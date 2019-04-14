@@ -8,6 +8,7 @@ class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
+
             0 -> FirstFragment()
             1 -> SecondFragment()
             2 -> ThirdFragment()
