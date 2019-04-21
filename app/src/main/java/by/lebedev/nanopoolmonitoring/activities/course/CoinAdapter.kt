@@ -31,7 +31,7 @@ class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<MyViewHolder>(
             holder.view.tvPriceChange.text = if (coin.percent_change_24h > 0) "+${coin.percent_change_24h}%" else {
                 "${coin.percent_change_24h}%"
             }
-            holder.view.tvPrice.text = "${coin.price_usd}"
+            holder.view.tvPrice.text = "${coin.price_usd}$"
 
 
             Picasso.get().load(coin.url.toString())

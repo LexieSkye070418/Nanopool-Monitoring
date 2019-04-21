@@ -37,6 +37,7 @@ class FourFragment : Fragment() {
                 result.map {
                     it
                     it.url = "http://coincap.io/images/coins/${it.id}.png"
+                    it.price_usd = Math.round(it.price_usd *100.0)/100.0
                 }
                 setupRecycler(result)
                 Log.e("AAA", "забрал лист")
