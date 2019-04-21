@@ -3,6 +3,7 @@ package by.lebedev.nanopoolmonitoring.activities
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import by.lebedev.nanopoolmonitoring.activities.course.FourFragment
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
