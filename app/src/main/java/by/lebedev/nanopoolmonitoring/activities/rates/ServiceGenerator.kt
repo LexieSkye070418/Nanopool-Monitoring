@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.course
+package by.lebedev.nanopoolmonitoring.activities.rates
 
 import android.util.Log
 import okhttp3.OkHttpClient

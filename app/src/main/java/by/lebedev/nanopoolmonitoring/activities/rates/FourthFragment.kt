@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.course
+package by.lebedev.nanopoolmonitoring.activities.rates
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.activities.course.ServiceGenerator.create1
+import by.lebedev.nanopoolmonitoring.activities.rates.ServiceGenerator.create1
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_four.*
-import java.net.URI.create
 
-class FourFragment : Fragment() {
+class FourthFragment : Fragment() {
 
     private lateinit var adapter: CoinAdapter
 

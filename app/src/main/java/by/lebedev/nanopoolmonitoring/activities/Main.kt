@@ -3,7 +3,6 @@ package by.lebedev.nanopoolmonitoring.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.activities.course.FourFragment
 import kotlinx.android.synthetic.main.main_layout.*
 
 
@@ -15,7 +14,7 @@ class Main : AppCompatActivity() {
 
 
 
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+        val fragmentAdapter = PagerAdapter(supportFragmentManager)
 
         viewpager_main.adapter = fragmentAdapter
 

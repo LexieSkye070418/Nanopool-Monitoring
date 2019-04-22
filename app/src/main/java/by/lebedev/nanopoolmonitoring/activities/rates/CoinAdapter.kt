@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.course
+package by.lebedev.nanopoolmonitoring.activities.rates
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import by.lebedev.nanopoolmonitoring.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coin.view.*
 
-class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<MyViewHolder>() {
+class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<CoinViewHolder>() {
 
     var mData: List<CoinCap>? = null
         set(value) {
@@ -15,15 +15,15 @@ class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<MyViewHolder>(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_coin, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
+        return CoinViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_coin, parent, false))
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
         list.let {
             val coin = it[position]
             holder.view.tvSimbol.text = coin.symbol

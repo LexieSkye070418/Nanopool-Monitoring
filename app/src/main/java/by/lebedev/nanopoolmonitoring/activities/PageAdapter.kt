@@ -3,19 +3,19 @@ package by.lebedev.nanopoolmonitoring.activities
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import by.lebedev.nanopoolmonitoring.activities.course.FourFragment
+import by.lebedev.nanopoolmonitoring.activities.rates.FourthFragment
 
-class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
 
-            0 -> FirstFragment()
-            1 -> SecondFragment()
-            2 -> ThirdFragment()
-            3 -> FourFragment()
+            0 -> DashboardFragment()
+            1 -> PoolFragment()
+            2 -> PaymentsFragment()
+            3 -> FourthFragment()
             else -> {
-                return FiveFragment()
+                return NewsFragment()
             }
         }
     }
@@ -26,12 +26,12 @@ class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "First Tab"
-            1 -> "Second Tab"
-            2 -> "Third Tab"
-            3 -> "Four  Tab"
+            0 -> "Dashboard"
+            1 -> "Pool"
+            2 -> "Payments"
+            3 -> "Rates"
             else -> {
-                return "Five  Tab"
+                return "News"
             }
         }
     }
