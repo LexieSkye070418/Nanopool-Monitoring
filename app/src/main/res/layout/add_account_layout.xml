@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="16dp"
+              android:background="@color/grey_background"
+>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_margin="8dp"
+              android:text="@string/add_account"
+              android:gravity="center"
+              android:textSize="25sp"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:text="@string/select_your_coin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Spinner
+            android:layout_marginTop="20dp"
+            android:id="@+id/coinSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <EditText
+            android:gravity="bottom|center"
+            android:hint="@string/your_wallet_address"
+            android:id="@+id/addAccountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+
+    <Button
+            android:background="@drawable/round"
+            android:text="@string/add"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:id="@+id/addAccountButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

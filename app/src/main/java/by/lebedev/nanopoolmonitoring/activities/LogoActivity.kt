@@ -13,7 +13,7 @@ class LogoActivity : AppCompatActivity() {
         sleepAndTransit()
     }
 
-    fun sleepAndTransit() {
+    private fun sleepAndTransit() {
 
         android.os.Handler().postDelayed({ val intent = Intent(this, AccountsActivity::class.java)
             startActivity(intent)

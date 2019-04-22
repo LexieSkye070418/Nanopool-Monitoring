@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.AccountsActivity"/>
+        <activity android:name=".activities.AddAccountActivity"/>
+        <activity android:name=".room.DataBase"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
