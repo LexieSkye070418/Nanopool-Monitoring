@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.rates
+package by.lebedev.nanopoolmonitoring.fragments.rates
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.activities.rates.ServiceGenerator.create1
+import by.lebedev.nanopoolmonitoring.fragments.rates.ServiceGenerator.create1
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_four.*

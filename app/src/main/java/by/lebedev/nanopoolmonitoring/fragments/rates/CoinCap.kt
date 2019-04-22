@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.rates
+package by.lebedev.nanopoolmonitoring.fragments.rates
 
 data class CoinCap(
     val id: String = "",

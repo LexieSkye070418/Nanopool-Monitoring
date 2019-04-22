@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.rates
+package by.lebedev.nanopoolmonitoring.fragments.rates
 
 import io.reactivex.Observable
 import retrofit2.http.GET

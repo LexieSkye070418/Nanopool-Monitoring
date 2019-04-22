@@ -3,7 +3,11 @@ package by.lebedev.nanopoolmonitoring.activities
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import by.lebedev.nanopoolmonitoring.activities.rates.FourthFragment
+import by.lebedev.nanopoolmonitoring.fragments.rates.FourthFragment
+import by.lebedev.nanopoolmonitoring.fragments.DashboardFragment
+import by.lebedev.nanopoolmonitoring.fragments.NewsFragment
+import by.lebedev.nanopoolmonitoring.fragments.PaymentsFragment
+import by.lebedev.nanopoolmonitoring.fragments.PoolFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

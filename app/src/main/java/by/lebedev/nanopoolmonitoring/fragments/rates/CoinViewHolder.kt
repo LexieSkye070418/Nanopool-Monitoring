@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.activities.rates
+package by.lebedev.nanopoolmonitoring.fragments.rates
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

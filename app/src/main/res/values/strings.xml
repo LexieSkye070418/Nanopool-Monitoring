@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nanopool monitoring</string>
+    <string name="accounts">ACCOUNTS</string>
 </resources>
