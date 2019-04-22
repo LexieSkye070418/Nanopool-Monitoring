@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Nanopool monitoring</string>
     <string name="accounts">ACCOUNTS</string>
+    <string name="skip">SKIP</string>
 </resources>

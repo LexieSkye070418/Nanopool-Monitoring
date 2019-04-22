@@ -22,6 +22,7 @@
                 android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
 
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -31,4 +32,16 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/plus"/>
+
+    <Button
+
+            android:background="@drawable/round"
+            android:text="@string/skip"
+            android:id="@+id/accountsButtonSkip"
+            android:layout_margin="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+
 </FrameLayout>
