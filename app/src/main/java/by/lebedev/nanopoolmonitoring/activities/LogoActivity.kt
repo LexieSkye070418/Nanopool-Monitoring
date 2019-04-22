@@ -1,12 +1,12 @@
 package by.lebedev.nanopoolmonitoring.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import by.lebedev.nanopoolmonitoring.R
 
 
-class LogoActivity : Activity() {
+class LogoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.logo_layout)
