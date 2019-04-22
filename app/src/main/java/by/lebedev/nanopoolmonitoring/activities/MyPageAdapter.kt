@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import by.lebedev.nanopoolmonitoring.activities.course.FourFragment
+import by.lebedev.nanopoolmonitoring.activities.news.FiveFragment
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
