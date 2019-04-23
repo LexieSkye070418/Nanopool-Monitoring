@@ -1,23 +1,23 @@
 package by.lebedev.nanopoolmonitoring.room
 
+import android.app.Application
 import android.arch.persistence.room.Room
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 
+class DataBase : Fragment() {
 
-class DataBase : AppCompatActivity() {
+    lateinit var db: AppDatabase
 
-    var database: AppDatabase? = null
-        private set
+    init {
+        db = Room.databaseBuilder(
+            context?.applicationContext!!,
+            AppDatabase::class.java, "database"
+        ).build()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        instance = this
-        database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
-            .build()
     }
 
+
     companion object {
-        var instance = DataBase()
+        val instances = DataBase()
     }
 }
