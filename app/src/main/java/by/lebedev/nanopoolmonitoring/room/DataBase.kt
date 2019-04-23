@@ -1,23 +1,31 @@
 package by.lebedev.nanopoolmonitoring.room
 
-import android.app.Application
 import android.arch.persistence.room.Room
-import android.support.v4.app.Fragment
+import android.content.Context
 
-class DataBase : Fragment() {
 
-    lateinit var db: AppDatabase
+class DataBase private constructor(context: Context) {
+
+    val db: AppDatabase
 
     init {
         db = Room.databaseBuilder(
-            context?.applicationContext!!,
-            AppDatabase::class.java, "database"
-        ).build()
-
+            context,
+            AppDatabase::class.java,
+            "database"
+        )
+            .build()
     }
 
-
     companion object {
-        val instances = DataBase()
+        private var instance: DataBase? = null
+
+        @Synchronized
+        fun getInstance(context: Context): DataBase {
+            if (instance == null) {
+                instance = DataBase(context)
+            }
+            return instance as DataBase
+        }
     }
 }
