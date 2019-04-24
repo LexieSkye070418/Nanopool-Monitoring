@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceGeneratorNews {
 
-        private val BASE_URL_NEWS = "https://cryptocontrol.io/api/v1/public/news/coin/"
+        private val BASE_URL_NEWS = "https://cryptocontrol.io/api/v1/public/news/"
+//        private val BASE_URL_NEWS = "https://api.coinmarketcap.com/v1/"
 
         // выставлены таймауты на соединение с сервером
 //        private val httpClient = OkHttpClient.Builder()
