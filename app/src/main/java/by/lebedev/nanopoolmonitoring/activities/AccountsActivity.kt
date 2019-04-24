@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.activities.recycler.accounts.AccountAdapter
+import by.lebedev.nanopoolmonitoring.coins.AccountLocalList
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -38,7 +39,10 @@ class AccountsActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         val intent = Intent(this, TabActivity::class.java)
         startActivity(intent)
-        overridePendingTransition(by.lebedev.nanopoolmonitoring.R.anim.entering, by.lebedev.nanopoolmonitoring.R.anim.exiting)
+        overridePendingTransition(
+            by.lebedev.nanopoolmonitoring.R.anim.entering,
+            by.lebedev.nanopoolmonitoring.R.anim.exiting
+        )
     }
 
     fun setupRecycler(accountList: List<Account>) {
@@ -55,9 +59,8 @@ class AccountsActivity : AppCompatActivity(), View.OnClickListener {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
-                Log.e("AAA", "Success READ")
-                Log.e("AAA", result.toString())
                 setupRecycler(result)
+                AccountLocalList.instance.list = result as ArrayList<Account>
                 if (result.isEmpty()) {
                     skip.visibility = View.VISIBLE
                 }
@@ -66,6 +69,7 @@ class AccountsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onResume() {
+        skip.visibility = View.INVISIBLE
         super.onResume()
         getAllDatabase()
     }

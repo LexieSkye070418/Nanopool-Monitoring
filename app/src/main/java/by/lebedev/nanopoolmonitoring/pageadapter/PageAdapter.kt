@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.adapters
+package by.lebedev.nanopoolmonitoring.pageadapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
