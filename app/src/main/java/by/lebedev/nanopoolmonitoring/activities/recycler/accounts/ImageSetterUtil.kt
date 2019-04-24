@@ -7,28 +7,28 @@ object ImageSetterUtil {
     fun setImage(imageView: ImageView, coin: String) {
 
         when (coin) {
-            "ETH" -> {
+            "eth" -> {
                 imageView.setImageResource(R.drawable.eth)
             }
-            "ETC" -> {
+            "etc" -> {
                 imageView.setImageResource(R.drawable.etc)
             }
-            "ZEC" -> {
+            "zec" -> {
                 imageView.setImageResource(R.drawable.zec)
             }
-            "XMR" -> {
+            "xmr" -> {
                 imageView.setImageResource(R.drawable.xmr)
             }
-            "PASC" -> {
+            "pasc" -> {
                 imageView.setImageResource(R.drawable.pasc)
             }
-            "ETN" -> {
+            "etn" -> {
                 imageView.setImageResource(R.drawable.etn)
             }
-            "RVN" -> {
+            "rvn" -> {
                 imageView.setImageResource(R.drawable.raven)
             }
-            "GRIN" -> {
+            "grin29" -> {
                 imageView.setImageResource(R.drawable.grin)
             }
         }

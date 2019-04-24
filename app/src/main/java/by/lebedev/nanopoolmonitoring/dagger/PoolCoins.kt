@@ -4,14 +4,14 @@ class PoolCoins private constructor() {
     val list = ArrayList<String>()
 
     init {
-        list.add("ETH")
-        list.add("ETC")
-        list.add("ZEC")
-        list.add("XMR")
-        list.add("PASC")
-        list.add("ETN")
-        list.add("RVN")
-        list.add("GRIN")
+        list.add("eth")
+        list.add("etc")
+        list.add("zec")
+        list.add("xmr")
+        list.add("pasc")
+        list.add("etn")
+        list.add("rvn")
+        list.add("grin29")
     }
 
     private object Holder {

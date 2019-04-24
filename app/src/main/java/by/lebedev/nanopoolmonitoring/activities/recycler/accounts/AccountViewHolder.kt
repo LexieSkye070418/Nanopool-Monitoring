@@ -28,32 +28,5 @@ class AccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         walletName.setText(account.wallet)
 
         ImageSetterUtil.setImage(coinImage, account.coin)
-
-//        trashImage.setOnClickListener {
-//            Completable.fromAction {
-//                DataBase.getInstance(it.context).db.accountDao()
-//                    .delete(account)
-//            }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                    {
-//                        AccountLocalList.instance.list.remove(account)
-//                    },
-//                    {
-//                        Toast.makeText(itemView.context, "Error deleting account...", Toast.LENGTH_SHORT).show()
-//                    }
-//                )
-//        }
-
-//        trashImage.setOnClickListener {
-//            Completable.fromAction {
-//                DataBase.getInstance(it.context).db.accountDao()
-//                    .delete(account)
-//            }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe {}
-//        }
     }
 }

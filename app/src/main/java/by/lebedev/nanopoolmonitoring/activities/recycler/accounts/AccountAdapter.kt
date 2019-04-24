@@ -1,12 +1,14 @@
 package by.lebedev.nanopoolmonitoring.activities.recycler.accounts
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoring.activities.TabActivity
 import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
@@ -24,7 +26,13 @@ class AccountAdapter(
             .inflate(R.layout.item_account, viewGroup, false)
         val holder = AccountViewHolder(view)
         view.setOnClickListener { v ->
-//                        onItemClickListener!!.onItemClick(holder.adapterPosition)
+
+            val intent = Intent(view.context,TabActivity::class.java)
+            intent.putExtra("COIN",AccountLocalList.instance.list.get(holder.adapterPosition).coin)
+            intent.putExtra("WALLET",AccountLocalList.instance.list.get(holder.adapterPosition).wallet)
+            if (context != null) {
+                context.startActivity(intent)
+            }
         }
 
         val trashImage = holder.itemView.findViewById<ImageView>(R.id.trash_image)
