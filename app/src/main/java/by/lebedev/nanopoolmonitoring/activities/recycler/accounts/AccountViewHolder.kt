@@ -5,11 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 
 class AccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,6 +28,23 @@ class AccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         walletName.setText(account.wallet)
 
         ImageSetterUtil.setImage(coinImage, account.coin)
+
+//        trashImage.setOnClickListener {
+//            Completable.fromAction {
+//                DataBase.getInstance(it.context).db.accountDao()
+//                    .delete(account)
+//            }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                    {
+//                        AccountLocalList.instance.list.remove(account)
+//                    },
+//                    {
+//                        Toast.makeText(itemView.context, "Error deleting account...", Toast.LENGTH_SHORT).show()
+//                    }
+//                )
+//        }
 
 //        trashImage.setOnClickListener {
 //            Completable.fromAction {

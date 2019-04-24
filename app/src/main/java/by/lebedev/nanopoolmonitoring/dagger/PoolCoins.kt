@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.coins
+package by.lebedev.nanopoolmonitoring.dagger
 
 class PoolCoins private constructor() {
     val list = ArrayList<String>()

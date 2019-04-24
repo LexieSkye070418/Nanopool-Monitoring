@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.coins
+package by.lebedev.nanopoolmonitoring.dagger
 
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 

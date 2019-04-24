@@ -9,7 +9,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import by.lebedev.nanopoolmonitoring.coins.PoolCoins
+import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable

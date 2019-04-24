@@ -4,12 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.activities.recycler.accounts.AccountAdapter
-import by.lebedev.nanopoolmonitoring.coins.AccountLocalList
+import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.android.schedulers.AndroidSchedulers

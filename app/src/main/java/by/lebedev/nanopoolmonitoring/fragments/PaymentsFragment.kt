@@ -10,7 +10,7 @@ import by.lebedev.nanopoolmonitoring.R
 class PaymentsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_third,container,false)
+        return inflater.inflate(R.layout.fragment_payments,container,false)
     }
 
     }

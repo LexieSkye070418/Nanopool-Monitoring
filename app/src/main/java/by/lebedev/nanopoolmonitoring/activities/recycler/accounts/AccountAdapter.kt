@@ -2,20 +2,17 @@ package by.lebedev.nanopoolmonitoring.activities.recycler.accounts
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.coins.AccountLocalList
+import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.accounts_layout.*
 
 class AccountAdapter(
     private val accountList: List<Account>,
@@ -27,7 +24,7 @@ class AccountAdapter(
             .inflate(R.layout.item_account, viewGroup, false)
         val holder = AccountViewHolder(view)
         view.setOnClickListener { v ->
-            //            onItemClickListener!!.onItemClick(holder.adapterPosition)
+//                        onItemClickListener!!.onItemClick(holder.adapterPosition)
         }
 
         val trashImage = holder.itemView.findViewById<ImageView>(R.id.trash_image)
