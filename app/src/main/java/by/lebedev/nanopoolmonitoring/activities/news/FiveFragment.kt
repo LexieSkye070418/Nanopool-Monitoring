@@ -1,7 +1,7 @@
 package by.lebedev.nanopoolmonitoring.activities.news
 
 import android.content.Intent
-import android.content.Intent.getIntent
+import android.content.Intent.*
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_five.*
 import kotlinx.android.synthetic.main.item_coin.*
 import kotlinx.android.synthetic.main.web_fragment.*
 import android.widget.AdapterView
+import kotlinx.android.synthetic.main.item_news.*
 import java.text.FieldPosition
 
 
@@ -33,33 +34,22 @@ class FiveFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-
-
         return inflater!!.inflate(R.layout.fragment_five, container, false)
-
-
-
-
     }
 
 
     override fun onViewCreated(viewNews: View, savedInstanceState: Bundle?) {
         super.onViewCreated(viewNews, savedInstanceState)
-
         getNews()
-        onFullStoryClicked(viewNews)
 
 
-
-
+//        onFullStoryClicked(viewNews)
 //        val listNews = ArrayList<News>()
 //        listNews.add(News("Horse", "urlm,mmmmn"))
 //        listNews.add(News("Horse1", "urlm,mmmmn"))
 //        listNews.add(News("Horse2", "urlm,mmmmn"))
 
 //        setupRecyclerNews(listNews)
-
     }
 
 
@@ -87,9 +77,9 @@ class FiveFragment : Fragment() {
 
     }
 
-    fun onFullStoryClicked(viewNews: View) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
-    }
+//    fun onFullStoryClicked(url: String) {
+//        val intent = Intent(Intent.ACTION_VIEW)
+//        intent.setData(Uri.parse(url))
+//        startActivity(intent)
+//    }
 }
