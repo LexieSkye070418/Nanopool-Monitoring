@@ -10,8 +10,8 @@ import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.activities.TabActivity
 import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.entity.payment.DataPayments
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.entity.payment.Payments
+import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.DataPayments
+import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.Payments
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable

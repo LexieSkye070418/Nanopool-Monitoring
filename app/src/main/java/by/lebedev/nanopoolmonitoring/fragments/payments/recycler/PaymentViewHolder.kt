@@ -2,13 +2,10 @@ package by.lebedev.nanopoolmonitoring.fragments.payments.recycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.activities.recycler.accounts.ImageSetterUtil
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.entity.payment.DataPayments
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.entity.payment.Payments
-import by.lebedev.nanopoolmonitoring.room.entity.Account
+import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.DataPayments
 
 
 class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,7 +26,7 @@ class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         paymentConfirmation.setText(payment.transform(payment.confirmed))
 
         paymentDate.setText(payment.convertLongToTime(payment.date))
-        paymentAmount.setText(payment.amount.toString())
+        paymentAmount.setText(payment.amount.toString().plus(TabIntent.instance.coin))
         paymentTx.setText(payment.txHash)
     }
 }

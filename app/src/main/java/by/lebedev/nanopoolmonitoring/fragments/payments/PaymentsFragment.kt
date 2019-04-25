@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.fragments.payments.recycler.PaymentAdapter
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.entity.payment.DataPayments
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.provideApi
+import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.DataPayments
+import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_payments.*
@@ -40,7 +40,9 @@ class PaymentsFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (!result.data.isEmpty()) {
-                    progressPayments.visibility = View.INVISIBLE
+                    if (progressPayments.visibility == View.VISIBLE) {
+                        progressPayments.visibility = View.INVISIBLE
+                    }
                     setupRecycler(result.data)
                 }
             }, {

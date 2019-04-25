@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
-import by.lebedev.nanopoolmonitoring.fragments.retrofit.provideApi
+import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pool.*

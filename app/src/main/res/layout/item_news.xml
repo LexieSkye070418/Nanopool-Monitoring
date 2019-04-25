@@ -4,16 +4,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin"
-        android:onClick="onFullStoryClicked"
-        android:orientation="horizontal">
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded">
 
     <ImageView
             android:id="@+id/urlNews"
             android:layout_width="100dp"
             android:layout_height="100dp"
     />
-
 
     <TextView
             android:id="@+id/titleNews"
@@ -22,7 +21,6 @@
             android:layout_marginStart="10dp"
             tools:text="Название новости"
             android:gravity="center"
-            android:textColor="#000000"
+            android:textColor="@color/black"
     />
-
 </LinearLayout>
