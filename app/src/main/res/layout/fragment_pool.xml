@@ -20,9 +20,7 @@
             android:layout_height="50dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-
 >
-
 
         <TextView
                 android:background="@drawable/squared_thin"
@@ -55,7 +53,6 @@
             android:layout_marginTop="5dp"
     >
 
-
         <TextView
                 android:gravity="center"
                 android:background="@drawable/squared_thin"
@@ -72,7 +69,7 @@
                 android:id="@+id/miners"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 
@@ -103,7 +100,7 @@
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 

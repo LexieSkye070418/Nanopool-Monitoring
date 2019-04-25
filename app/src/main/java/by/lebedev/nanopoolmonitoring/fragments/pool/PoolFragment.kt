@@ -8,12 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pool.*
+import javax.inject.Inject
 
 class PoolFragment : Fragment() {
+    @Inject
+    lateinit var tabIntent: TabIntent
+
     var hashType: String = ""
     var coin: String = ""
 
@@ -24,17 +29,17 @@ class PoolFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val component = DaggerMagicBox.builder().build()
+        tabIntent = component.provideTabIntent()
 
-        coin = TabIntent.instance.coin
-        hashType = TabIntent.instance.getHashType(coin)
-        coin_name.setText(TabIntent.instance.fullName(coin))
+
+        coin = tabIntent.coin
+        hashType = tabIntent.getHashType(coin)
+        coin_name.setText(tabIntent.fullName(coin))
         getPrice()
         getHashrate()
         getMiners()
-
-
     }
-
 
     fun getPrice() {
         val d = provideApi().getPrice(coin)
@@ -43,7 +48,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 price.setText(result.data.price_usd.toString().plus('$'))
             }, {
-                Log.e("err",it.message)
+                Log.e("err", it.message)
             })
     }
 
@@ -54,7 +59,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 hashrate.setText(result.data.toString().plus(' ').plus(hashType))
             }, {
-                Log.e("err",it.message)
+                Log.e("err", it.message)
             })
     }
 
@@ -65,9 +70,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 miners.setText(result.data.toString())
             }, {
-                Log.e("err",it.message)
+                Log.e("err", it.message)
             })
     }
-
-
 }

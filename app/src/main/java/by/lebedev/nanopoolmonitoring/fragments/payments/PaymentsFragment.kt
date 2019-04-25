@@ -9,14 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.fragments.payments.recycler.PaymentAdapter
 import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.DataPayments
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_payments.*
+import javax.inject.Inject
 
 class PaymentsFragment : Fragment() {
+
+    @Inject
+    lateinit var tabIntent: TabIntent
 
     var coin: String = ""
     var wallet: String = ""
@@ -28,8 +33,11 @@ class PaymentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        coin = TabIntent.instance.coin
-        wallet = TabIntent.instance.wallet
+        val component = DaggerMagicBox.builder().build()
+        tabIntent = component.provideTabIntent()
+
+        coin = tabIntent.coin
+        wallet = tabIntent.wallet
 
         getPayments()
     }

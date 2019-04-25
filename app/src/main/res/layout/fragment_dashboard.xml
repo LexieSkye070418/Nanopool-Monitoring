@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Current Hashrate:"
+                android:text="@string/current_hashrate"
                 android:layout_weight="1"
                 android:textSize="18sp"
         />
@@ -33,7 +33,7 @@
                 android:id="@+id/current_hashrate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 
@@ -48,12 +48,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Balance:"
+                android:text="@string/balance"
                 android:layout_weight="1"
                 android:textSize="18sp"
         />
@@ -62,7 +61,7 @@
                 android:id="@+id/balance"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 
@@ -77,12 +76,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Average Hashrate for last 6 hours:"
+                android:text="@string/average_hashrate_for_last_6_hours"
                 android:layout_weight="1"
                 android:textSize="18sp"
         />
@@ -91,12 +89,11 @@
                 android:id="@+id/hours_6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 
     </LinearLayout>
-
 
     <LinearLayout
             android:layout_marginTop="5dp"
@@ -112,7 +109,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Average Hashrate for last 24 hours:"
+                android:text="@string/average_hashrate_for_last_24_hours"
                 android:layout_weight="1"
                 android:textSize="18sp"
         />
@@ -121,19 +118,18 @@
                 android:id="@+id/hours_24"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:layout_weight="1"
         />
 
     </LinearLayout>
-
 
     <TextView
             android:gravity="center"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Very approximated earnings:"
+            android:text="@string/very_approximated_earnings"
             android:textSize="20sp"
     />
 
@@ -146,12 +142,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Period:"
+                android:text="@string/period"
                 android:layout_weight="1"
                 android:textSize="18sp"
                 android:background="@drawable/squared"
@@ -160,7 +155,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Coins"
+                android:text="@string/coins"
                 android:textSize="18sp"
                 android:layout_weight="1"
         />
@@ -168,7 +163,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="BTC"
+                android:text="@string/btc"
                 android:textSize="18sp"
                 android:layout_weight="1"
                 android:background="@drawable/squared"
@@ -177,7 +172,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="USD"
+                android:text="@string/usd"
                 android:textSize="18sp"
                 android:layout_weight="1"
         />
@@ -193,12 +188,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Minute:"
+                android:text="@string/minute"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:background="@drawable/squared"
@@ -208,7 +202,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -217,7 +211,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:background="@drawable/squared"
@@ -227,13 +221,12 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
 
     </LinearLayout>
-
 
     <LinearLayout
             android:layout_marginTop="1dp"
@@ -244,12 +237,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Hour:"
+                android:text="@string/hour"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:background="@drawable/squared"
@@ -259,7 +251,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -268,7 +260,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:background="@drawable/squared"
@@ -278,7 +270,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -294,12 +286,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Day:"
+                android:text="@string/day"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:background="@drawable/squared"
@@ -309,7 +300,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -318,7 +309,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:background="@drawable/squared"
@@ -328,7 +319,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -344,12 +335,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Week:"
+                android:text="@string/week"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:background="@drawable/squared"
@@ -359,7 +349,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -368,7 +358,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:background="@drawable/squared"
@@ -378,7 +368,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="N/A"
+                android:text="@string/n_a"
                 android:textSize="12sp"
                 android:layout_weight="1"
         />
@@ -394,12 +384,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-
         <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Month:"
+                android:text="@string/month"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:background="@drawable/squared"

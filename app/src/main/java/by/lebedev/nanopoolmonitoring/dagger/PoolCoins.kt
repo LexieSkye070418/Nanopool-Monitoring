@@ -1,5 +1,8 @@
 package by.lebedev.nanopoolmonitoring.dagger
 
+import javax.inject.Singleton
+
+@Singleton
 class PoolCoins private constructor() {
     val list = ArrayList<String>()
 

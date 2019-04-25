@@ -11,5 +11,19 @@
     <string name="pool_hashrate">Pool Hashrate:</string>
     <string name="miners_count">Miners Count:</string>
     <string name="price">Coin Price:</string>
+    <string name="current_hashrate">Current Hashrate:</string>
+    <string name="balance">Balance:</string>
+    <string name="average_hashrate_for_last_6_hours">Average Hashrate for last 6 hours:</string>
+    <string name="average_hashrate_for_last_24_hours">Average Hashrate for last 24 hours:</string>
+    <string name="very_approximated_earnings">Very approximated earnings:</string>
+    <string name="period">Period:</string>
+    <string name="coins">Coins</string>
+    <string name="btc">BTC</string>
+    <string name="usd">USD</string>
+    <string name="minute">Minute:</string>
+    <string name="hour">Hour:</string>
+    <string name="day">Day:</string>
+    <string name="week">Week:</string>
+    <string name="month">Month:</string>
 
 </resources>

@@ -1,16 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="by.lebedev.nanopoolmonitoring">
+          xmlns:tools="http://schemas.android.com/tools" package="by.lebedev.nanopoolmonitoring">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application android:allowBackup="true"
                  android:label="@string/app_name"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
+                 android:icon="@mipmap/nanopool_ic"
+                 android:roundIcon="@mipmap/nanopool_ic"
                  android:supportsRtl="true"
-                 android:theme="@style/AppTheme">
+                 android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".activities.TabActivity"/>
-
-
         <activity android:name=".activities.LogoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,7 +20,5 @@
         <activity android:name=".activities.AccountsActivity"/>
         <activity android:name=".activities.AddAccountActivity"/>
 
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

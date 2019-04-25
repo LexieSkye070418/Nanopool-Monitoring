@@ -10,16 +10,26 @@ import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.activities.TabActivity
 import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
+import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class AccountAdapter(
     private val accountList: List<Account>,
     private val context: Context?
 ) : RecyclerView.Adapter<AccountViewHolder>() {
+
+    @Inject
+    lateinit var accountLocalList: AccountLocalList
+    init {
+        val component = DaggerMagicBox.builder().build()
+        accountLocalList = component.provideAccountLocalList()
+
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): AccountViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
@@ -28,8 +38,8 @@ class AccountAdapter(
         view.setOnClickListener { v ->
 
             val intent = Intent(view.context,TabActivity::class.java)
-            intent.putExtra("COIN",AccountLocalList.instance.list.get(holder.adapterPosition).coin)
-            intent.putExtra("WALLET",AccountLocalList.instance.list.get(holder.adapterPosition).wallet)
+            intent.putExtra("COIN",accountLocalList.list.get(holder.adapterPosition).coin)
+            intent.putExtra("WALLET",accountLocalList.list.get(holder.adapterPosition).wallet)
             if (context != null) {
                 context.startActivity(intent)
             }
@@ -41,13 +51,13 @@ class AccountAdapter(
 
             Completable.fromAction {
                 DataBase.getInstance(it.context).db.accountDao()
-                    .delete(AccountLocalList.instance.list.get(holder.adapterPosition))
+                    .delete(accountLocalList.list.get(holder.adapterPosition))
             }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        AccountLocalList.instance.list.removeAt(holder.adapterPosition)
+                        accountLocalList.list.removeAt(holder.adapterPosition)
                         notifyDataSetChanged()
                     },
                     {

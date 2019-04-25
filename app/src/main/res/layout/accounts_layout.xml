@@ -41,16 +41,4 @@
             android:layout_margin="16dp"
             android:src="@drawable/plus"/>
 
-    <Button
-
-            android:background="@drawable/round"
-            android:text="@string/skip"
-            android:id="@+id/accountsButtonSkip"
-            android:layout_margin="28dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
-
-
 </FrameLayout>

@@ -2,7 +2,6 @@ package by.lebedev.nanopoolmonitoring.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
@@ -10,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
+import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.room.DataBase
 import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable
@@ -17,15 +17,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.add_account_layout.*
 import java.util.*
+import javax.inject.Inject
 
 
 class AddAccountActivity : AppCompatActivity() {
 
     private var coinId: Int = 0
+    @Inject
+    lateinit var poolCoins: PoolCoins
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(by.lebedev.nanopoolmonitoring.R.layout.add_account_layout)
+
+        val component = DaggerMagicBox.builder().build()
+        poolCoins = component.providePoolCoins()
+
         val wallet = addAccountEditText
 
         val button = addAccountButton
@@ -39,7 +46,7 @@ class AddAccountActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, PoolCoins.instance.list);
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, poolCoins.list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val spinner = coinSpinner
@@ -67,12 +74,10 @@ class AddAccountActivity : AppCompatActivity() {
             DataBase.getInstance(this).db.accountDao().insert(
                 Account(
                     Calendar.getInstance().timeInMillis,
-                    PoolCoins.instance.list.get(coinId),
+                    poolCoins.list.get(coinId),
                     walletText
                 )
             )
-
-            Log.e("AAA", "INSERTED")
         }
         val disposable = complete.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
