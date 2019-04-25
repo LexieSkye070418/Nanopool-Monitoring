@@ -39,7 +39,7 @@ class PaymentsFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result.status) {
+                if (!result.data.isEmpty()) {
                     progressPayments.visibility = View.INVISIBLE
                     setupRecycler(result.data)
                 }
