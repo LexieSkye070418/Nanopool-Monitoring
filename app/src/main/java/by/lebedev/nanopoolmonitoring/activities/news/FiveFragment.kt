@@ -1,8 +1,5 @@
 package by.lebedev.nanopoolmonitoring.activities.news
 
-import android.content.Intent
-import android.content.Intent.*
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -17,11 +14,6 @@ import by.lebedev.nanopoolmonitoring.activities.news.adapterNews.NewsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_five.*
-import kotlinx.android.synthetic.main.item_coin.*
-import kotlinx.android.synthetic.main.web_fragment.*
-import android.widget.AdapterView
-import kotlinx.android.synthetic.main.item_news.*
-import java.text.FieldPosition
 
 
 class FiveFragment : Fragment() {
@@ -70,7 +62,7 @@ class FiveFragment : Fragment() {
 
         recycleViewNews.layoutManager = LinearLayoutManager(context)
 
-        adapterNews = NewsAdapter(listNews)
+        adapterNews = NewsAdapter(listNews, context)
 
         recycleViewNews.adapter = adapterNews
 

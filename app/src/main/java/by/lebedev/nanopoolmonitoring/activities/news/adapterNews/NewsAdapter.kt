@@ -1,9 +1,9 @@
 package by.lebedev.nanopoolmonitoring.activities.news.adapterNews
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.activities.news.News
@@ -13,12 +13,20 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_news.view.*
 
 
-class NewsAdapter(val listNews: List<News>) : RecyclerView.Adapter<ViewHolderNews>() {
+class NewsAdapter(
+    val listNews: List<News>,
+    context: Context?
+) : RecyclerView.Adapter<ViewHolderNews>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNews {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
-        return ViewHolderNews(view)
+        val holder = ViewHolderNews(view)
+        val intent = Intent(parent.context, WebActivity::class.java)
+        intent.putExtra("URL", holder.adapterPosition)
+     parent.context.startActivities(arrayOf(intent))
+        return holder
+
     }
 
     override fun getItemCount(): Int {
