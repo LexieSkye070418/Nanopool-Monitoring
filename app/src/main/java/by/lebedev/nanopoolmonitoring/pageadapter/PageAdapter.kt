@@ -1,15 +1,15 @@
-package by.lebedev.nanopoolmonitoring.activities
+package by.lebedev.nanopoolmonitoring.pageadapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import by.lebedev.nanopoolmonitoring.activities.news.FiveFragment
+import by.lebedev.nanopoolmonitoring.fragments.rates.FourthFragment
 import by.lebedev.nanopoolmonitoring.fragments.dashboard.DashboardFragment
+import by.lebedev.nanopoolmonitoring.fragments.NewsFragment
 import by.lebedev.nanopoolmonitoring.fragments.payments.PaymentsFragment
 import by.lebedev.nanopoolmonitoring.fragments.pool.PoolFragment
-import by.lebedev.nanopoolmonitoring.fragments.rates.FourthFragment
 
-class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
@@ -19,7 +19,7 @@ class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
             2 -> PaymentsFragment()
             3 -> FourthFragment()
             else -> {
-                return FiveFragment()
+                return NewsFragment()
             }
         }
     }
@@ -30,12 +30,12 @@ class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "First Tab"
-            1 -> "Second Tab"
-            2 -> "Third Tab"
-            3 -> "Four  Tab"
+            0 -> "Dashboard"
+            1 -> "Pool"
+            2 -> "Payments"
+            3 -> "Rates"
             else -> {
-                return "Five  Tab"
+                return "News"
             }
         }
     }

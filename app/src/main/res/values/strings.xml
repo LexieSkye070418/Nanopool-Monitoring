@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Nanopool monitoring</string>
+    <string name="accounts">ACCOUNTS</string>
+    <string name="skip">SKIP</string>
+    <string name="add_account">ADD ACCOUNT</string>
+    <string name="select_your_coin">Select your coin:</string>
+    <string name="your_wallet_address">your wallet address</string>
+    <string name="add">ADD</string>
+    <string name="n_a">N/A</string>
+    <string name="coin_name">COIN_NAME</string>
+    <string name="pool_hashrate">Pool Hashrate:</string>
+    <string name="miners_count">Miners Count:</string>
+    <string name="price">Coin Price:</string>
+
 </resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_margin="16dp">
+
+    <ProgressBar
+            android:id="@+id/progressAccountLoad"
+            style="?android:attr/progressBarStyleInverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_margin="8dp"
+                  android:text="@string/accounts"
+                  android:gravity="center"
+                  android:textSize="25sp"
+                  android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAddAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/plus"/>
+
+    <Button
+
+            android:background="@drawable/round"
+            android:text="@string/skip"
+            android:id="@+id/accountsButtonSkip"
+            android:layout_margin="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+
+
+</FrameLayout>
