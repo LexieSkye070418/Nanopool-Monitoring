@@ -31,8 +31,6 @@ class PaymentsFragment : Fragment() {
         coin = TabIntent.instance.coin
         wallet = TabIntent.instance.wallet
 
-
-
         getPayments()
     }
 
@@ -42,6 +40,7 @@ class PaymentsFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (result.status) {
+                    progressPayments.visibility = View.INVISIBLE
                     setupRecycler(result.data)
                 }
             }, {
