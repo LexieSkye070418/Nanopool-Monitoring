@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.fragments.pool.retrofit
+package by.lebedev.nanopoolmonitoring.fragments.retrofit
 
 import by.lebedev.nanopoolmonitoring.BuildConfig
 import okhttp3.OkHttpClient

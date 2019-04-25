@@ -26,6 +26,7 @@ class AccountsActivity : AppCompatActivity(), View.OnClickListener {
         skip.setOnClickListener(this)
 
         val fab = fabAddAccount
+        fab.alpha = 0.6f
         fab.setOnClickListener {
             val intent = Intent(it.context, AddAccountActivity::class.java)
             startActivity(intent)

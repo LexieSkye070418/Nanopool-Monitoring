@@ -1,27 +1,439 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+>
+    <TableLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            cardCornerRadius="4dp"
-            style="@style/MyCardViewStyle"
-    >
+            android:stretchColumns="1">
+
+    <LinearLayout
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded">
+
+
         <TextView
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="First tab"
-                android:textSize="20sp"/>
+                android:text="Current Hashrate:"
+                android:layout_weight="1"
+                android:textSize="18sp"
+        />
+        <TextView
+                android:gravity="center"
+                android:id="@+id/current_hashrate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:layout_weight="1"
+        />
 
-        <EditText
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Balance:"
+                android:layout_weight="1"
+                android:textSize="18sp"
+        />
+        <TextView
+                android:gravity="center"
+                android:id="@+id/balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Average Hashrate for last 6 hours:"
+                android:layout_weight="1"
+                android:textSize="18sp"
+        />
+        <TextView
+                android:gravity="center"
+                android:id="@+id/hours_6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Average Hashrate for last 24 hours:"
+                android:layout_weight="1"
+                android:textSize="18sp"
+        />
+        <TextView
+                android:gravity="center"
+                android:id="@+id/hours_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+
+    <TextView
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Very approximated earnings:"
+            android:textSize="20sp"
+    />
+
+    <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:background="@drawable/squared"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Period:"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Coins"
+                android:textSize="18sp"
+                android:layout_weight="1"
+        />
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="BTC"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="USD"
+                android:textSize="18sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:background="@drawable/squared"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Minute:"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/minute_coin"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
                 android:textSize="12sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-    </android.support.v7.widget.CardView>
+                android:layout_weight="1"
+        />
+        <TextView
+                android:id="@+id/minute_btc"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/minute_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+    <LinearLayout
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:background="@drawable/squared"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Hour:"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/hour_coin"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+        <TextView
+                android:id="@+id/hour_btc"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/hour_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/squared"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Day:"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/day_coin"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+        <TextView
+                android:id="@+id/day_btc"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/day_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:background="@drawable/squared"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Week:"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/week_coin"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+        <TextView
+                android:id="@+id/week_btc"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/week_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp"
+            android:background="@drawable/squared"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+
+        <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Month:"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/month_coin"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/n_a"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+        <TextView
+                android:id="@+id/month_btc"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/n_a"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:background="@drawable/squared"
+        />
+        <TextView
+                android:id="@+id/month_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/n_a"
+                android:textSize="12sp"
+                android:layout_weight="1"
+        />
+
+    </LinearLayout>
+    </TableLayout>
+
+</ScrollView>
