@@ -1,4 +1,6 @@
 package by.lebedev.nanopoolmonitoring.activities.news
+
+import by.lebedev.nanopoolmonitoring.activities.course.CoinCap
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
