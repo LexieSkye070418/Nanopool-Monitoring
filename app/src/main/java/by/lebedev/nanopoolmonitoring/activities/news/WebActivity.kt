@@ -14,7 +14,7 @@ class WebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_fragment)
 
-        webView.loadUrl(intent.getStringExtra("url"))
+        webView.loadUrl(intent.getStringExtra("URL"))
 
     }
 }
