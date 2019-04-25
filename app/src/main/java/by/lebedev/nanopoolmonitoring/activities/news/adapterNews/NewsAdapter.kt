@@ -1,8 +1,11 @@
 package by.lebedev.nanopoolmonitoring.activities.news.adapterNews
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.activities.news.News
 import by.lebedev.nanopoolmonitoring.activities.news.ViewHolderNews
@@ -27,6 +30,9 @@ class NewsAdapter(val listNews: List<News>) : RecyclerView.Adapter<ViewHolderNew
             holderNews.viewNews.titleNews.text = news.title
             Picasso.get().load(news.originalImageUrl.toString())
                 .into(holderNews.viewNews.urlNews)
+
+
+
         }
     }
 }

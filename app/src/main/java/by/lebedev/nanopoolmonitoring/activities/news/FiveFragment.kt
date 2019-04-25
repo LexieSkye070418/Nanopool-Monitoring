@@ -1,6 +1,7 @@
 package by.lebedev.nanopoolmonitoring.activities.news
 
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,20 +18,40 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_five.*
 import kotlinx.android.synthetic.main.item_coin.*
+import kotlinx.android.synthetic.main.web_fragment.*
+import android.widget.AdapterView
+import java.text.FieldPosition
+
 
 class FiveFragment : Fragment() {
 
-    var API_KEY:String = "6bb2d102680be65b5d540eb15eb2c58a"
+    var API_KEY: String = "6bb2d102680be65b5d540eb15eb2c58a"
 
     private lateinit var adapterNews: NewsAdapter
+    private lateinit var url: String
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_five,container,false)
+
+
+
+
+        return inflater!!.inflate(R.layout.fragment_five, container, false)
+
+
+
+
     }
+
 
     override fun onViewCreated(viewNews: View, savedInstanceState: Bundle?) {
         super.onViewCreated(viewNews, savedInstanceState)
+
         getNews()
+        onFullStoryClicked(viewNews)
+
+
+
 
 //        val listNews = ArrayList<News>()
 //        listNews.add(News("Horse", "urlm,mmmmn"))
@@ -40,8 +61,6 @@ class FiveFragment : Fragment() {
 //        setupRecyclerNews(listNews)
 
     }
-
-
 
 
     fun getNews() {
@@ -57,17 +76,20 @@ class FiveFragment : Fragment() {
     }
 
 
-     fun setupRecyclerNews(listNews: List<News>) {
+    fun setupRecyclerNews(listNews: List<News>) {
 
-         recycleViewNews.layoutManager = LinearLayoutManager(context)
+        recycleViewNews.layoutManager = LinearLayoutManager(context)
 
         adapterNews = NewsAdapter(listNews)
 
         recycleViewNews.adapter = adapterNews
+
+
     }
-     fun onFullStoryClicked(viewNews: View){
-         val intent = Intent.ACTION_VIEW
-         intent.setData(Uri.parse(url))
-         startActivity(intent)
-     }
+
+    fun onFullStoryClicked(viewNews: View) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
 }
