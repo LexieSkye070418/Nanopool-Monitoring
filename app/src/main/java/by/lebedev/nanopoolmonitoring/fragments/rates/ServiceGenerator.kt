@@ -13,7 +13,7 @@ object ServiceGenerator {
 
 
     // выставлены таймауты на соединение с сервером
-    private val httpClient = OkHttpClient.Builder()
+     val httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
         .writeTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)

@@ -17,8 +17,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".activities.news.WebActivity">
+
+        </activity>
+
         <activity android:name=".activities.AccountsActivity"/>
         <activity android:name=".activities.AddAccountActivity"/>
+
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
