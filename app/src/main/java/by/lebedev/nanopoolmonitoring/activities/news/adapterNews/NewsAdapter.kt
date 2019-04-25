@@ -2,7 +2,9 @@ package by.lebedev.nanopoolmonitoring.activities.news.adapterNews
 
 import android.content.Context
 import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivities
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
@@ -18,13 +20,15 @@ class NewsAdapter(
     context: Context?
 ) : RecyclerView.Adapter<ViewHolderNews>() {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNews {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNews {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
         val holder = ViewHolderNews(view)
-        val intent = Intent(parent.context, WebActivity::class.java)
-        intent.putExtra("URL", holder.adapterPosition)
-     parent.context.startActivities(arrayOf(intent))
+            view.setOnClickListener {
+
+        val intent = Intent(it.context, WebActivity::class.java)
+        val position:Int = holder.adapterPosition
+        intent.putExtra("URL", listNews[position].url)
+        it.context.startActivity(intent)}
         return holder
 
     }
@@ -44,4 +48,4 @@ class NewsAdapter(
         }
     }
 
-   }
+}
