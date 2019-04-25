@@ -41,9 +41,9 @@ class PaymentsFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-
-                setupRecycler(result.data)
-
+                if (result.status) {
+                    setupRecycler(result.data)
+                }
             }, {
                 Log.e("err", it.message)
             })
