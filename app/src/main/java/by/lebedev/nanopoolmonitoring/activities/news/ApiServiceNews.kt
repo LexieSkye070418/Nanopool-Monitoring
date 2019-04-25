@@ -1,9 +1,7 @@
 package by.lebedev.nanopoolmonitoring.activities.news
 
-import by.lebedev.nanopoolmonitoring.activities.course.CoinCap
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import kotlin.Int as Int1
 
