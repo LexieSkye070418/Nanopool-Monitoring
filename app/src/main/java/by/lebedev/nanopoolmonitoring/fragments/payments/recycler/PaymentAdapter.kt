@@ -19,13 +19,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class PaymentAdapter(
-    private val payments: ArrayList<DataPayments>,
-    private val context: Context?
-) : RecyclerView.Adapter<PaymentViewHolder>() {
+    private val payments: ArrayList<DataPayments>) : RecyclerView.Adapter<PaymentViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PaymentViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_account, viewGroup, false)
+            .inflate(R.layout.item_payment, viewGroup, false)
         val holder = PaymentViewHolder(view)
         return holder
     }

@@ -39,12 +39,16 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                balance.setText(result.data.balance.toString().plus('$'))
-                current_hashrate.setText(result.data.hashrate.toString().plus(" H/s"))
-                hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
-                hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
+                if (result.status) {
+                    balance.setText(result.data.balance.toString().plus('$'))
+                    current_hashrate.setText(result.data.hashrate.toString().plus(" H/s"))
+                    hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
+                    hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
 
-                getProfitInfo(coin, result.data.avgHashrate.h6)
+
+                    getProfitInfo(coin, result.data.avgHashrate.h6)
+                }
+
             }, {
                 Log.e("err", it.message)
             })
