@@ -46,12 +46,11 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result.status) {
+                if (result.status&&balance!=null) {
                     balance.setText(result.data.balance.toString().plus('$'))
                     current_hashrate.setText(result.data.hashrate.toString().plus(" H/s"))
                     hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
                     hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
-
 
                     getProfitInfo(coin, result.data.avgHashrate.h6)
                 }
@@ -67,26 +66,28 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                minute_coin.setText(Math.round(result.data.minute.coins * 10000.0).div(10000.0).toString())
-                minute_btc.setText(Math.round(result.data.minute.bitcoins * 100000.0).div(100000.0).toString())
-                minute_usd.setText(Math.round(result.data.minute.dollars * 1000.0).div(1000.0).toString())
+                if (minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
 
-                hour_coin.setText(Math.round(result.data.hour.coins * 10000.0).div(10000.0).toString())
-                hour_btc.setText(Math.round(result.data.hour.bitcoins * 100000.0).div(100000.0).toString())
-                hour_usd.setText(Math.round(result.data.hour.dollars * 1000.0).div(1000.0).toString())
+                    minute_coin.setText(Math.round(result.data.minute.coins * 10000.0).div(10000.0).toString())
+                    minute_btc.setText(Math.round(result.data.minute.bitcoins * 100000.0).div(100000.0).toString())
+                    minute_usd.setText(Math.round(result.data.minute.dollars * 1000.0).div(1000.0).toString())
 
-                day_coin.setText(Math.round(result.data.day.coins * 10000.0).div(10000.0).toString())
-                day_btc.setText(Math.round(result.data.day.bitcoins * 100000.0).div(100000.0).toString())
-                day_usd.setText(Math.round(result.data.day.dollars * 1000.0).div(1000.0).toString())
+                    hour_coin.setText(Math.round(result.data.hour.coins * 10000.0).div(10000.0).toString())
+                    hour_btc.setText(Math.round(result.data.hour.bitcoins * 100000.0).div(100000.0).toString())
+                    hour_usd.setText(Math.round(result.data.hour.dollars * 1000.0).div(1000.0).toString())
 
-                week_coin.setText(Math.round(result.data.week.coins * 10000.0).div(10000.0).toString())
-                week_btc.setText(Math.round(result.data.week.bitcoins * 100000.0).div(100000.0).toString())
-                week_usd.setText(Math.round(result.data.week.dollars * 1000.0).div(1000.0).toString())
+                    day_coin.setText(Math.round(result.data.day.coins * 10000.0).div(10000.0).toString())
+                    day_btc.setText(Math.round(result.data.day.bitcoins * 100000.0).div(100000.0).toString())
+                    day_usd.setText(Math.round(result.data.day.dollars * 1000.0).div(1000.0).toString())
 
-                month_coin.setText(Math.round(result.data.month.coins * 10000.0).div(10000.0).toString())
-                month_btc.setText(Math.round(result.data.month.bitcoins * 100000.0).div(100000.0).toString())
-                month_usd.setText(Math.round(result.data.month.dollars * 1000.0).div(1000.0).toString())
+                    week_coin.setText(Math.round(result.data.week.coins * 10000.0).div(10000.0).toString())
+                    week_btc.setText(Math.round(result.data.week.bitcoins * 100000.0).div(100000.0).toString())
+                    week_usd.setText(Math.round(result.data.week.dollars * 1000.0).div(1000.0).toString())
 
+                    month_coin.setText(Math.round(result.data.month.coins * 10000.0).div(10000.0).toString())
+                    month_btc.setText(Math.round(result.data.month.bitcoins * 100000.0).div(100000.0).toString())
+                    month_usd.setText(Math.round(result.data.month.dollars * 1000.0).div(1000.0).toString())
+                }
             }, {
                 Log.e("err", it.message)
             })

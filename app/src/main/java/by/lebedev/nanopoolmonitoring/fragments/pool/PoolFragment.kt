@@ -46,7 +46,8 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                price.setText(result.data.price_usd.toString().plus('$'))
+                if (price!=null){
+                price.setText(result.data.price_usd.toString().plus('$'))}
             }, {
                 Log.e("err", it.message)
             })
@@ -57,7 +58,8 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                hashrate.setText(result.data.toString().plus(' ').plus(hashType))
+                if (hashrate!=null){
+                hashrate.setText(result.data.toString().plus(' ').plus(hashType))}
             }, {
                 Log.e("err", it.message)
             })
@@ -68,7 +70,8 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                miners.setText(result.data.toString())
+                if (miners!=null){
+                miners.setText(result.data.toString())}
             }, {
                 Log.e("err", it.message)
             })
