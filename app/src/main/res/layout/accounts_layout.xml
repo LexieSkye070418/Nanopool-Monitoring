@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:ads="http://schemas.android.com/apk/res-auto"
              android:orientation="vertical"
+             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:layout_margin="16dp"
@@ -40,7 +41,7 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/recycleAccounts"
                 android:layout_width="match_parent"
-                android:layout_height="550dp">
+                android:layout_height="480dp">
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
