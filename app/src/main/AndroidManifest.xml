@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="by.lebedev.nanopoolmonitoring">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="by.lebedev.nanopoolmonitoring">
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application android:allowBackup="true"
@@ -9,6 +10,9 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme"
                  tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-9699134137611847~3977929109"/>
 
         <activity android:name=".activities.TabActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.LogoActivity" android:screenOrientation="portrait">
