@@ -11,6 +11,8 @@ import by.lebedev.nanopoolmonitoring.fragments.pool.PoolFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
+
+
     override fun getItem(position: Int): Fragment {
         return when (position) {
 

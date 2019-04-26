@@ -2,10 +2,12 @@ package by.lebedev.nanopoolmonitoring.fragments.dashboard
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
@@ -14,6 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import javax.inject.Inject
+import android.widget.LinearLayout
+import by.lebedev.nanopoolmonitoring.activities.TabActivity
+
 
 class DashboardFragment : Fragment() {
 

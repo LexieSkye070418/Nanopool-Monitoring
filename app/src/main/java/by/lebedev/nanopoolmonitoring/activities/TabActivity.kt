@@ -30,6 +30,6 @@ class TabActivity : AppCompatActivity() {
         tabs_main.setupWithViewPager(viewpager_main)
         tabIntent.coin = intent.getStringExtra("COIN")
         tabIntent.wallet = intent.getStringExtra("WALLET")
-    }
 
+    }
 }

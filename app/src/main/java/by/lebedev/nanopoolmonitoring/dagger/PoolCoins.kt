@@ -1,5 +1,7 @@
 package by.lebedev.nanopoolmonitoring.dagger
 
+import android.graphics.drawable.Drawable
+import by.lebedev.nanopoolmonitoring.R
 import javax.inject.Singleton
 
 @Singleton

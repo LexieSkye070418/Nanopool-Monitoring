@@ -7,20 +7,22 @@
 >
 
     <android.support.design.widget.TabLayout
-            app:tabTextAppearance="@style/CustomTabText"
+            app:tabGravity="fill"
             android:id="@+id/tabs_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="scrollable"
             tools:ignore="MissingConstraints"
-    />
+            app:tabIndicatorColor="@android:color/holo_orange_dark"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/orange"
 
+    />
 
     <android.support.v4.view.ViewPager
             android:id="@+id/viewpager_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true"
             app:layout_scrollFlags="scroll|enterAlways"
             app:layout_constraintTop_toBottomOf="@+id/tabs_main"
     />

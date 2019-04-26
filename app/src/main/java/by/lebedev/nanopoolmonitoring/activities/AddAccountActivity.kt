@@ -8,6 +8,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.room.DataBase
@@ -64,7 +65,44 @@ class AddAccountActivity : AppCompatActivity() {
                 position: Int, id: Long
             ) {
                 coinId = position
+
+                when (position) {
+                    0 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.eth)
+
+                    }
+                    1 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.etc)
+
+                    }
+                    2 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.zec)
+
+                    }
+                    3 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.xmr)
+
+                    }
+                    4 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.pasc)
+
+                    }
+                    5 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.etn)
+
+                    }
+                    6 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.raven)
+
+                    }
+                    7 -> {
+                        addAccCoinLogo.setImageResource(R.drawable.grin)
+
+                    }
+                    else -> addAccCoinLogo.setImageResource(R.drawable.eth)
+                }
             }
+
             override fun onNothingSelected(arg0: AdapterView<*>) {}
         }
     }
