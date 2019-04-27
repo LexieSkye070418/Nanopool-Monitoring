@@ -12,10 +12,17 @@ https://play.google.com/store/apps/details?id=by.lebedev.nanopoolmonitoring
 # Includes support for all cryptocurrencies on Nanopool including
 
 ★ Ethereum (ETH)
+
 ★ Ethereum Classic (ETC)
+
 ★ Zcash (ZEC)
+
 ★ Monero (XMR)
+
 ★ Electroneum (ETN)
+
 ★ Pascal(PASC)
+
 ★ Raven(RVN)
+
 ★ GRIN-29(GRIN)
