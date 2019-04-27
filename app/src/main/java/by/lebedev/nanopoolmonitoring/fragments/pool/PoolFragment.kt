@@ -41,13 +41,14 @@ class PoolFragment : Fragment() {
         getMiners()
     }
 
-    fun getPrice() {
+    fun getPrice()  {
         val d = provideApi().getPrice(coin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (price!=null){
                 price.setText(result.data.price_usd.toString().plus('$'))}
+
             }, {
                 Log.e("err", it.message)
             })

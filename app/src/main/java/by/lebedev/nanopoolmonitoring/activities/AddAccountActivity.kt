@@ -65,55 +65,21 @@ class AddAccountActivity : AppCompatActivity() {
                 position: Int, id: Long
             ) {
                 coinId = position
-
-                when (position) {
-                    0 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.eth)
-
-                    }
-                    1 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.etc)
-
-                    }
-                    2 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.zec)
-
-                    }
-                    3 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.xmr)
-
-                    }
-                    4 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.pasc)
-
-                    }
-                    5 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.etn)
-
-                    }
-                    6 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.raven)
-
-                    }
-                    7 -> {
-                        addAccCoinLogo.setImageResource(R.drawable.grin)
-
-                    }
-                    else -> addAccCoinLogo.setImageResource(R.drawable.eth)
-                }
+                setSelectedCoinImage(coinId)
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>) {}
         }
     }
 
-    private fun insertToDatabase(walletText: String) {
+    fun insertToDatabase(walletText: String) {
         val complete = Completable.fromAction {
             DataBase.getInstance(this).db.accountDao().insert(
                 Account(
                     Calendar.getInstance().timeInMillis,
                     poolCoins.list.get(coinId),
                     walletText
+
                 )
             )
         }
@@ -121,4 +87,43 @@ class AddAccountActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {}
     }
+
+    fun setSelectedCoinImage(position: Int) {
+        when (position) {
+            0 -> {
+                addAccCoinLogo.setImageResource(R.drawable.eth)
+
+            }
+            1 -> {
+                addAccCoinLogo.setImageResource(R.drawable.etc)
+
+            }
+            2 -> {
+                addAccCoinLogo.setImageResource(R.drawable.zec)
+
+            }
+            3 -> {
+                addAccCoinLogo.setImageResource(R.drawable.xmr)
+
+            }
+            4 -> {
+                addAccCoinLogo.setImageResource(R.drawable.pasc)
+
+            }
+            5 -> {
+                addAccCoinLogo.setImageResource(R.drawable.etn)
+
+            }
+            6 -> {
+                addAccCoinLogo.setImageResource(R.drawable.raven)
+
+            }
+            7 -> {
+                addAccCoinLogo.setImageResource(R.drawable.grin)
+
+            }
+            else -> addAccCoinLogo.setImageResource(R.drawable.eth)
+        }
+    }
+
 }
