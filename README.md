@@ -5,7 +5,7 @@
 
 https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/Privacy_Policy.md
 
->google play
+>View on google play:
 
 https://play.google.com/store/apps/details?id=by.lebedev.nanopoolmonitoring
 
