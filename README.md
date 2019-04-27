@@ -28,11 +28,27 @@ https://play.google.com/store/apps/details?id=by.lebedev.nanopoolmonitoring
 
 ★ GRIN-29(GRIN)
 
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-06-45-569_by.lebedev.nanopoolmonitoring.png />
+<br> 
 
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-06-45-569_by.lebedev.nanopoolmonitoring.png "Optional title")
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-02-587_by.lebedev.nanopoolmonitoring.png "Optional title")
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-07-415_by.lebedev.nanopoolmonitoring.png "Optional title")
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-14-043_by.lebedev.nanopoolmonitoring.png "Optional title")
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-20-353_by.lebedev.nanopoolmonitoring.png "Optional title")
-![Alt text](https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/title.jpg"Optional title")
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-02-587_by.lebedev.nanopoolmonitoring.png />
+<br>
+
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-07-415_by.lebedev.nanopoolmonitoring.png />
+<br>
+
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-14-043_by.lebedev.nanopoolmonitoring.png/>
+<br>
+
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-20-353_by.lebedev.nanopoolmonitoring.png />
+<br>
+
+<br>
+<img height = "200" src= https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/screen/screenshot_2019-04-27-00-07-26-247_by.lebedev.nanopoolmonitoring.png />
+<br>
 
