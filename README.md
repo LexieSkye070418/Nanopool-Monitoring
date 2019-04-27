@@ -9,7 +9,8 @@ https://github.com/PaladinVCT/Nanopool-Monitoring/blob/master/Privacy_Policy.md
 
 https://play.google.com/store/apps/details?id=by.lebedev.nanopoolmonitoring
 
->Includes support for all cryptocurrencies on Nanopool including
+
+# Includes support for all cryptocurrencies on Nanopool including
 
 ★ Ethereum (ETH)
 
