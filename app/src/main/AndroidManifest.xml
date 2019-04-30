@@ -12,7 +12,7 @@
                  tools:ignore="GoogleAppIndexingWarning">
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-9699134137611847~3977929109"/>
+                android:value="ca-app-pub-1501215034144631~3780667725"/>
 
         <activity android:name=".activities.TabActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.LogoActivity" android:screenOrientation="portrait">

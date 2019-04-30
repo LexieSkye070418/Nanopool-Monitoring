@@ -48,7 +48,9 @@
     <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
     </style>
 
 </resources>

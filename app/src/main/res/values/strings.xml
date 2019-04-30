@@ -26,5 +26,6 @@
     <string name="week">Week:</string>
     <string name="month">Month:</string>
     <string name="banner_ad_unit_id">ca-app-pub-9699134137611847~3977929109</string>
+    <string name="please_add">Accounts not found, please try to add some...</string>
 
 </resources>

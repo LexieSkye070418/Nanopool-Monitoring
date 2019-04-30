@@ -49,7 +49,6 @@
 
             </LinearLayout>
 
-
             <TextView
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"

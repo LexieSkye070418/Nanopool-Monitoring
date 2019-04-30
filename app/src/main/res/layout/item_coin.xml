@@ -8,6 +8,7 @@
         android:padding="@dimen/margin"
         android:orientation="horizontal"
         android:background="@drawable/rounded"
+        android:layout_margin="2dp"
 >
 
     <ImageView

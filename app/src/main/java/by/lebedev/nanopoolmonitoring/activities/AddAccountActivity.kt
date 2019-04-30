@@ -48,9 +48,10 @@ class AddAccountActivity : AppCompatActivity() {
         }
 
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, poolCoins.list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_nano)
 
         val spinner = coinSpinner
+        spinner.prompt = "Coin"
         spinner.adapter = adapter
 
         setupSpinner(spinner)
