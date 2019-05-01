@@ -3,8 +3,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/nanopool_background"
-   >
+>
+    <ImageView
+            android:background="@drawable/nanopool_background"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     <ProgressBar
             android:id="@+id/progressAccountLoad"
@@ -18,7 +22,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/recycleViewNews"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="550dp"
             tools:listitem="@layout/item_news"/>
 
 </FrameLayout>
