@@ -6,7 +6,8 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:orientation="horizontal"
-        android:background="@drawable/rounded">
+        android:background="@drawable/rounded"
+        android:layout_margin="2dp">
 
     <ImageView
             android:id="@+id/urlNews"

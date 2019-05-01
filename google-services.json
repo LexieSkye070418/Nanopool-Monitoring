@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "639457054205",
+    "firebase_url": "https://nanopool-monitoring.firebaseio.com",
+    "project_id": "nanopool-monitoring",
+    "storage_bucket": "nanopool-monitoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639457054205:android:33edd26c9c1e4a81",
+        "android_client_info": {
+          "package_name": "by.lebedev.nanopoolmonitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639457054205-2tsudea4bq9mld5qseladcjjspacjfd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "by.lebedev.nanopoolmonitoring",
+            "certificate_hash": "d6b97af769f93c92c26abfd2ea2eab44efcde02c"
+          }
+        },
+        {
+          "client_id": "639457054205-bo9nucg078vksgrrv59ul9nm3et750a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHpAbvU7Lc2wDBtIklwc7hNMOjGg0DIQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639457054205-bo9nucg078vksgrrv59ul9nm3et750a6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
