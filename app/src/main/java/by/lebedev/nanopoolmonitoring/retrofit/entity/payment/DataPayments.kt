@@ -20,7 +20,5 @@ class DataPayments(
         val date = Date(time*1000)
         val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
         return format.format(date)
-
-
     }
 }

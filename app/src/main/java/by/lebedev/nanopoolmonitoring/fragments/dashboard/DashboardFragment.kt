@@ -15,6 +15,13 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
 import javax.inject.Inject
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
+import java.util.ArrayList
+import android.R
+
+
 
 
 class DashboardFragment : Fragment() {
@@ -24,6 +31,7 @@ class DashboardFragment : Fragment() {
     val nf = NumberFormat.getInstance()
     var coin: String = ""
     var wallet: String = ""
+    lateinit var graph: GraphView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -31,6 +39,10 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        graph = graphDashboard
+
+
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()
@@ -96,4 +108,35 @@ class DashboardFragment : Fragment() {
                 Log.e("err", it.message)
             })
     }
+
+    fun getChart() {
+        val d = provideApi().getChart(coin, wallet)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { result ->
+
+                val datapoints = Array<>()
+
+                for (data in result.data){
+
+                    datapoints.add(DataPoint(data.date,data.hashrate))
+                }
+
+                datapoints.toArray()
+
+
+                val series = LineGraphSeries(
+                    arrayOf(
+                    )
+                )
+
+
+
+
+
+
+
+            }
+    }
+
 }
