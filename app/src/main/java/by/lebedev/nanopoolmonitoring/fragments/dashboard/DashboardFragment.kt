@@ -22,6 +22,9 @@ import javax.inject.Inject
 import com.github.mikephil.charting.data.LineData
 import java.util.*
 import kotlin.collections.ArrayList
+import com.github.mikephil.charting.utils.EntryXComparator
+
+
 
 
 class DashboardFragment : Fragment() {
@@ -116,29 +119,37 @@ class DashboardFragment : Fragment() {
             .subscribe { result ->
 
 
-               val entries = ArrayList<Entry>()
+                val entries = ArrayList<Entry>()
 
                 for (data in result.data) {
-                    entries.add(Entry((data.date*1000).toFloat(),data.hashrate.toFloat()))
+                    entries.add(Entry((data.date * 1000).toFloat(), data.hashrate.toFloat()))
                 }
 
-                entries.sortWith(object: Comparator<Entry>{
-                    override fun compare(p1: Entry, p2: Entry): Int = when {
-                        p1.x > p2.x -> 1
-                        p1.x == p2.x -> 0
-                        else -> -1
-                    }
-                })
+                Collections.sort(entries, EntryXComparator())
+
+//                entries.sortWith(object: Comparator<Entry>{
+//                    override fun compare(p1: Entry, p2: Entry): Int = when {
+//                        p1.x > p2.x -> 1
+//                        p1.x == p2.x -> 0
+//                        else -> -1
+//                    }
+//                })
                 val dataSet = LineDataSet(entries, "Hashrate")
                 val lineData = LineData(dataSet)
-                chart.data = lineData
+
+
+
+
+
+                    chart.data = lineData
+
                 chart.invalidate()
 
 
                 Log.e("AAA", result.toString())
 
 
-
             }
     }
+
 }
