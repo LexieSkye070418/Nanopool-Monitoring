@@ -10,7 +10,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 
     compileSdkVersion 28
     defaultConfig {
@@ -76,5 +78,5 @@ dependencies {
     implementation "org.mockito:mockito-inline:2.8.9"
     implementation "android.arch.core:core-testing:1.1.1"
 
-    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

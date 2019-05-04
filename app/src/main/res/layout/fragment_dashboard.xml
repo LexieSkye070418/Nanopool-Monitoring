@@ -135,15 +135,16 @@
 
             </LinearLayout>
 
-            <com.jjoe64.graphview.GraphView
+            <com.github.mikephil.charting.charts.LineChart
+                    android:layout_margin="20dp"
+                    android:id="@+id/chartView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:id="@+id/graphDashboard"/>
+                    android:layout_height="200dp" />
 
 
             <TextView
                     android:gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/very_approximated_earnings"

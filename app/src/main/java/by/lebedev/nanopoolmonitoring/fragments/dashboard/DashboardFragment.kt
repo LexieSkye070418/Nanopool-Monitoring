@@ -9,19 +9,19 @@ import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoring.retrofit.entity.dashboard.DataChart
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineDataSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
 import javax.inject.Inject
-import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
-import java.util.ArrayList
-import android.R
-
-
+import com.github.mikephil.charting.data.LineData
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DashboardFragment : Fragment() {
@@ -31,7 +31,7 @@ class DashboardFragment : Fragment() {
     val nf = NumberFormat.getInstance()
     var coin: String = ""
     var wallet: String = ""
-    lateinit var graph: GraphView
+    lateinit var chart: LineChart
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -40,8 +40,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        graph = graphDashboard
-
+        chart = chartView
 
         nf.maximumFractionDigits = 4
 
@@ -52,6 +51,7 @@ class DashboardFragment : Fragment() {
         wallet = tabIntent.wallet
 
         getGeneralInfo()
+        getChart()
 
     }
 
@@ -115,28 +115,30 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
 
-                val datapoints = Array<>()
 
-                for (data in result.data){
+               val entries = ArrayList<Entry>()
 
-                    datapoints.add(DataPoint(data.date,data.hashrate))
+                for (data in result.data) {
+                    entries.add(Entry((data.date*1000).toFloat(),data.hashrate.toFloat()))
                 }
 
-                datapoints.toArray()
+                entries.sortWith(object: Comparator<Entry>{
+                    override fun compare(p1: Entry, p2: Entry): Int = when {
+                        p1.x > p2.x -> 1
+                        p1.x == p2.x -> 0
+                        else -> -1
+                    }
+                })
+                val dataSet = LineDataSet(entries, "Hashrate")
+                val lineData = LineData(dataSet)
+                chart.data = lineData
+                chart.invalidate()
 
 
-                val series = LineGraphSeries(
-                    arrayOf(
-                    )
-                )
-
-
-
-
+                Log.e("AAA", result.toString())
 
 
 
             }
     }
-
 }
