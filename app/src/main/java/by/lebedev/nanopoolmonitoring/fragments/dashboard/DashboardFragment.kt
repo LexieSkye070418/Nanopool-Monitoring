@@ -1,30 +1,33 @@
 package by.lebedev.nanopoolmonitoring.fragments.dashboard
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.retrofit.entity.dashboard.DataChart
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.EntryXComparator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
-import javax.inject.Inject
-import com.github.mikephil.charting.data.LineData
+import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
-import com.github.mikephil.charting.utils.EntryXComparator
-
-
 
 
 class DashboardFragment : Fragment() {
@@ -37,7 +40,7 @@ class DashboardFragment : Fragment() {
     lateinit var chart: LineChart
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(by.lebedev.nanopoolmonitoring.R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +58,7 @@ class DashboardFragment : Fragment() {
 
         getGeneralInfo()
         getChart()
+        chart.getDescription().setEnabled(false)
 
     }
 
@@ -118,6 +122,12 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
 
+                val resultTen = ArrayList<DataChart>()
+
+                for (i in 0..9) {
+                    resultTen.add(i, result.data.get(i))
+                }
+
 
                 val entries = ArrayList<Entry>()
 
@@ -127,28 +137,54 @@ class DashboardFragment : Fragment() {
 
                 Collections.sort(entries, EntryXComparator())
 
-//                entries.sortWith(object: Comparator<Entry>{
-//                    override fun compare(p1: Entry, p2: Entry): Int = when {
-//                        p1.x > p2.x -> 1
-//                        p1.x == p2.x -> 0
-//                        else -> -1
-//                    }
-//                })
+                val xAxis = chart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.textSize = 10f
+                xAxis.textColor = Color.WHITE
+                xAxis.setDrawAxisLine(false)
+                xAxis.setDrawGridLines(true)
+                xAxis.textColor = Color.rgb(255, 192, 56)
+                xAxis.setCenterAxisLabels(true)
+                xAxis.granularity = 1f // one hour
+                xAxis.valueFormatter = object : ValueFormatter() {
+
+                    val mFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
+
+                    override fun getFormattedValue(value: Float): String {
+
+                        val millis = value.toLong()
+                        return mFormat.format(Date(millis))
+                    }
+                }
+
+
                 val dataSet = LineDataSet(entries, "Hashrate")
+                dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER)
                 val lineData = LineData(dataSet)
 
 
+                val leftAxis = chart.axisLeft
+                leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+                leftAxis.textColor = ColorTemplate.getHoloBlue()
+                leftAxis.setDrawGridLines(true)
+                leftAxis.isGranularityEnabled = true
+                leftAxis.axisMinimum = 0f
+                leftAxis.axisMaximum = 170f
+                leftAxis.yOffset = -9f
+                leftAxis.textColor = Color.rgb(255, 192, 56)
+
+                val rightAxis = chart.axisRight
+                rightAxis.isEnabled = false
 
 
 
-                    chart.data = lineData
+
+                chart.data = lineData
+                chart.animateX(1000)
+                chart.animateY(1000)
 
                 chart.invalidate()
-
-
                 Log.e("AAA", result.toString())
-
-
             }
     }
 
