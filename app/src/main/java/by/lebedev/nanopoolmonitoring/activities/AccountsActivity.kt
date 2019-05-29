@@ -35,9 +35,14 @@ class AccountsActivity : AppCompatActivity() {
         setContentView(R.layout.accounts_layout)
 
         MobileAds.initialize(this, "ca-app-pub-1501215034144631~3780667725")
+
         val adView = AdView(this)
         adView.adSize = AdSize.BANNER
-        adView.adUnitId = "ca-app-pub-1501215034144631/2383825576"
+        //старый
+//        adView.adUnitId = "ca-app-pub-1501215034144631/2383825576"
+        //актуальный
+        adView.adUnitId = "ca-app-pub-9699134137611847/6712027369"
+
 
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()

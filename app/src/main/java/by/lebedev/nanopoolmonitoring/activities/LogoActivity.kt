@@ -20,4 +20,4 @@ class LogoActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.entering, R.anim.exiting) }, 1000)
 
     }
-}
+}  
