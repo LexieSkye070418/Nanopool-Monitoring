@@ -64,4 +64,4 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-keystore/keystore_nano.jksapp/google-services.jsonapp/google-services.json
+keystore/keystore_nano.jksapp/google-services.jsonapp/google-services.json*.json
