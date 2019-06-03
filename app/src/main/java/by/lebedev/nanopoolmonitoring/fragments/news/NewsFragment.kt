@@ -34,6 +34,7 @@ class NewsFragment : Fragment() {
             .subscribe({ resultNews ->
                 if (!resultNews.isEmpty()) {
                     setupRecyclerNews(resultNews)
+                    progressNewsLoad.visibility = View.INVISIBLE
                 }
             },
                 { error -> Log.e("AAA", "не забрал новости!!!") })

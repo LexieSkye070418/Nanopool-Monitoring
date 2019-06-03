@@ -23,7 +23,10 @@
         </activity>
 
         <activity android:name=".activities.AccountsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.AddAccountActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AddAccountActivity"
+                  android:screenOrientation="portrait"
+
+        />
 
     </application>
 </manifest>

@@ -18,7 +18,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.accounts_layout.*
+import kotlinx.android.synthetic.main.account_layout.*
 import javax.inject.Inject
 
 
@@ -32,12 +32,12 @@ class AccountsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.accounts_layout)
+        setContentView(R.layout.account_layout)
 
         MobileAds.initialize(this, "ca-app-pub-1501215034144631~3780667725")
         val adView = AdView(this)
         adView.adSize = AdSize.BANNER
-        adView.adUnitId = "ca-app-pub-1501215034144631/2383825576"
+        adView.adUnitId = "ca-app-pub-1501215034144631/7368226777"
 
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
