@@ -13,11 +13,14 @@ import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pool.*
+import java.text.NumberFormat
 import javax.inject.Inject
 
 class PoolFragment : Fragment() {
     @Inject
     lateinit var tabIntent: TabIntent
+
+    val nf = NumberFormat.getInstance()
 
     var hashType: String = ""
     var coin: String = ""
@@ -28,6 +31,8 @@ class PoolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        nf.maximumFractionDigits = 8
 
         val component = DaggerMagicBox.builder().build()
         tabIntent = component.provideTabIntent()
@@ -60,7 +65,7 @@ class PoolFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (hashrate!=null){
-                hashrate.setText(result.data.toString().plus(' ').plus(hashType))}
+                hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))}
             }, {
                 Log.e("err", it.message)
             })

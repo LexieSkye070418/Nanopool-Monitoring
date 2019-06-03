@@ -16,7 +16,7 @@ import by.lebedev.nanopoolmonitoring.room.entity.Account
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.add_account_layout.*
+import kotlinx.android.synthetic.main.adding_account_layout.*
 import java.util.*
 import javax.inject.Inject
 
@@ -29,7 +29,7 @@ class AddAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(by.lebedev.nanopoolmonitoring.R.layout.add_account_layout)
+        setContentView(R.layout.adding_account_layout)
 
         val component = DaggerMagicBox.builder().build()
         poolCoins = component.providePoolCoins()

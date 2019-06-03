@@ -6,6 +6,14 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
 
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\admin\\Documents\\GitHub\\Nanopool-Monitoring\\keystore\\keystore_nano.jks')
+            storePassword 'Paladin1'
+            keyAlias = 'nano'
+            keyPassword 'Paladin1'
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -20,6 +28,7 @@ android {
         versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
