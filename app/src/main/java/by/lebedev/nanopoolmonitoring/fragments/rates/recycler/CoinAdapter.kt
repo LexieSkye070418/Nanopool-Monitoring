@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoring.fragments.rates.recycler
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -38,6 +39,12 @@ class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<CoinViewHolder
             holder.view.tvPriceChange.text = if (coin.percent_change_24h > 0) "+${coin.percent_change_24h}%" else {
                 "${coin.percent_change_24h}%"
             }
+            if (coin.percent_change_24h > 0){
+                holder.view.tvPriceChange.setTextColor(Color.parseColor("#37B110"))}
+            else{
+                holder.view.tvPriceChange.setTextColor(Color.parseColor("#D41611"))}
+
+
             holder.view.tvPrice.text = "${coin.price_usd}$"
 
 

@@ -94,7 +94,8 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="40dp">
 
 
             <TextView
@@ -116,8 +117,137 @@
                     android:text="@string/n_a"
                     android:layout_weight="1"
             />
-
         </LinearLayout>
+
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:text="General info"
+                android:background="@color/grey_background"
+        />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp">
+
+
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Original authors"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:layout_marginRight="1dp"
+            />
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:id="@+id/authors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/n_a"
+                    android:layout_weight="1"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="3dp">
+
+
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Initial release"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:layout_marginRight="1dp"
+            />
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:id="@+id/release"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/n_a"
+                    android:layout_weight="1"
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="3dp">
+
+
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Written in"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:layout_marginRight="1dp"
+            />
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:id="@+id/writtenIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/n_a"
+                    android:layout_weight="1"
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="3dp">
+
+
+            <TextView
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Website"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:layout_marginRight="1dp"
+            />
+            <TextView
+                    android:textColor="@color/darkBlue"
+                    android:gravity="center"
+                    android:background="@drawable/squared_thin"
+                    android:id="@+id/website"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/n_a"
+                    android:layout_weight="1"
+            />
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

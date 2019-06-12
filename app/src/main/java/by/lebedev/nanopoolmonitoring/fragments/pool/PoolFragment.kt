@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoring.fragments.pool
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoring.activities.webview.WebActivity
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
@@ -44,15 +46,24 @@ class PoolFragment : Fragment() {
         getPrice()
         getHashrate()
         getMiners()
+        getGeneralInfo()
+
+
+        website.setOnClickListener {
+            val intent = Intent(this.context, WebActivity::class.java)
+            intent.putExtra("url", "https://" + website.text.toString())
+            startActivity(intent)
+        }
     }
 
-    fun getPrice()  {
+    fun getPrice() {
         val d = provideApi().getPrice(coin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (price!=null){
-                price.setText(result.data.price_usd.toString().plus('$'))}
+                if (price != null) {
+                    price.setText(result.data.price_usd.toString().plus('$'))
+                }
 
             }, {
                 Log.e("err", it.message)
@@ -64,8 +75,9 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (hashrate!=null){
-                hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))}
+                if (hashrate != null) {
+                    hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))
+                }
             }, {
                 Log.e("err", it.message)
             })
@@ -76,10 +88,18 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (miners!=null){
-                miners.setText(result.data.toString())}
+                if (miners != null) {
+                    miners.setText(result.data.toString())
+                }
             }, {
                 Log.e("err", it.message)
             })
+    }
+
+    fun getGeneralInfo() {
+        if (authors != null) authors.text = tabIntent.getAuthors(coin)
+        if (authors != null) release.text = tabIntent.getRelease(coin)
+        if (authors != null) writtenIn.text = tabIntent.getWrittenIn(coin)
+        if (authors != null) website.text = tabIntent.getWebsite(coin)
     }
 }

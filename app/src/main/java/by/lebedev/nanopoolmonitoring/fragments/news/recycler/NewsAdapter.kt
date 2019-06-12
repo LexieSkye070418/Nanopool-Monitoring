@@ -2,11 +2,11 @@ package by.lebedev.nanopoolmonitoring.fragments.news.recycler
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoring.activities.webview.WebActivity
 import by.lebedev.nanopoolmonitoring.fragments.news.retrofit.entity.News
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_news.view.*
@@ -22,9 +22,15 @@ class NewsAdapter(
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
         val holder = ViewHolderNews(view)
         view.setOnClickListener {
-            val address = Uri.parse(listNews.get(holder.adapterPosition).url);
-            val openlink = Intent(Intent.ACTION_VIEW, address);
-            it.context.startActivity(openlink)
+
+            val url = listNews.get(holder.adapterPosition).url
+            val intent = Intent(it.context,WebActivity::class.java)
+            intent.putExtra("url",url)
+            it.context.startActivity(intent)
+
+//            val address = Uri.parse(listNews.get(holder.adapterPosition).url);
+//            val openlink = Intent(Intent.ACTION_VIEW, address);
+//            it.context.startActivity(openlink)
         }
         return holder
 

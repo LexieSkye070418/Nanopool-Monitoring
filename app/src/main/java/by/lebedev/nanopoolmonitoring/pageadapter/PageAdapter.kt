@@ -3,11 +3,12 @@ package by.lebedev.nanopoolmonitoring.pageadapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import by.lebedev.nanopoolmonitoring.fragments.rates.RatesFragment
 import by.lebedev.nanopoolmonitoring.fragments.dashboard.DashboardFragment
 import by.lebedev.nanopoolmonitoring.fragments.news.NewsFragment
 import by.lebedev.nanopoolmonitoring.fragments.payments.PaymentsFragment
 import by.lebedev.nanopoolmonitoring.fragments.pool.PoolFragment
+import by.lebedev.nanopoolmonitoring.fragments.rates.RatesFragment
+import by.lebedev.nanopoolmonitoring.fragments.workers.WorkersFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
@@ -17,9 +18,10 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         return when (position) {
 
             0 -> DashboardFragment()
-            1 -> PoolFragment()
-            2 -> PaymentsFragment()
-            3 -> RatesFragment()
+            1 -> WorkersFragment()
+            2 -> PoolFragment()
+            3 -> PaymentsFragment()
+            4 -> RatesFragment()
             else -> {
                 return NewsFragment()
             }
@@ -27,15 +29,16 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        return 5
+        return 6
     }
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
             0 -> "Dashboard"
-            1 -> "Pool"
-            2 -> "Payments"
-            3 -> "Rates"
+            1 -> "Workers"
+            2 -> "Pool"
+            3 -> "Payments"
+            4 -> "Rates"
             else -> {
                 return "News"
             }

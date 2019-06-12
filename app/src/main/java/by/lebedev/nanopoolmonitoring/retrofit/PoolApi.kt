@@ -6,6 +6,7 @@ import by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo.Hashrate
 import by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo.Miners
 import by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo.Price
 import by.lebedev.nanopoolmonitoring.retrofit.entity.profit.Profit
+import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.Workers
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,4 +30,9 @@ interface PoolApi {
 
     @GET("{coin}/payments/{wallet}")
     fun getPayments(@Path("coin")coin: String, @Path("wallet")wallet:String): Single<Payments>
+
+    @GET("{coin}/workers/{wallet}")
+    fun getWorkers(@Path("coin")coin: String, @Path("wallet")wallet:String): Single<Workers>
+
+
 }
