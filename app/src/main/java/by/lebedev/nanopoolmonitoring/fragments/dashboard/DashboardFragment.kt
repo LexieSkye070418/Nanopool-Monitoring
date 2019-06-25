@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
@@ -87,8 +88,8 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
-
+                if (view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
+                    val minute_coin = view!!.findViewById<TextView>(R.id.minute_coin)
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     minute_btc.setText(nf.format(result.data.minute.bitcoins).toString())
                     minute_usd.setText(Math.round(result.data.minute.dollars * 1000).div(1000).toString())
