@@ -27,24 +27,15 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.397"
             app:layout_constraintVertical_bias="0.0" android:id="@+id/textView"/>
 
-    <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-1501215034144631/7368226777"
-            tools:layout_editor_absoluteX="0dp" android:layout_marginTop="8dp"
-            ads:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginBottom="8dp"
-            ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintVertical_bias="0.0">
-    </com.google.android.gms.ads.AdView>
 
     <android.support.v7.widget.RecyclerView
+
             android:id="@+id/recycleAccounts"
             android:layout_width="match_parent"
-            android:layout_height="480dp" tools:layout_editor_absoluteX="-16dp" android:layout_marginTop="8dp"
-            ads:layout_constraintTop_toBottomOf="@+id/adView" android:layout_marginBottom="8dp"
-            ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintVertical_bias="0.0">
+            android:layout_height="550dp" tools:layout_editor_absoluteX="0dp"
+            android:layout_marginBottom="8dp"
+            ads:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="16dp"
+            ads:layout_constraintTop_toBottomOf="@+id/textView" ads:layout_constraintVertical_bias="0.731">
     </android.support.v7.widget.RecyclerView>
 
     <ProgressBar

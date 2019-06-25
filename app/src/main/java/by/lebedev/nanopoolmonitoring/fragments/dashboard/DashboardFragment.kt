@@ -31,6 +31,7 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()

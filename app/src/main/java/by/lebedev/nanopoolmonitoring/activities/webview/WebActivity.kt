@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import by.lebedev.nanopoolmonitoring.R
+import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.webview_layout.*
 
 class WebActivity : AppCompatActivity() {
+
+    lateinit var mAdView: AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.webview_layout)

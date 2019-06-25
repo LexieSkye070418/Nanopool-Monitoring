@@ -17,7 +17,7 @@ class LogoActivity : AppCompatActivity() {
 
         android.os.Handler().postDelayed({ val intent = Intent(this, AccountsActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.entering, R.anim.exiting) }, 1000)
+            overridePendingTransition(R.anim.entering, R.anim.exiting) }, 200)
 
     }
 }  
