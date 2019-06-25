@@ -10,6 +10,10 @@ import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -18,6 +22,7 @@ import javax.inject.Inject
 
 
 class DashboardFragment : Fragment() {
+    lateinit var mAdView: AdView
 
     @Inject
     lateinit var tabIntent: TabIntent
@@ -31,6 +36,17 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MobileAds.initialize(this.context, "ca-app-pub-1501215034144631~3780667725")
+
+        val adView = AdView(this.context)
+        adView.adSize = AdSize.BANNER
+
+        adView.adUnitId = "ca-app-pub-1501215034144631/8209904262"
+
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         nf.maximumFractionDigits = 4
 
