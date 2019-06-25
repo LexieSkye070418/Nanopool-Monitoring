@@ -25,7 +25,6 @@ import javax.inject.Inject
 class AccountsActivity : AppCompatActivity() {
     private var back_pressed: Long = 0
 
-    lateinit var mAdView: AdView
 
     @Inject
     lateinit var accountLocalList: AccountLocalList
@@ -33,18 +32,6 @@ class AccountsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_layout)
-
-        MobileAds.initialize(this, "ca-app-pub-1501215034144631~3780667725")
-
-        val adView = AdView(this)
-        adView.adSize = AdSize.BANNER
-
-        adView.adUnitId = "ca-app-pub-1501215034144631/7368226777"
-
-
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         val component = DaggerMagicBox.builder().build()
         accountLocalList = component.provideAccountLocalList()

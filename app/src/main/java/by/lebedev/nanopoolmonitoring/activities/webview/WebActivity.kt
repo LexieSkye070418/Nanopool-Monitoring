@@ -12,23 +12,10 @@ import kotlinx.android.synthetic.main.webview_layout.*
 
 class WebActivity : AppCompatActivity() {
 
-    lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.webview_layout)
-
-        MobileAds.initialize(this, "ca-app-pub-1501215034144631~3780667725")
-
-        val adView = AdView(this)
-        adView.adSize = AdSize.BANNER
-
-        adView.adUnitId = "ca-app-pub-1501215034144631/9714557621"
-
-
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         val simpleWebView = SimpleWebView()
         webview.webViewClient = simpleWebView
