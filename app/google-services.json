@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:709793566750:android:33edd26c9c1e4a81",
         "android_client_info": {
-          "package_name": "by.lebedev.nanopoolmonitoring"
+          "package_name": "by.lebedev.nanopoolmonitoringnoads"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "709793566750-oks483e3jqtbpt0fjr2js9h0qasln0jp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "by.lebedev.nanopoolmonitoring",
+            "package_name": "by.lebedev.nanopoolmonitoringnoads",
             "certificate_hash": "c61d2a7f649e1a05effe6eb34ecaf51908688470"
           }
         },
