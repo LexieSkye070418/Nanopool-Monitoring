@@ -74,7 +74,9 @@ class DashboardFragment : Fragment() {
                     hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
                     hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
 
-                    getProfitInfo(coin, result.data.avgHashrate.h6)
+                    if (result.data.avgHashrate.h6 > 1) {
+                        getProfitInfo(coin, result.data.avgHashrate.h6)
+                    }
                 }
 
             }, {
