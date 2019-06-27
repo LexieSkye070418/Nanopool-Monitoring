@@ -34,7 +34,7 @@ class WebActivity : AppCompatActivity() {
         webview.webViewClient = simpleWebView
 
         webview.settings.javaScriptEnabled = true
-        var url: String = intent.getStringExtra("url")
+        val url: String = intent.getStringExtra("url")
         webview.loadUrl(url)
     }
 
