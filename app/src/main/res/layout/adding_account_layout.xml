@@ -11,17 +11,6 @@
                android:background="@color/white"
                android:layout_height="match_parent"/>
 
-    <ImageView android:layout_width="300dp"
-               android:scaleType="centerCrop"
-               android:src="@drawable/add_background"
-               android:layout_height="300dp"
-               android:id="@+id/imageView3"
-               android:layout_marginBottom="8dp"
-               app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
-               app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-               app:layout_constraintTop_toTopOf="@+id/textView2" android:layout_marginStart="8dp"
-               app:layout_constraintStart_toStartOf="@+id/scrollView2" app:layout_constraintHorizontal_bias="0.597"
-               app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
             android:id="@+id/addAccCoinLogo"
@@ -102,9 +91,7 @@
                     android:layout_height="200dp"
             />
 
-
         </TableLayout>
-
 
     </ScrollView>
 

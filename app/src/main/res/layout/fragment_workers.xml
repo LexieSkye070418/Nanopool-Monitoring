@@ -6,9 +6,12 @@
         android:layout_height="match_parent"
 >
     <EditText
+android:id="@+id/searchText"
             android:hint="Look for worker..."
-            android:drawableLeft="@drawable/removeads"
-            android:background="@drawable/squared"
+            android:drawableLeft="@drawable/searchicon"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/squared_thin"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -18,10 +21,10 @@
 
     <ImageView
             android:layout_marginTop="50dp"
-            android:background="@drawable/nanopool_background"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/imageView4"/>
+            android:layout_height="match_parent"
+            android:id="@+id/imageView4"/>
 
     <ProgressBar
             android:id="@+id/progressWorkers"

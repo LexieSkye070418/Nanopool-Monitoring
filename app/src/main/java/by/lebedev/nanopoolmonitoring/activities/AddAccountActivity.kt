@@ -30,6 +30,8 @@ class AddAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.adding_account_layout)
+        window.setBackgroundDrawableResource(R.drawable.nanopool_background)
+
 
         val component = DaggerMagicBox.builder().build()
         poolCoins = component.providePoolCoins()

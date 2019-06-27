@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoring.dagger
 
+import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import javax.inject.Singleton
 
 @Singleton
@@ -7,6 +8,8 @@ class TabIntent private constructor() {
 
     var coin: String = ""
     var wallet: String = ""
+    var localWorkersList: ArrayList<DataWorkers>? = null
+    var filteredLocalWorkersList: ArrayList<DataWorkers>? = null
 
 
     private object Holder {
