@@ -100,6 +100,7 @@ class WorkersFragment : Fragment() {
 
     override fun onPause() {
         searchText.setText("")
+        getWorkers()
         super.onPause()
     }
 }
