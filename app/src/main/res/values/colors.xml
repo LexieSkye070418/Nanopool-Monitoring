@@ -13,5 +13,6 @@
     <color name="white">#00000000</color>
     <color name="darkBlue">#283A91</color>
     <color name="btcpurple">#5531BD</color>
+    <color name="dark_red_error">#BE0404</color>
 
 </resources>

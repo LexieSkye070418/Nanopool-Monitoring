@@ -82,7 +82,11 @@ class WorkersFragment : Fragment() {
                     tabIntent.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
-                    Log.e("AAA", tabIntent.localWorkersList.get(0).id)
+                } else {
+                    if (progressWorkers != null && textForError != null) {
+                        progressWorkers.visibility = View.INVISIBLE
+                        textForError.setText("Workers not found...")
+                    }
                 }
             }, {
                 Log.e("err", it.message)
@@ -102,5 +106,7 @@ class WorkersFragment : Fragment() {
         searchText.setText("")
         getWorkers()
         super.onPause()
+        tabIntent.filteredLocalWorkersList.clear()
+        tabIntent.localWorkersList.clear()
     }
 }

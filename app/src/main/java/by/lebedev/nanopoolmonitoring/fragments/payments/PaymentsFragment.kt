@@ -52,6 +52,11 @@ class PaymentsFragment : Fragment() {
                 if (!result.data.isEmpty()&&progressPayments!=null&&payment_recycle!=null) {
                         progressPayments.visibility = View.INVISIBLE
                     setupRecycler(result.data)
+                }else {
+                    if (progressPayments != null && textForErrorPayments != null) {
+                        progressPayments.visibility = View.INVISIBLE
+                        textForErrorPayments.setText("Payments not found...")
+                    }
                 }
             }, {
                 Log.e("err", it.message)

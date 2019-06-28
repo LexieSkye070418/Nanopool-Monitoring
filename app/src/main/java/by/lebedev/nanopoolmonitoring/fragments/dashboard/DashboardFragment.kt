@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
@@ -21,6 +22,11 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
 import javax.inject.Inject
+import android.net.NetworkInfo
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.support.v4.content.ContextCompat.getSystemService
+import android.net.ConnectivityManager
+import android.content.Context
 
 
 class DashboardFragment : Fragment() {
@@ -174,4 +180,7 @@ class DashboardFragment : Fragment() {
                 Log.e("err", it.message)
             })
     }
+
+
+
 }

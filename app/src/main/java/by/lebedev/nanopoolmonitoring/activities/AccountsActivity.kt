@@ -1,6 +1,9 @@
 package by.lebedev.nanopoolmonitoring.activities
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -21,6 +24,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.account_layout.*
 import javax.inject.Inject
 import android.net.Uri
+import android.support.v4.content.ContextCompat
 
 
 class AccountsActivity : AppCompatActivity() {
@@ -34,6 +38,11 @@ class AccountsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_layout)
+        if (!isNetworkAvailable()){
+            Toast.makeText(this, "Network unavailable...", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Check Internet connection...", Toast.LENGTH_LONG).show()
+        }
+
 
         MobileAds.initialize(this, "ca-app-pub-1501215034144631~3780667725")
 
@@ -59,13 +68,13 @@ class AccountsActivity : AppCompatActivity() {
 
         getAllDatabase()
 
-            removeAdsButton.setOnClickListener {
+        removeAdsButton.setOnClickListener {
 
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("market://details?id=by.lebedev.nanopoolmonitoringnoads")
-                startActivity(intent)
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=by.lebedev.nanopoolmonitoringnoads")
+            startActivity(intent)
 
-            }
+        }
     }
 
     fun setupRecycler(accountList: List<Account>) {
@@ -111,4 +120,16 @@ class AccountsActivity : AppCompatActivity() {
 
         back_pressed = System.currentTimeMillis()
     }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE)
+        return if (connectivityManager is ConnectivityManager) {
+            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+            networkInfo?.isConnected ?: false
+        } else false
+    }
 }
+
+
+
+
