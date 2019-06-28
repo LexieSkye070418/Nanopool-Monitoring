@@ -45,28 +45,21 @@ class WorkersFragment : Fragment() {
         coin = tabIntent.coin
         wallet = tabIntent.wallet
 
+        //Поиск по workers
         searchText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
 
-                    if (!TextUtils.isEmpty(s)) {
-                        Log.e("AAA", "s not empty")
+                if (!TextUtils.isEmpty(s)) {
+                    tabIntent.filteredLocalWorkersList.clear()
 
-                        for (i in 0 until tabIntent.localWorkersList!!.size) {
-                            Log.e("AAA", "enter FOR loop")
-                            if (tabIntent.localWorkersList!!.get(i).id.contains(s.toString(), true)) {
-                                Log.e("AAA", "if contains s = true")
-                                tabIntent.filteredLocalWorkersList!!.add(tabIntent.localWorkersList!!.get(i))
-                            }
-
+                    for (i in 0 until tabIntent.localWorkersList.size) {
+                        if (tabIntent.localWorkersList.get(i).id.contains(s.toString(), true)) {
+                            tabIntent.filteredLocalWorkersList.add(tabIntent.localWorkersList.get(i))
+                        }
                     }
-
-                        tabIntent.filteredLocalWorkersList?.let { setupRecycler(it) }
-                        Log.e("AAA", tabIntent.filteredLocalWorkersList?.get(0)?.id.toString())
-                        Log.e("AAA", "setting up recycle")
+                    setupRecycler(tabIntent.filteredLocalWorkersList)
                 }
-
-
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -89,7 +82,7 @@ class WorkersFragment : Fragment() {
                     tabIntent.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
-                    Log.e("AAA", tabIntent.localWorkersList!!.get(0).id)
+                    Log.e("AAA", tabIntent.localWorkersList.get(0).id)
                 }
             }, {
                 Log.e("err", it.message)
@@ -105,4 +98,8 @@ class WorkersFragment : Fragment() {
         (workers_recycle.adapter as WorkersAdapter).notifyDataSetChanged()
     }
 
+    override fun onPause() {
+        searchText.setText("")
+        super.onPause()
+    }
 }
