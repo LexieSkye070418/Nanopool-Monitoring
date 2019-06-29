@@ -11,17 +11,6 @@
                android:background="@color/white"
                android:layout_height="match_parent"/>
 
-    <ImageView android:layout_width="300dp"
-               android:scaleType="centerCrop"
-               android:src="@drawable/add_background"
-               android:layout_height="300dp"
-               android:id="@+id/imageView3"
-               android:layout_marginBottom="8dp"
-               app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
-               app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-               app:layout_constraintTop_toTopOf="@+id/textView2" android:layout_marginStart="8dp"
-               app:layout_constraintStart_toStartOf="@+id/scrollView2" app:layout_constraintHorizontal_bias="0.597"
-               app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
             android:id="@+id/addAccCoinLogo"
@@ -43,26 +32,34 @@
             app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/addAccCoinLogo"
             android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.519" android:id="@+id/textView2"/>
 
-    <TextView
+    <Button
+            android:drawableRight="@drawable/dropdownlisticoin"
+            android:drawableLeft="@drawable/coinslist"
+            android:background="@drawable/rounded"
             android:gravity="center"
-            android:textSize="18sp"
-            android:text="@string/select_your_coin"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            tools:layout_editor_absoluteX="0dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"
-            android:id="@+id/textView3"/>
-    <Spinner
-            style="@style/AppTheme"
-            android:id="@+id/coinSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:spinnerMode="dialog"
-            tools:layout_editor_absoluteX="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView3">
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:id="@+id/selectCoinButton"/>
+    <TextView
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:focusable="false"
+            android:textStyle="italic"
+            android:text="Selected coin: Ethereum"
+            android:id="@+id/coinName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/selectCoinButton"/>
 
-    </Spinner>
 
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,9 +69,7 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:id="@+id/scrollView2"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/coinSpinner"
-    >
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/coinName">
         <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,7 +80,7 @@
                     android:hint="@string/your_wallet_address"
                     android:id="@+id/addAccountEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="120dp"
             />
 
             <Button
@@ -102,9 +97,7 @@
                     android:layout_height="200dp"
             />
 
-
         </TableLayout>
-
 
     </ScrollView>
 

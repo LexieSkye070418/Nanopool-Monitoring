@@ -1,12 +1,8 @@
 package by.lebedev.nanopoolmonitoringnoads.activities
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.PoolCoins
@@ -30,9 +26,13 @@ class AddAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.adding_account_layout)
+        window.setBackgroundDrawableResource(R.drawable.nanopool_background)
+        addAccCoinLogo.setImageResource(R.drawable.eth)
 
         val component = DaggerMagicBox.builder().build()
         poolCoins = component.providePoolCoins()
+        val arrayOfCoins = arrayOfNulls<String>(poolCoins.list.size)
+        poolCoins.list.toArray(arrayOfCoins)
 
         val wallet = addAccountEditText
 
@@ -47,31 +47,29 @@ class AddAccountActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, poolCoins.list);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_nano)
+        selectCoinButton.setOnClickListener {
+            val builder = AlertDialog.Builder(it.context)
+                .setTitle("Select your coin")
+                .setIcon(R.drawable.bitcoinicon)
+                .setCancelable(true)
 
-        val spinner = coinSpinner
-        spinner.prompt = "Coin"
-        spinner.adapter = adapter
+                .setSingleChoiceItems(arrayOfCoins, -1,
+                    { dialog, item ->
 
-        setupSpinner(spinner)
+                        coinId = item
+                        setSelectedCoinImage(coinId)
+                        coinName.setText("Selected coin: " + poolCoins.fullName(coinId))
 
-    }
+                    })
 
-    private fun setupSpinner(spinner: Spinner) {
 
-        spinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>, view: View,
-                position: Int, id: Long
-            ) {
-                coinId = position
-                setSelectedCoinImage(coinId)
-            }
-
-            override fun onNothingSelected(arg0: AdapterView<*>) {}
+                .setPositiveButton("OK", { dialog, which -> dialog.cancel() })
+                .setNegativeButton("Cancel", { dialog, which -> dialog.cancel() })
+            val alert = builder.create()
+            alert.show()
         }
     }
+
 
     fun insertToDatabase(walletText: String) {
         val complete = Completable.fromAction {
@@ -126,5 +124,4 @@ class AddAccountActivity : AppCompatActivity() {
             else -> addAccCoinLogo.setImageResource(R.drawable.eth)
         }
     }
-
 }

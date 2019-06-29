@@ -3,13 +3,16 @@ package by.lebedev.nanopoolmonitoringnoads.fragments.workers
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
-import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.fragments.workers.recycler.WorkersAdapter
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
@@ -17,6 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_workers.*
 import javax.inject.Inject
+
 
 class WorkersFragment : Fragment() {
 
@@ -32,12 +36,39 @@ class WorkersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getActivity()?.getWindow()
+            ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
+
 
         val component = DaggerMagicBox.builder().build()
         tabIntent = component.provideTabIntent()
 
         coin = tabIntent.coin
         wallet = tabIntent.wallet
+
+        //Поиск по workers
+        searchText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+
+                if (!TextUtils.isEmpty(s)) {
+                    tabIntent.filteredLocalWorkersList.clear()
+
+                    for (i in 0 until tabIntent.localWorkersList.size) {
+                        if (tabIntent.localWorkersList.get(i).id.contains(s.toString(), true)) {
+                            tabIntent.filteredLocalWorkersList.add(tabIntent.localWorkersList.get(i))
+                        }
+                    }
+                    setupRecycler(tabIntent.filteredLocalWorkersList)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
         getWorkers()
     }
@@ -48,12 +79,15 @@ class WorkersFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                Log.e("AAA",result.toString())
-
-
-                if (!result.data.isEmpty()&&progressWorkers!=null&&workers_recycle!=null) {
+                if (!result.data.isEmpty() && progressWorkers != null && workers_recycle != null) {
+                    tabIntent.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
+                } else {
+                    if (progressWorkers != null && textForError != null) {
+                        progressWorkers.visibility = View.INVISIBLE
+                        textForError.setText("Workers not found...")
+                    }
                 }
             }, {
                 Log.e("err", it.message)
@@ -66,6 +100,14 @@ class WorkersFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         workers_recycle.layoutManager = layoutManager
         workers_recycle.adapter = WorkersAdapter(workers)
+        (workers_recycle.adapter as WorkersAdapter).notifyDataSetChanged()
     }
 
+    override fun onPause() {
+        searchText.setText("")
+        getWorkers()
+        super.onPause()
+        tabIntent.filteredLocalWorkersList.clear()
+        tabIntent.localWorkersList.clear()
+    }
 }

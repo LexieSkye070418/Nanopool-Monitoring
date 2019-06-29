@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoringnoads.dagger
 
+import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import javax.inject.Singleton
 
 @Singleton
@@ -7,6 +8,8 @@ class TabIntent private constructor() {
 
     var coin: String = ""
     var wallet: String = ""
+    var localWorkersList = ArrayList<DataWorkers>()
+    var filteredLocalWorkersList = ArrayList<DataWorkers>()
 
 
     private object Holder {
@@ -77,34 +80,35 @@ class TabIntent private constructor() {
             else -> "N/A"
         }
     }
-        fun getWorkerHashType(coin: String): String {
-            return when (coin) {
-                "eth" -> {
-                    return "Mh/s"
-                }
-                "etc" -> {
-                    return "Mh/s"
-                }
-                "zec" -> {
-                    return "Sol/s"
-                }
-                "xmr" -> {
-                    return "H/s"
-                }
-                "pasc" -> {
-                    return "H/s"
-                }
-                "etn" -> {
-                    return "H/s"
-                }
-                "rvn" -> {
-                    return "Mh/s"
-                }
-                "grin29" -> {
-                    return "Gp/s"
-                }
-                else -> "N/A"
+
+    fun getWorkerHashType(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "Mh/s"
             }
+            "etc" -> {
+                return "Mh/s"
+            }
+            "zec" -> {
+                return "Sol/s"
+            }
+            "xmr" -> {
+                return "H/s"
+            }
+            "pasc" -> {
+                return "H/s"
+            }
+            "etn" -> {
+                return "H/s"
+            }
+            "rvn" -> {
+                return "Mh/s"
+            }
+            "grin29" -> {
+                return "Gp/s"
+            }
+            else -> "N/A"
+        }
     }
 
     fun getAuthors(coin: String): String {

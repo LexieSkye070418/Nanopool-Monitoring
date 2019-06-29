@@ -1,8 +1,10 @@
 package by.lebedev.nanopoolmonitoringnoads.fragments.pool
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +35,8 @@ class PoolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getActivity()?.getWindow()?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
+
 
         nf.maximumFractionDigits = 8
 
@@ -63,6 +67,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 if (price != null) {
                     price.setText(result.data.price_usd.toString().plus('$'))
+                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { price.setTextColor(it) }
                 }
 
             }, {
@@ -77,6 +82,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 if (hashrate != null) {
                     hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))
+                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { hashrate.setTextColor(it) }
                 }
             }, {
                 Log.e("err", it.message)
@@ -90,6 +96,7 @@ class PoolFragment : Fragment() {
             .subscribe({ result ->
                 if (miners != null) {
                     miners.setText(result.data.toString())
+                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { miners.setTextColor(it) }
                 }
             }, {
                 Log.e("err", it.message)

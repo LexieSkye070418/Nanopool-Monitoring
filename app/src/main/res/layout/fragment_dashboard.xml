@@ -9,7 +9,6 @@
         android:layout_height="match_parent"
 >
     <ImageView
-            android:background="@drawable/nanopool_background"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -42,6 +41,7 @@
                         android:textSize="18sp"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:gravity="center"
                         android:id="@+id/current_hashrate"
                         android:layout_width="match_parent"
@@ -75,6 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/n_a"
+                        android:textColor="@color/colorAccent"
                         android:layout_weight="1"
                 />
 
@@ -98,6 +99,7 @@
                         android:textSize="18sp"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:gravity="center"
                         android:id="@+id/hours_6"
                         android:layout_width="match_parent"
@@ -127,6 +129,7 @@
                         android:textSize="18sp"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:gravity="center"
                         android:id="@+id/hours_24"
                         android:layout_width="match_parent"
@@ -211,6 +214,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/minute_coin"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -220,6 +224,7 @@
                         android:layout_weight="1"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/minute_btc"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -230,6 +235,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/minute_usd"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -260,6 +266,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/hour_coin"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -269,6 +276,7 @@
                         android:layout_weight="1"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/hour_btc"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -279,6 +287,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/hour_usd"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -309,6 +318,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/day_coin"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -318,6 +328,7 @@
                         android:layout_weight="1"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/day_btc"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -328,6 +339,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/day_usd"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -358,6 +370,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/week_coin"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -367,6 +380,7 @@
                         android:layout_weight="1"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/week_btc"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -377,6 +391,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/week_usd"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -407,6 +422,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/month_coin"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -416,6 +432,7 @@
                         android:layout_weight="1"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/month_btc"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -426,6 +443,7 @@
                         android:background="@drawable/squared"
                 />
                 <TextView
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/month_usd"
                         android:gravity="center"
                         android:layout_width="match_parent"
