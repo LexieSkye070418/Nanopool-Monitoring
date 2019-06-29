@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
 import javax.inject.Inject
-import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
-import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 
 
 class DashboardFragment : Fragment() {

@@ -1,6 +1,6 @@
 package by.lebedev.nanopoolmonitoringnoads.dagger
 
-import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
+import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import javax.inject.Singleton
 
 @Singleton

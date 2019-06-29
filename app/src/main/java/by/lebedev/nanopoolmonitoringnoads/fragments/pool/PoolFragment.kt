@@ -1,7 +1,6 @@
 package by.lebedev.nanopoolmonitoringnoads.fragments.pool
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -35,7 +34,7 @@ class PoolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getActivity()?.getWindow()?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
+        getActivity()?.getWindow()?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
 
         nf.maximumFractionDigits = 8

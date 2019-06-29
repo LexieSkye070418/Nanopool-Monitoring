@@ -19,8 +19,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.account_layout.*
 import javax.inject.Inject
-import android.net.Uri
-import android.support.v4.content.ContextCompat
 
 
 class AccountsActivity : AppCompatActivity() {
@@ -51,13 +49,6 @@ class AccountsActivity : AppCompatActivity() {
 
         getAllDatabase()
 
-        removeAdsButton.setOnClickListener {
-
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("market://details?id=by.lebedev.nanopoolmonitoringnoads")
-            startActivity(intent)
-
-        }
     }
 
     fun setupRecycler(accountList: List<Account>) {

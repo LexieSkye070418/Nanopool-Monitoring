@@ -10,9 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.fragments.workers.recycler.WorkersAdapter
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
