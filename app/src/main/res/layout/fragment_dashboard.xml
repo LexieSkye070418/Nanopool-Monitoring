@@ -23,8 +23,8 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                    android:id="@+id/chartLayout"
+            <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="20dp"
@@ -32,7 +32,7 @@
                     android:orientation="horizontal"
                     android:layout_height="200dp"
                     android:background="@drawable/rounded">
-            </LinearLayout>
+            </com.github.mikephil.charting.charts.LineChart>
 
             <LinearLayout
                     android:layout_marginLeft="16dp"
@@ -45,6 +45,7 @@
 
 
                 <TextView
+                        android:id="@+id/currentHashrateTextView"
                         android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

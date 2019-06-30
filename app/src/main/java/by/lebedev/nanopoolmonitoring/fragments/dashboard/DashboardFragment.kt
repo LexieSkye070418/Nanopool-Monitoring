@@ -62,6 +62,7 @@ class DashboardFragment : Fragment() {
 
         getGeneralInfo()
 
+
     }
 
     fun getGeneralInfo() {
@@ -173,6 +174,23 @@ class DashboardFragment : Fragment() {
             }, {
                 Log.e("err", it.message)
             })
+    }
+
+    fun getChartInfo(){
+        val d = provideApi().getChart(coin, wallet)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+
+                if (!result.data.isEmpty() && balance != null) {
+
+                    currentHashrateTextView.setText(result.data.get(0).toString())
+                }
+
+            }, {
+                Log.e("err", it.message)
+            })
+
     }
 
 
