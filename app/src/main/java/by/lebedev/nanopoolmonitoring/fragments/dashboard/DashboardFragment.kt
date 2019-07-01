@@ -1,6 +1,7 @@
 package by.lebedev.nanopoolmonitoring.fragments.dashboard
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -26,14 +27,11 @@ import java.text.NumberFormat
 import javax.inject.Inject
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
+import javax.xml.transform.Templates
 import kotlin.collections.ArrayList
 
 
@@ -53,7 +51,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getActivity()?.getWindow()
-            ?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
+            ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
 
         MobileAds.initialize(this.context, "ca-app-pub-1501215034144631~3780667725")
@@ -90,19 +88,37 @@ class DashboardFragment : Fragment() {
 
                 if (result.status && balance != null) {
 
-                    balance.setText(nf.format(result.data.balance).toString().plus(" ").plus(coin).toUpperCase())
+                    balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { balance.setTextColor(it) }
 
-                    current_hashrate.setText(result.data.hashrate.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
+                    current_hashrate.setText(
+                        result.data.hashrate.toString().plus(" ").plus(
+                            tabIntent.getWorkerHashType(
+                                coin
+                            )
+                        )
+                    )
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { current_hashrate.setTextColor(it) }
 
-                    hours_6.setText(result.data.avgHashrate.h6.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
+                    hours_6.setText(
+                        result.data.avgHashrate.h6.toString().plus(" ").plus(
+                            tabIntent.getWorkerHashType(
+                                coin
+                            )
+                        )
+                    )
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_6.setTextColor(it) }
 
-                    hours_24.setText(result.data.avgHashrate.h24.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
+                    hours_24.setText(
+                        result.data.avgHashrate.h24.toString().plus(" ").plus(
+                            tabIntent.getWorkerHashType(
+                                coin
+                            )
+                        )
+                    )
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_24.setTextColor(it) }
 
@@ -123,9 +139,6 @@ class DashboardFragment : Fragment() {
             .subscribe({ result ->
 
                 if (view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
-                    val minute_coin = view!!.findViewById<TextView>(R.id.minute_coin)
-                    val minute_btc = view!!.findViewById<TextView>(R.id.minute_btc)
-                    val minute_usd = view!!.findViewById<TextView>(R.id.minute_usd)
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }
@@ -136,9 +149,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { minute_usd.setTextColor(it) }
 
-                    val hour_coin = view!!.findViewById<TextView>(R.id.hour_coin)
-                    val hour_btc = view!!.findViewById<TextView>(R.id.hour_btc)
-                    val hour_usd = view!!.findViewById<TextView>(R.id.hour_usd)
                     hour_coin.setText(nf.format(result.data.hour.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { hour_coin.setTextColor(it) }
@@ -149,9 +159,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { hour_usd.setTextColor(it) }
 
-                    val day_coin = view!!.findViewById<TextView>(R.id.day_coin)
-                    val day_btc = view!!.findViewById<TextView>(R.id.day_btc)
-                    val day_usd = view!!.findViewById<TextView>(R.id.day_usd)
                     day_coin.setText(nf.format(result.data.day.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { day_coin.setTextColor(it) }
@@ -162,9 +169,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { day_usd.setTextColor(it) }
 
-                    val week_coin = view!!.findViewById<TextView>(R.id.week_coin)
-                    val week_btc = view!!.findViewById<TextView>(R.id.week_btc)
-                    val week_usd = view!!.findViewById<TextView>(R.id.week_usd)
                     week_coin.setText(nf.format(result.data.week.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { week_coin.setTextColor(it) }
@@ -175,9 +179,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { week_usd.setTextColor(it) }
 
-                    val month_coin = view!!.findViewById<TextView>(R.id.month_coin)
-                    val month_btc = view!!.findViewById<TextView>(R.id.month_btc)
-                    val month_usd = view!!.findViewById<TextView>(R.id.month_usd)
                     month_coin.setText(nf.format(result.data.month.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { month_coin.setTextColor(it) }
@@ -199,9 +200,25 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (!result.data.isEmpty() && balance != null) {
+                if (!result.data.isEmpty() && lineChart != null && result.data.get(0).hashrate.toInt() != 0) {
 
-                    setupChart(result.data)
+
+                    result.data.sortWith(object : Comparator<ChartData> {
+                        override fun compare(p1: ChartData, p2: ChartData): Int = when {
+                            p1.date > p2.date -> 1
+                            p1.date == p2.date -> 0
+                            else -> -1
+                        }
+                    })
+                    val limitedArray = ArrayList<ChartData>()
+
+                    for (i in 0..20) {
+                        limitedArray.add(result.data.get(i))
+
+                    }
+
+                    setupLineChart(limitedArray)
+                    setupBarChart(limitedArray)
 
                 }
 
@@ -211,61 +228,66 @@ class DashboardFragment : Fragment() {
 
     }
 
-    fun setupChart(result: ArrayList<ChartData>) {
+    fun setupLineChart(result: ArrayList<ChartData>) {
 
-        chart.setBackgroundColor(Color.WHITE);
+        lineChart.setBackgroundColor(Color.WHITE);
 
         // disable description text
-        chart.getDescription().setEnabled(false);
+        lineChart.getDescription().setEnabled(false);
 
         // enable touch gestures
-        chart.setTouchEnabled(true);
-
-        // set listeners
-        chart.setDrawGridBackground(false);
+        lineChart.setTouchEnabled(false);
+        lineChart.setDrawGridBackground(false);
 
         // enable scaling and dragging
-        chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
+        lineChart.setDragEnabled(false);
+        lineChart.setScaleEnabled(true);
 
         // force pinch zoom along both axis
-        chart.setPinchZoom(true);
+        lineChart.setPinchZoom(true);
 
-        val xAxis = chart.getXAxis();
+        val xAxis = lineChart.getXAxis();
 
-        xAxis.position = XAxis.XAxisPosition.TOP_INSIDE
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textSize = 10f
-        xAxis.textColor = Color.WHITE
         xAxis.setDrawAxisLine(false)
         xAxis.setDrawGridLines(true)
-        xAxis.textColor = Color.rgb(255, 192, 56)
+        xAxis.textColor = Color.rgb(230, 133, 22)
         xAxis.setCenterAxisLabels(true)
-        xAxis.granularity = 1f // one hour
-
+        xAxis.granularity = 5f
 
         xAxis.setValueFormatter(object : IAxisValueFormatter {
-            private val mFormat = SimpleDateFormat("dd MMM HH:mm", Locale.ENGLISH)
+            private val mFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+                val date = Date((value * 1000).toLong())
 
-                val millis = TimeUnit.HOURS.toMillis(value.toLong())
-                return mFormat.format(Date(millis))
+                return mFormat.format(date)
 
             }
         })
 
+        val leftAxis = lineChart.getAxisLeft()
+        leftAxis.setValueFormatter(object : IAxisValueFormatter {
 
-        val leftAxis = chart.getAxisLeft();
-        leftAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
+            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+
+                return value.div(1000).toInt().toString().plus(" ").plus(
+                    tabIntent.getWorkerHashType(
+                        coin
+                    )
+                )
+
+            }
+        })
+
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setDrawGridLines(true);
         leftAxis.setGranularityEnabled(true);
-        leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(170f);
-        leftAxis.setYOffset(-9f);
-        leftAxis.setTextColor(Color.rgb(255, 192, 56));
+        leftAxis.setYOffset(9f);
+        leftAxis.setTextColor(Color.rgb(230, 133, 22));
 
-        val rightAxis = chart.getAxisRight();
+        val rightAxis = lineChart.getAxisRight();
         rightAxis.setEnabled(false);
 
         val values = ArrayList<Entry>()
@@ -275,29 +297,103 @@ class DashboardFragment : Fragment() {
         }
 
         // create a dataset and give it a type
-        val set = LineDataSet(values, "DataSet 1");
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set.setColor(ColorTemplate.getHoloBlue());
-        set.setValueTextColor(ColorTemplate.getHoloBlue());
-        set.setLineWidth(1.5f);
+        val set = LineDataSet(values, "Hashrate")
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setCubicIntensity(0.2f)
+        set.setDrawFilled(true);
         set.setDrawCircles(false);
-        set.setDrawValues(false);
-        set.setFillAlpha(65);
-        set.setFillColor(ColorTemplate.getHoloBlue());
-        set.setHighLightColor(Color.rgb(244, 117, 117));
-        set.setDrawCircleHole(false);
+        set.setLineWidth(1.8f);
+        set.setFillColor(R.color.yellow)
+        set.setDrawCircleHole(false)
+        set.setColor(R.color.yellow, 100)
 
         // create a data object with the data sets
         val data = LineData(set);
-        data.setValueTextColor(Color.WHITE);
-        data.setValueTextSize(9f);
+        data.setDrawValues(false)
 
         // set data
-        chart.setData(data);
-
-
-
+        lineChart.setData(data)
+        lineChart.animateXY(1000, 1000)
+        lineChart.invalidate()
     }
 
+    fun setupBarChart(result: ArrayList<ChartData>) {
+
+//        barChart.setBackgroundColor(Color.WHITE);
+
+        // disable description text
+        barChart.getDescription().setEnabled(false);
+
+        // enable touch gestures
+//        barChart.setTouchEnabled(false);
+//        barChart.setDrawGridBackground(false);
+
+        // enable scaling and dragging
+        barChart.setDragEnabled(false);
+        barChart.setScaleEnabled(true);
+
+        // force pinch zoom along both axis
+//        barChart.setPinchZoom(true);
+
+        val xAxis = barChart.getXAxis();
+
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.textSize = 10f
+//        xAxis.setDrawAxisLine(false)
+//        xAxis.setDrawGridLines(true)
+//        xAxis.textColor = Color.rgb(230, 133, 22)
+//        xAxis.setCenterAxisLabels(true)
+//        xAxis.granularity = 5f
+
+        xAxis.setValueFormatter(object : IAxisValueFormatter {
+            private val mFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+
+            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+                val date = Date((value * 1000).toLong())
+
+                return mFormat.format(date)
+
+            }
+        })
+
+        val leftAxis = barChart.getAxisLeft()
+
+
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+//        leftAxis.setDrawGridLines(true);
+//        leftAxis.setGranularityEnabled(true);
+//        leftAxis.setYOffset(9f);
+//        leftAxis.setTextColor(Color.rgb(230, 133, 22));
+
+        val rightAxis = barChart.getAxisRight();
+        rightAxis.setEnabled(false);
+
+        val values = ArrayList<BarEntry>()
+
+        for (i in 0 until result.size) {
+            values.add(BarEntry(result.get(i).date.toFloat(), result.get(i).shares.toFloat()))
+        }
+        currentHashrateTextView.setText(result.get(0).shares.toString())
+
+
+        // create a dataset and give it a type
+        val set = BarDataSet(values, "Shares")
+        set.barBorderColor = R.color.dark_red_error
+        set.barShadowColor = R.color.dark_red_error
+        set.valueTypeface = Typeface.DEFAULT
+        set.setColor(R.color.dark_red_error)
+        set.setColor(R.color.dark_red_error, 0)
+        // create a data object with the data sets
+        val data = BarData(set);
+//        data.barWidth = 0.1f
+//        data.setDrawValues(false)
+//        data.setValueTextColor(R.color.dark_red_error)
+
+        // set data
+        barChart.setFitBars(true)
+        barChart.setData(data)
+        barChart.animateXY(1000, 1000)
+        barChart.invalidate()
+    }
 
 }

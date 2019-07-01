@@ -24,15 +24,24 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chart"
+                    android:id="@+id/lineChart"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
                     android:layout_height="200dp"
                     android:background="@drawable/rounded">
             </com.github.mikephil.charting.charts.LineChart>
+
+            <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/rounded">
+            </com.github.mikephil.charting.charts.BarChart>
 
             <LinearLayout
                     android:layout_marginLeft="16dp"
