@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoring.fragments.dashboard
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -11,7 +12,9 @@ import android.widget.TextView
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartData
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import com.github.mikephil.charting.components.AxisBase
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -21,6 +24,17 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
 import javax.inject.Inject
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 class DashboardFragment : Fragment() {
@@ -38,7 +52,8 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getActivity()?.getWindow()?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
+        getActivity()?.getWindow()
+            ?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
 
 
         MobileAds.initialize(this.context, "ca-app-pub-1501215034144631~3780667725")
@@ -62,6 +77,8 @@ class DashboardFragment : Fragment() {
 
         getGeneralInfo()
 
+        getChartInfo()
+
 
     }
 
@@ -73,19 +90,19 @@ class DashboardFragment : Fragment() {
 
                 if (result.status && balance != null) {
 
-                    balance.setText(nf.format(result.data.balance).toString().plus(" ETH"))
+                    balance.setText(nf.format(result.data.balance).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { balance.setTextColor(it) }
 
-                    current_hashrate.setText(result.data.hashrate.toString().plus(" H/s"))
+                    current_hashrate.setText(result.data.hashrate.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { current_hashrate.setTextColor(it) }
 
-                    hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
+                    hours_6.setText(result.data.avgHashrate.h6.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_6.setTextColor(it) }
 
-                    hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
+                    hours_24.setText(result.data.avgHashrate.h24.toString().plus(" ").plus(tabIntent.getWorkerHashType(coin)))
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_24.setTextColor(it) }
 
@@ -176,7 +193,7 @@ class DashboardFragment : Fragment() {
             })
     }
 
-    fun getChartInfo(){
+    fun getChartInfo() {
         val d = provideApi().getChart(coin, wallet)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -184,7 +201,8 @@ class DashboardFragment : Fragment() {
 
                 if (!result.data.isEmpty() && balance != null) {
 
-                    currentHashrateTextView.setText(result.data.get(0).toString())
+                    setupChart(result.data)
+
                 }
 
             }, {
@@ -193,6 +211,93 @@ class DashboardFragment : Fragment() {
 
     }
 
+    fun setupChart(result: ArrayList<ChartData>) {
+
+        chart.setBackgroundColor(Color.WHITE);
+
+        // disable description text
+        chart.getDescription().setEnabled(false);
+
+        // enable touch gestures
+        chart.setTouchEnabled(true);
+
+        // set listeners
+        chart.setDrawGridBackground(false);
+
+        // enable scaling and dragging
+        chart.setDragEnabled(true);
+        chart.setScaleEnabled(true);
+
+        // force pinch zoom along both axis
+        chart.setPinchZoom(true);
+
+        val xAxis = chart.getXAxis();
+
+        xAxis.position = XAxis.XAxisPosition.TOP_INSIDE
+        xAxis.textSize = 10f
+        xAxis.textColor = Color.WHITE
+        xAxis.setDrawAxisLine(false)
+        xAxis.setDrawGridLines(true)
+        xAxis.textColor = Color.rgb(255, 192, 56)
+        xAxis.setCenterAxisLabels(true)
+        xAxis.granularity = 1f // one hour
+
+
+        xAxis.setValueFormatter(object : IAxisValueFormatter {
+            private val mFormat = SimpleDateFormat("dd MMM HH:mm", Locale.ENGLISH)
+
+            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+
+                val millis = TimeUnit.HOURS.toMillis(value.toLong())
+                return mFormat.format(Date(millis))
+
+            }
+        })
+
+
+        val leftAxis = chart.getAxisLeft();
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setGranularityEnabled(true);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(170f);
+        leftAxis.setYOffset(-9f);
+        leftAxis.setTextColor(Color.rgb(255, 192, 56));
+
+        val rightAxis = chart.getAxisRight();
+        rightAxis.setEnabled(false);
+
+        val values = ArrayList<Entry>()
+
+        for (i in 0 until result.size) {
+            values.add(Entry(result.get(i).date.toFloat(), result.get(i).hashrate.toFloat()))
+        }
+
+        // create a dataset and give it a type
+        val set = LineDataSet(values, "DataSet 1");
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set.setColor(ColorTemplate.getHoloBlue());
+        set.setValueTextColor(ColorTemplate.getHoloBlue());
+        set.setLineWidth(1.5f);
+        set.setDrawCircles(false);
+        set.setDrawValues(false);
+        set.setFillAlpha(65);
+        set.setFillColor(ColorTemplate.getHoloBlue());
+        set.setHighLightColor(Color.rgb(244, 117, 117));
+        set.setDrawCircleHole(false);
+
+        // create a data object with the data sets
+        val data = LineData(set);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTextSize(9f);
+
+        // set data
+        chart.setData(data);
+
+
+
+    }
 
 
 }
