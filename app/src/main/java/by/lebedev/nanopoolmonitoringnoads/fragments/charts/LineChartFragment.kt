@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoringnoads.R
 
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.chart.ChartData
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import com.github.mikephil.charting.components.AxisBase
