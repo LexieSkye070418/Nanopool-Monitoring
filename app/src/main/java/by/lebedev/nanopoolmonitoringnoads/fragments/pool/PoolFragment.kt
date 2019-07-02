@@ -65,7 +65,8 @@ class PoolFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (price != null) {
-                    price.setText(result.data.price_usd.toString().plus('$'))
+                    nf.maximumFractionDigits = 2
+                    price.setText(nf.format(result.data.price_usd).toString().plus('$'))
                     view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { price.setTextColor(it) }
                 }
 

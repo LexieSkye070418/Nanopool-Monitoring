@@ -24,13 +24,19 @@ android {
         applicationId "by.lebedev.nanopoolmonitoringnoads"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 3
-        versionName "2.0.2"
+        versionCode 4
+        versionName "2.0.3"
+
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         signingConfig signingConfigs.release
     }
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -84,4 +90,7 @@ dependencies {
 
     implementation "org.mockito:mockito-inline:2.8.9"
     implementation "android.arch.core:core-testing:1.1.1"
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
 }

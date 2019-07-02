@@ -111,6 +111,36 @@ class TabIntent private constructor() {
         }
     }
 
+    fun getWorkerHashTypeHigh(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "Gh/s"
+            }
+            "etc" -> {
+                return "Gh/s"
+            }
+            "zec" -> {
+                return "KSol/s"
+            }
+            "xmr" -> {
+                return "KH/s"
+            }
+            "pasc" -> {
+                return "KH/s"
+            }
+            "etn" -> {
+                return "KH/s"
+            }
+            "rvn" -> {
+                return "Gh/s"
+            }
+            "grin29" -> {
+                return "Tp/s"
+            }
+            else -> "N/A"
+        }
+    }
+
     fun getAuthors(coin: String): String {
         return when (coin) {
             "eth" -> {

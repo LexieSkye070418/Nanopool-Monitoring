@@ -11,7 +11,10 @@ import android.widget.TextView
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoringnoads.fragments.charts.BarChartFragment
+import by.lebedev.nanopoolmonitoringnoads.fragments.charts.LineChartFragment
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -47,9 +50,23 @@ class DashboardFragment : Fragment() {
 
         getGeneralInfo()
 
+        if (layoutLineChart != null) {
+
+            val lineChartFragment = LineChartFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.layoutLineChart, lineChartFragment)
+            ft.commit()
+        }
+        if (layoutBarChart != null) {
+            val barChartFragment = BarChartFragment()
+            val ft1 = childFragmentManager.beginTransaction()
+            ft1.replace(R.id.layoutBarChart, barChartFragment)
+            ft1.commit()
+        }
     }
 
     fun getGeneralInfo() {
+        nf.maximumFractionDigits = 2
         val d = provideApi().getGeneralInfo(coin, wallet)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -57,19 +74,82 @@ class DashboardFragment : Fragment() {
 
                 if (result.status && balance != null) {
 
-                    balance.setText(nf.format(result.data.balance).toString().plus(" ETH"))
+                    balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { balance.setTextColor(it) }
 
-                    current_hashrate.setText(result.data.hashrate.toString().plus(" H/s"))
+
+                    if (result.data.hashrate > 1000) {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { current_hashrate.setTextColor(it) }
 
-                    hours_6.setText(result.data.avgHashrate.h6.toString().plus(" H/s"))
+
+                    if (result.data.avgHashrate.h6 > 1000) {
+
+                        hours_6.setText(
+                            nf.format
+                                (result.data.avgHashrate.h6.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        hours_6.setText(
+                            nf.format
+                                (result.data.avgHashrate.h6).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_6.setTextColor(it) }
 
-                    hours_24.setText(result.data.avgHashrate.h24.toString().plus(" H/s"))
+
+                    if (result.data.avgHashrate.h24 > 1000) {
+
+                        hours_24.setText(
+                            nf.format
+                                (result.data.avgHashrate.h24.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        hours_24.setText(
+                            nf.format
+                                (result.data.avgHashrate.h24).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_24.setTextColor(it) }
 
@@ -84,15 +164,13 @@ class DashboardFragment : Fragment() {
     }
 
     fun getProfitInfo(coin: String, hashrate: Double) {
+        nf.maximumFractionDigits = 4
         val d = provideApi().getProfit(coin, hashrate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
                 if (view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
-                    val minute_coin = view!!.findViewById<TextView>(R.id.minute_coin)
-                    val minute_btc = view!!.findViewById<TextView>(R.id.minute_btc)
-                    val minute_usd = view!!.findViewById<TextView>(R.id.minute_usd)
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }
@@ -103,9 +181,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { minute_usd.setTextColor(it) }
 
-                    val hour_coin = view!!.findViewById<TextView>(R.id.hour_coin)
-                    val hour_btc = view!!.findViewById<TextView>(R.id.hour_btc)
-                    val hour_usd = view!!.findViewById<TextView>(R.id.hour_usd)
                     hour_coin.setText(nf.format(result.data.hour.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { hour_coin.setTextColor(it) }
@@ -116,9 +191,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { hour_usd.setTextColor(it) }
 
-                    val day_coin = view!!.findViewById<TextView>(R.id.day_coin)
-                    val day_btc = view!!.findViewById<TextView>(R.id.day_btc)
-                    val day_usd = view!!.findViewById<TextView>(R.id.day_usd)
                     day_coin.setText(nf.format(result.data.day.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { day_coin.setTextColor(it) }
@@ -129,9 +201,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { day_usd.setTextColor(it) }
 
-                    val week_coin = view!!.findViewById<TextView>(R.id.week_coin)
-                    val week_btc = view!!.findViewById<TextView>(R.id.week_btc)
-                    val week_usd = view!!.findViewById<TextView>(R.id.week_usd)
                     week_coin.setText(nf.format(result.data.week.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { week_coin.setTextColor(it) }
@@ -142,9 +211,6 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { week_usd.setTextColor(it) }
 
-                    val month_coin = view!!.findViewById<TextView>(R.id.month_coin)
-                    val month_btc = view!!.findViewById<TextView>(R.id.month_btc)
-                    val month_usd = view!!.findViewById<TextView>(R.id.month_usd)
                     month_coin.setText(nf.format(result.data.month.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { month_coin.setTextColor(it) }
@@ -159,4 +225,5 @@ class DashboardFragment : Fragment() {
                 Log.e("err", it.message)
             })
     }
+
 }

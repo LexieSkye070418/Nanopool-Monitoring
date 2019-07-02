@@ -22,6 +22,29 @@
                 android:stretchColumns="1"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/layoutLineChart"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/rounded">
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/layoutBarChart"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/rounded">
+            </LinearLayout>
+
             <LinearLayout
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -33,6 +56,7 @@
 
 
                 <TextView
+                        android:id="@+id/currentHashrateTextView"
                         android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -454,6 +478,7 @@
                 />
 
             </LinearLayout>
+
 
             <TextView
                     android:layout_marginTop="100dp"
