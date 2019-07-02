@@ -1,8 +1,10 @@
 package by.lebedev.nanopoolmonitoring.fragments.charts
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.os.ConfigurationCompat.getLocales
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -61,14 +63,8 @@ class LineChartFragment : Fragment() {
 
                 if (!result.data.isEmpty() && lineChart != null && result.data.get(0).hashrate.toInt() != 0) {
 
+                    result.data.sortBy { it.date }
 
-                    result.data.sortWith(object : Comparator<ChartData> {
-                        override fun compare(p1: ChartData, p2: ChartData): Int = when {
-                            p1.date > p2.date -> 1
-                            p1.date == p2.date -> 0
-                            else -> -1
-                        }
-                    })
                     val limitedArray = ArrayList<ChartData>()
 
                     for (i in 0..20) {
@@ -115,10 +111,14 @@ class LineChartFragment : Fragment() {
         xAxis.granularity = 5f
 
         xAxis.setValueFormatter(object : IAxisValueFormatter {
-            private val mFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            private val mFormat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                SimpleDateFormat("HH:mm", getResources().getConfiguration().getLocales().get(0))
+            } else {
+                SimpleDateFormat("HH:mm", getResources().getConfiguration().locale)
+            }
 
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                val date = Date((value * 1000).toLong())
+                val date = Date((value * 1000).minus(10800000).toLong())
 
                 return mFormat.format(date)
 

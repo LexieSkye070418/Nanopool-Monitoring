@@ -64,19 +64,23 @@ class DashboardFragment : Fragment() {
 
         getGeneralInfo()
 
-        val lineChartFragment = LineChartFragment()
-        val ft = childFragmentManager.beginTransaction()
-        ft.replace(R.id.layoutLineChart, lineChartFragment)
-        ft.commit()
+        if (layoutLineChart != null) {
 
-        val barChartFragment = BarChartFragment()
-        val ft1 = childFragmentManager.beginTransaction()
-        ft1.replace(R.id.layoutBarChart, barChartFragment)
-        ft1.commit()
-
+            val lineChartFragment = LineChartFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.layoutLineChart, lineChartFragment)
+            ft.commit()
+        }
+        if (layoutBarChart != null) {
+            val barChartFragment = BarChartFragment()
+            val ft1 = childFragmentManager.beginTransaction()
+            ft1.replace(R.id.layoutBarChart, barChartFragment)
+            ft1.commit()
+        }
     }
 
     fun getGeneralInfo() {
+        nf.maximumFractionDigits = 2
         val d = provideApi().getGeneralInfo(coin, wallet)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -88,33 +92,78 @@ class DashboardFragment : Fragment() {
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { balance.setTextColor(it) }
 
-                    current_hashrate.setText(
-                        result.data.hashrate.toString().plus(" ").plus(
-                            tabIntent.getWorkerHashType(
-                                coin
+
+                    if (result.data.hashrate > 1000) {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
                             )
                         )
-                    )
+                    } else {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { current_hashrate.setTextColor(it) }
 
-                    hours_6.setText(
-                        result.data.avgHashrate.h6.toString().plus(" ").plus(
-                            tabIntent.getWorkerHashType(
-                                coin
+
+                    if (result.data.avgHashrate.h6 > 1000) {
+
+                        hours_6.setText(
+                            nf.format
+                                (result.data.avgHashrate.h6.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
                             )
                         )
-                    )
+                    } else {
+                        hours_6.setText(
+                            nf.format
+                                (result.data.avgHashrate.h6).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_6.setTextColor(it) }
 
-                    hours_24.setText(
-                        result.data.avgHashrate.h24.toString().plus(" ").plus(
-                            tabIntent.getWorkerHashType(
-                                coin
+
+                    if (result.data.avgHashrate.h24 > 1000) {
+
+                        hours_24.setText(
+                            nf.format
+                                (result.data.avgHashrate.h24.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
                             )
                         )
-                    )
+                    } else {
+                        hours_24.setText(
+                            nf.format
+                                (result.data.avgHashrate.h24).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { hours_24.setTextColor(it) }
 
@@ -129,6 +178,7 @@ class DashboardFragment : Fragment() {
     }
 
     fun getProfitInfo(coin: String, hashrate: Double) {
+        nf.maximumFractionDigits = 4
         val d = provideApi().getProfit(coin, hashrate)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
