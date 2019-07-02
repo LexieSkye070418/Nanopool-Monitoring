@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.retrofit.entity.chart
+package by.lebedev.nanopoolmonitoringnoads.retrofit.entity.chart
 
 class ChartData(
     val date: Long,

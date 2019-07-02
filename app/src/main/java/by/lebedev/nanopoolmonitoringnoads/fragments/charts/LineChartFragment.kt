@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.fragments.charts
+package by.lebedev.nanopoolmonitoringnoads.fragments.charts
 
 import android.graphics.Color
 import android.os.Build
@@ -9,11 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
-import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
-import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartData
-import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import by.lebedev.nanopoolmonitoringnoads.R
+
+import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.chart.ChartData
+import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
