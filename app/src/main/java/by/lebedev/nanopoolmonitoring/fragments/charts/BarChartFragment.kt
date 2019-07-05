@@ -69,10 +69,19 @@ class BarChartFragment : Fragment() {
 
                     val limitedArray = ArrayList<ChartData>()
 
-                    for (i in 0..10) {
-                        limitedArray.add(result.data.get(i))
 
+                    if (result.data.size > 10) {
+                        for (i in 0..10) {
+                            limitedArray.add(result.data.get(i))
+
+                        }
+                    } else {
+
+                        for (i in 0 until result.data.size) {
+                            limitedArray.add(result.data.get(i))
+                        }
                     }
+
 
                     setupBarChart(limitedArray)
 
@@ -103,10 +112,9 @@ class BarChartFragment : Fragment() {
                 dataSetIndex: Int,
                 viewPortHandler: ViewPortHandler?
             ): String {
-                if (value>1000){
+                if (value > 1000) {
                     return nf.format(value.div(1000)).toString().plus(" k")
-                }
-                else return value.toInt().toString()
+                } else return value.toInt().toString()
             }
 
         })
@@ -163,10 +171,9 @@ class BarChartFragment : Fragment() {
         leftAxis.setValueFormatter(object : IAxisValueFormatter {
 
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                if (value>1000){
+                if (value > 1000) {
                     return nf.format(value.div(1000)).toString().plus(" k")
-                }
-                else return value.toInt().toString()
+                } else return value.toInt().toString()
             }
         })
 //

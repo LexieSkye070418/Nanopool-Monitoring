@@ -67,9 +67,15 @@ class LineChartFragment : Fragment() {
 
                     val limitedArray = ArrayList<ChartData>()
 
-                    for (i in 0..20) {
-                        limitedArray.add(result.data.get(i))
+                    if (result.data.size > 20) {
+                        for (i in 0..20) {
+                            limitedArray.add(result.data.get(i))
 
+                        }
+                    } else {
+                        for (i in 0 until result.data.size) {
+                            limitedArray.add(result.data.get(i))
+                        }
                     }
 
                     setupLineChart(limitedArray)
