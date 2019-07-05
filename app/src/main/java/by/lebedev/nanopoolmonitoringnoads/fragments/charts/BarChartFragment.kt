@@ -69,9 +69,16 @@ class BarChartFragment : Fragment() {
 
                     val limitedArray = ArrayList<ChartData>()
 
-                    for (i in 0..10) {
-                        limitedArray.add(result.data.get(i))
+                    if (result.data.size > 10) {
+                        for (i in 0..10) {
+                            limitedArray.add(result.data.get(i))
 
+                        }
+                    } else {
+
+                        for (i in 0 until result.data.size) {
+                            limitedArray.add(result.data.get(i))
+                        }
                     }
 
                     setupBarChart(limitedArray)
