@@ -4,52 +4,101 @@
                 android:padding="@dimen/widget_margin"
                 android:background="@drawable/widget"
 
-                >
+>
 
     <ImageView
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/eth"
-            android:layout_toLeftOf="@+id/widgetCoin"
             android:id="@+id/widgetCoinImage"
             android:layout_width="25dp"
-               android:layout_height="25dp"/>
+            android:layout_height="25dp"/>
 
     <TextView
+            android:layout_toRightOf="@id/widgetCoinImage"
             android:id="@+id/widgetCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ethereum"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="12dp"
-    android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
     />
     <TextView
-            android:layout_below="@id/widgetCoin"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:id="@+id/widgetHashrate"
+            android:layout_below="@id/widgetCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Hashrate"
+            android:text="Hashrate:"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:contentDescription="@string/appwidget_text"
-      />
+    />
+
     <TextView
-            android:layout_below="@id/widgetHashrate"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/widgetHashrate"
+            android:layout_below="@id/widgetCoin"
+            android:id="@+id/widgetCurrentHashrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Hashrate"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+    />
+    <TextView
+            android:layout_marginTop="4dp"
             android:id="@+id/widgetBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Balance"
+            android:paddingLeft="16dp"
+            android:text="Balance:"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:contentDescription="@string/appwidget_text"
-          />
+            android:layout_toRightOf="@+id/widgetCurrentHashrate"
+            android:layout_below="@id/widgetCoin"
+    />
+
+    <TextView
+            android:layout_marginTop="4dp"
+        android:id="@+id/widgetCurrentBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Current Balance"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/widgetBalance"
+        android:layout_below="@id/widgetCoin"
+/>
+
+    <TextView
+            android:id="@+id/widgetWorkers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Workers:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetHashrate"
+    />
+
+    <TextView
+            android:id="@+id/widgetCurrentWorkers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Current workers"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetHashrate"
+            android:layout_toRightOf="@+id/widgetWorkers"
+    />
+
 
 </RelativeLayout>
