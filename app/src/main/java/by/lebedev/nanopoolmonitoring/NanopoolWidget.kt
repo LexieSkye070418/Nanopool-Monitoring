@@ -21,7 +21,7 @@ class NanopoolWidget : AppWidgetProvider() {
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         // When the user deletes the widget, delete the preference associated with it.
         for (appWidgetId in appWidgetIds) {
-            NanopoolWidgetConfigureActivity.deleteTitlePref(context, appWidgetId)
+            NanopoolWidgetConfigureActivity.deleteSharedPref(context, appWidgetId)
         }
     }
 
@@ -40,14 +40,60 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
 
-            val widgetText = NanopoolWidgetConfigureActivity.loadTitlePref(context, appWidgetId)
+            val walletText = NanopoolWidgetConfigureActivity.loadSharedPrefWallet(context, appWidgetId)
             // Construct the RemoteViews object
             val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
-            views.setTextViewText(R.id.widgetCoin, widgetText)
+            views.setTextViewText(R.id.widgetCoin, walletText)
 
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
+
+        fun setSelectedCoinImage(context: Context,
+                                 appWidgetManager: AppWidgetManager,
+                                 appWidgetId: Int,
+                                 coinId: Int) {
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+
+            when (coinId) {
+                0 -> {
+                    views.setImageViewResource(R.id.widgetCoin,)
+                    addAccCoinLogo.setImageResource(R.drawable.eth)
+
+                }
+                1 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.etc)
+
+                }
+                2 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.zec)
+
+                }
+                3 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.xmr)
+
+                }
+                4 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.pasc)
+
+                }
+                5 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.etn)
+
+                }
+                6 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.raven)
+
+                }
+                7 -> {
+                    addAccCoinLogo.setImageResource(R.drawable.grin)
+
+                }
+                else -> addAccCoinLogo.setImageResource(R.drawable.eth)
+            }
+        }
+
+
     }
 }
 

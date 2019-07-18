@@ -37,7 +37,7 @@
             android:text="Hashrate:"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:contentDescription="@string/appwidget_text"
+            android:contentDescription="@string/default_wallet_text"
     />
 
     <TextView
