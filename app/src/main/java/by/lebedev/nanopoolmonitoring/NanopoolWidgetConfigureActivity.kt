@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.EditText
+import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import kotlinx.android.synthetic.main.nanopool_widget_configure.*
@@ -17,7 +18,7 @@ import javax.inject.Inject
  * The configuration screen for the [NanopoolWidget] AppWidget.
  */
 class NanopoolWidgetConfigureActivity : Activity() {
-    private var coinId: Int = 0
+    var coinId: Int = 0
     @Inject
     lateinit var poolCoins: PoolCoins
     internal var mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
@@ -31,7 +32,7 @@ class NanopoolWidgetConfigureActivity : Activity() {
 
         // It is the responsibility of the configuration activity to update the app widget
         val appWidgetManager = AppWidgetManager.getInstance(context)
-        NanopoolWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId)
+        NanopoolWidget.loadWallet(context, appWidgetManager, mAppWidgetId)
 
         // Make sure we pass back the original appWidgetId
         val resultValue = Intent()
@@ -100,13 +101,14 @@ class NanopoolWidgetConfigureActivity : Activity() {
     companion object {
 
         private val PREFS_NAME = "by.lebedev.nanopoolmonitoring.NanopoolWidget"
-        private val PREF_PREFIX_KEY = "appwidget_"
+        private val PREF_PREFIX_KEY_WALLET = "appwidgetwallet_"
+        private val PREF_PREFIX_KEY_COINID = "appwidgetcoinid_"
 
         // Write the prefix to the SharedPreferences object for this widget
-        internal fun saveSharedPref(context: Context, appWidgetId: Int, wallet: String, coin:Int) {
+        internal fun saveSharedPref(context: Context, appWidgetId: Int, walletText: String, coin:Int) {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-            prefs.putString(PREF_PREFIX_KEY + appWidgetId, wallet)
-            prefs.putInt(PREF_PREFIX_KEY + appWidgetId, coin)
+            prefs.putString(PREF_PREFIX_KEY_WALLET + appWidgetId, walletText)
+            prefs.putInt(PREF_PREFIX_KEY_COINID + appWidgetId, coin)
             prefs.apply()
         }
 
@@ -114,21 +116,89 @@ class NanopoolWidgetConfigureActivity : Activity() {
         // If there is no preference saved, get the default from a resource
         internal fun loadSharedPrefWallet(context: Context, appWidgetId: Int): String {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0)
-            val walletValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null)
+            val walletValue = prefs.getString(PREF_PREFIX_KEY_WALLET + appWidgetId, null)
             return walletValue ?: context.getString(R.string.default_wallet_text)
         }
 
         internal fun loadSharedPrefCoin(context: Context, appWidgetId: Int): Int {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0)
-            val coinValue = prefs.getInt(PREF_PREFIX_KEY + appWidgetId, 0)
+            val coinValue = prefs.getInt(PREF_PREFIX_KEY_COINID + appWidgetId, 0)
             return coinValue ?: 0
         }
 
         internal fun deleteSharedPref(context: Context, appWidgetId: Int) {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-            prefs.remove(PREF_PREFIX_KEY + appWidgetId)
+            prefs.remove(PREF_PREFIX_KEY_WALLET + appWidgetId)
+            prefs.remove(PREF_PREFIX_KEY_COINID + appWidgetId)
             prefs.apply()
         }
+
+        internal fun setCoinImage(context: Context,
+                                  appWidgetManager: AppWidgetManager,
+                                  appWidgetId: Int) {
+
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val coinId = loadSharedPrefCoin(context, appWidgetId)
+
+
+            when (coinId) {
+                0 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.eth)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                }
+                1 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.etc)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                2 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.zec)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                3 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.xmr)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                4 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.pasc)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                5 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.etn)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                6 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.raven)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                7 -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.grin)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                else -> {
+                    views.setViewVisibility(R.id.progressBar,View.INVISIBLE)
+                    views.setImageViewResource(R.id.widgetCoinImage,R.drawable.eth)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)}
+            }
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+
+
+             }
+
     }
 }
 

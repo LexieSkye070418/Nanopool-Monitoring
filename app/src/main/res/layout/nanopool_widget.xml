@@ -6,20 +6,27 @@
 
 >
 
+    <ProgressBar
+android:id="@+id/progressBar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+
     <ImageView
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/eth"
             android:id="@+id/widgetCoinImage"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
 
     <TextView
+            android:paddingLeft="8dp"
             android:layout_toRightOf="@id/widgetCoinImage"
             android:id="@+id/widgetCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ethereum"
+            android:text="Loading coin..."
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_marginEnd="8dp"
@@ -66,16 +73,16 @@
 
     <TextView
             android:layout_marginTop="4dp"
-        android:id="@+id/widgetCurrentBalance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:text="Current Balance"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:layout_toRightOf="@+id/widgetBalance"
-        android:layout_below="@id/widgetCoin"
-/>
+            android:id="@+id/widgetCurrentBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Current Balance"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/widgetBalance"
+            android:layout_below="@id/widgetCoin"
+    />
 
     <TextView
             android:id="@+id/widgetWorkers"
