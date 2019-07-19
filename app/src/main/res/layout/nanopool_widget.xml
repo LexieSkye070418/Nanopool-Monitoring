@@ -7,7 +7,7 @@
 >
 
     <ProgressBar
-android:id="@+id/progressBar"
+            android:id="@+id/progressBar"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_width="25dp"
@@ -33,6 +33,15 @@ android:id="@+id/progressBar"
             android:layout_marginTop="12dp"
             android:layout_alignParentTop="true"
     />
+    <Button
+
+            android:background="@drawable/update_selector"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/updateButton"
+            android:layout_alignParentRight="true"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
     <TextView
             android:layout_marginTop="4dp"
             android:paddingLeft="16dp"
@@ -54,7 +63,7 @@ android:id="@+id/progressBar"
             android:id="@+id/widgetCurrentHashrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Hashrate"
+            android:text="Loading hashrate..."
             android:textColor="@color/black"
             android:textSize="12sp"
     />
@@ -77,7 +86,7 @@ android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:text="Current Balance"
+            android:text="Loading balance..."
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_toRightOf="@+id/widgetBalance"
@@ -100,7 +109,7 @@ android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:text="Current workers"
+            android:text="Loading workers..."
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_below="@id/widgetHashrate"

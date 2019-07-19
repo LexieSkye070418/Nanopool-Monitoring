@@ -5,7 +5,7 @@
                     android:updatePeriodMillis="1800000"
                     android:previewImage="@drawable/example_appwidget_preview"
                     android:initialLayout="@layout/nanopool_widget"
-                    android:configure="by.lebedev.nanopoolmonitoring.NanopoolWidgetConfigureActivity"
+                    android:configure="by.lebedev.nanopoolmonitoring.widget.NanopoolWidgetConfigureActivity"
                     android:resizeMode="horizontal|vertical"
                     android:widgetCategory="home_screen"
                     android:initialKeyguardLayout="@layout/nanopool_widget">
