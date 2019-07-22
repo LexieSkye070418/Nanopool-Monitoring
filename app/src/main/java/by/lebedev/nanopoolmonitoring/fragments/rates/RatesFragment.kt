@@ -18,9 +18,7 @@ import kotlinx.android.synthetic.main.fragment_rates.*
 
 class RatesFragment : Fragment() {
     lateinit var progressBar: ProgressBar
-
     private lateinit var adapter: CoinAdapter
-    var status: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_rates, container, false)
@@ -35,20 +33,23 @@ class RatesFragment : Fragment() {
     }
 
     fun getD() {
-        val disposable = create1().loadData("587a787c-2a32-44f9-8a5a-40470f01ce6f")
+        val disposable = create1().loadData()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                result.data.map{
+                result.data.map {
+
                     it.url = "https://s2.coinmarketcap.com/static/img/coins/32x32/${it.id}.png"
-                    it.price = Math.round(it.price * 100.0) / 100.0
-                    Log.e("AAA", "it.price")
+                    it.quote.USD.price = Math.round(it.quote.USD.price * 100.0) / 100.0
+                    it.quote.USD.percent_change_24h = Math.round(it.quote.USD.percent_change_24h * 100.0) / 100.0
 
                 }
-                progressBar.visibility = View.INVISIBLE
-                setupRecycler(result.data)
+                if (recycleView !=null){
+                    progressBar.visibility = View.INVISIBLE
+                    setupRecycler(result.data)
+                }
             },
-                { error -> Log.e("AAA", "не забрал!!!") })
+                { error -> Log.e("AAA", error.message) })
     }
 
 

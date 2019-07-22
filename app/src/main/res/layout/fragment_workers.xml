@@ -19,9 +19,56 @@
             android:layout_marginTop="14dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="@+id/textForError"/>
 
+    <LinearLayout
+            android:layout_marginTop="4dp"
+            android:id="@+id/workersList"
+
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@id/searchText"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@+id/textForError"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="1.0" android:orientation="horizontal"
+    >
+
+        <TextView
+                android:id="@+id/workersTotal"
+                android:gravity="center|left"
+                android:text="Workers total: "
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        />
+
+        <TextView
+                android:textColor="@color/green_confirm"
+                android:id="@+id/workersAlive"
+                android:text="Alive: "
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:textColor="@color/dark_red_error"
+                android:id="@+id/workersDead"
+                android:text="Dead: "
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
     <TextView
             android:paddingBottom="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/dark_red_error"
@@ -44,7 +91,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:foregroundGravity="center"
             android:id="@+id/workers_recycle"
             android:layout_width="match_parent"
