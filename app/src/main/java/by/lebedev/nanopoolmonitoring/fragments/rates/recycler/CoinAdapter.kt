@@ -35,7 +35,7 @@ class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<CoinViewHolder
         list.let {
             val coin = it[position]
             holder.view.tvSimbol.text = coin.symbol
-            holder.view.tvName.text = coin.id
+            holder.view.tvName.text = coin.name
             holder.view.tvPriceChange.text = if (coin.percent_change_24h > 0) "+${coin.percent_change_24h}%" else {
                 "${coin.percent_change_24h}%"
             }
@@ -45,7 +45,7 @@ class CoinAdapter(val list: List<CoinCap>) : RecyclerView.Adapter<CoinViewHolder
                 holder.view.tvPriceChange.setTextColor(Color.parseColor("#D41611"))}
 
 
-            holder.view.tvPrice.text = "${coin.price_usd}$"
+            holder.view.tvPrice.text = "${coin.price}$"
 
 
             Picasso.get().load(coin.url.toString())

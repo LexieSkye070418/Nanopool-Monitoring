@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
 
-    private val BASE_URL = "https://api.coinmarketcap.com/v1/"
+//    private val BASE_URL = "https://api.coinmarketcap.com/v1/"
+    private val BASE_URL = "https://pro-api.coinmarketcap.com/"
 
 
     // выставлены таймауты на соединение с сервером
