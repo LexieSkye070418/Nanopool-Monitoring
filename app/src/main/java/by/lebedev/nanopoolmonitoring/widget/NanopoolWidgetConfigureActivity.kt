@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.RemoteViews
+import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import kotlinx.android.synthetic.main.nanopool_widget_configure.*
@@ -39,25 +39,23 @@ class NanopoolWidgetConfigureActivity : Activity() {
 
         // It is the responsibility of the configuration activity to update the app widget
 //        val appWidgetManager = AppWidgetManager.getInstance(context)
-//        setWalletFromConfig(
+//        setHashrate(
 //            context,
 //            appWidgetManager,
 //            mAppWidgetId
 //        )
 //
-//        setCoinImage(
+//        setCoinImageAndName(
 //            context,
 //            appWidgetManager,
 //            mAppWidgetId
 //        )
 
 
-
-
         // Make sure we pass back the original appWidgetId
         val resultValue = Intent()
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId)
-        setResult(Activity.RESULT_OK, resultValue)
+        setResult(RESULT_OK, resultValue)
         finish()
     }
 
@@ -72,14 +70,14 @@ class NanopoolWidgetConfigureActivity : Activity() {
 
         // Set the result to CANCELED.  This will cause the widget host to cancel
         // out of the widget placement if the user presses the back button.
-        setResult(Activity.RESULT_CANCELED)
+        setResult(RESULT_CANCELED)
 
-        setContentView(by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget_configure)
+        setContentView(R.layout.nanopool_widget_configure)
 
         widgetCoinSelect.setOnClickListener {
             val builder = AlertDialog.Builder(it.context)
                 .setTitle("Select your coin")
-                .setIcon(by.lebedev.nanopoolmonitoring.R.drawable.bitcoinicon)
+                .setIcon(R.drawable.bitcoinicon)
                 .setCancelable(true)
 
                 .setSingleChoiceItems(arrayOfCoins, -1,
@@ -98,8 +96,8 @@ class NanopoolWidgetConfigureActivity : Activity() {
         }
 
 
-        wallet = findViewById<View>(by.lebedev.nanopoolmonitoring.R.id.walletWidgetEditText) as EditText
-        findViewById<View>(by.lebedev.nanopoolmonitoring.R.id.add_button).setOnClickListener(mOnClickListener)
+        wallet = findViewById<View>(R.id.walletWidgetEditText) as EditText
+        findViewById<View>(R.id.add_button).setOnClickListener(mOnClickListener)
 
         // Find the widget id from the intent.
         val intent = intent
@@ -143,7 +141,7 @@ class NanopoolWidgetConfigureActivity : Activity() {
         internal fun loadSharedPrefWallet(context: Context, appWidgetId: Int): String {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0)
             val walletValue = prefs.getString(PREF_PREFIX_KEY_WALLET + appWidgetId, null)
-            return walletValue ?: context.getString(by.lebedev.nanopoolmonitoring.R.string.default_wallet_text)
+            return walletValue ?: context.getString(R.string.default_wallet_text)
         }
 
         internal fun loadSharedPrefCoin(context: Context, appWidgetId: Int): Int {
@@ -158,134 +156,5 @@ class NanopoolWidgetConfigureActivity : Activity() {
             prefs.remove(PREF_PREFIX_KEY_COINID + appWidgetId)
             prefs.apply()
         }
-
-        internal fun setCoinImage(
-            context: Context,
-            appWidgetManager: AppWidgetManager,
-            appWidgetId: Int
-        ) {
-
-            Log.e("AAA", "set coin image")
-
-
-            val views = RemoteViews(context.packageName, by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget)
-            val coinId =
-                loadSharedPrefCoin(
-                    context,
-                    appWidgetId
-                )
-            views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.VISIBLE)
-
-
-            when (coinId) {
-                0 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.eth
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-                }
-                1 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.etc
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                2 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.zec
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                3 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.xmr
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                4 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.pasc
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                5 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.etn
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                6 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.raven
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                7 -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.grin
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                }
-                else -> {
-                    views.setViewVisibility(by.lebedev.nanopoolmonitoring.R.id.progressBar, View.INVISIBLE)
-                    views.setImageViewResource(
-                        by.lebedev.nanopoolmonitoring.R.id.widgetCoinImage,
-                        by.lebedev.nanopoolmonitoring.R.drawable.eth
-                    )
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-                }
-            }
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-
-
-        }
-
-
-        fun setWalletFromConfig(
-            context: Context, appWidgetManager: AppWidgetManager,
-            appWidgetId: Int
-        ) {
-
-            Log.e("AAA", "set wallet from config")
-
-            val walletText =
-                NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
-                    context,
-                    appWidgetId
-                )
-            // Construct the RemoteViews object
-            val views = RemoteViews(context.packageName, by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget)
-            views.setTextViewText(by.lebedev.nanopoolmonitoring.R.id.widgetCoin, walletText)
-
-            // Instruct the widget manager to update the widget
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-        }
-
-
-
     }
 }
-

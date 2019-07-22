@@ -6,9 +6,14 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import android.widget.RemoteViews
-
-
+import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.text.NumberFormat
 
 
 /**
@@ -39,12 +44,12 @@ class NanopoolWidget : AppWidgetProvider() {
 
 
 
-            NanopoolWidgetConfigureActivity.setWalletFromConfig(
+            setHashrate(
                 context,
                 appWidgetManager,
                 appWidgetId
             )
-            NanopoolWidgetConfigureActivity.setCoinImage(
+            setCoinImageAndName(
                 context,
                 appWidgetManager,
                 appWidgetId
@@ -84,14 +89,14 @@ class NanopoolWidget : AppWidgetProvider() {
         }
 
         if (context != null) {
-            NanopoolWidgetConfigureActivity.setWalletFromConfig(
+            setHashrate(
                 context,
                 appWidgetManager,
                 mAppWidgetId
             )
         }
         if (context != null) {
-            NanopoolWidgetConfigureActivity.setCoinImage(
+            setCoinImageAndName(
                 context,
                 appWidgetManager,
                 mAppWidgetId
@@ -128,7 +133,196 @@ class NanopoolWidget : AppWidgetProvider() {
                 )
             // Construct the RemoteViews object
             val views = RemoteViews(context.packageName, by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget)
-            views.setTextViewText(by.lebedev.nanopoolmonitoring.R.id.widgetCoin, walletText)
+            views.setTextViewText(by.lebedev.nanopoolmonitoring.R.id.widgetCurrentCoin, walletText)
+
+            // Instruct the widget manager to update the widget
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+        }
+
+
+        fun setCoinImageAndName(
+            context: Context,
+            appWidgetManager: AppWidgetManager,
+            appWidgetId: Int
+        ) {
+
+            Log.e("AAA", "set coin image")
+
+
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val coinId =
+                NanopoolWidgetConfigureActivity.loadSharedPrefCoin(
+                    context,
+                    appWidgetId
+                )
+            views.setViewVisibility(R.id.progressBar, View.VISIBLE)
+
+
+            when (coinId) {
+                0 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.eth
+                    )
+
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Ethereum")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                }
+                1 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.etc
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Ethereum Classic")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                2 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.zec
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "ZCash")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                3 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.xmr
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Monero")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                4 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.pasc
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Pascal")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                5 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.etn
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Electroneum")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                6 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.raven
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Raven")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                7 -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.grin
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Grin-29")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                }
+                else -> {
+                    views.setViewVisibility(R.id.progressBar, View.INVISIBLE)
+                    views.setImageViewResource(
+                        R.id.widgetCoinImage,
+                        R.drawable.eth
+                    )
+                    views.setTextViewText(R.id.widgetCurrentCoin, "Ethereum")
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                }
+            }
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+
+
+        }
+
+
+        fun setHashrate(
+            context: Context,
+            appWidgetManager: AppWidgetManager,
+            appWidgetId: Int
+        ) {
+            val nf = NumberFormat.getInstance()
+            Log.e("AAA", "set hashrate")
+
+
+            val wallet =
+                NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
+                    context,
+                    appWidgetId
+                )
+
+            val coinId =
+                NanopoolWidgetConfigureActivity.loadSharedPrefCoin(
+                    context,
+                    appWidgetId
+                )
+
+            val coin = TabIntent.instance.shortNameFromSelector(coinId)
+
+            nf.maximumFractionDigits = 2
+            val d = provideApi().getGeneralInfo(coin, wallet)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
+
+                    if (result.status != null) {
+                        val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+                        views.setTextViewText(
+                            R.id.widgetCurrentBalance,
+                            nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase()
+                        )
+
+
+                        if (result.data.hashrate > 1000) {
+
+                            views.setTextViewText(
+                                R.id.widgetCurrentHashrate,
+                                nf.format
+                                    (result.data.hashrate.div(1000)).toString().plus(" ").plus(
+                                    TabIntent.instance.getWorkerHashTypeHigh(
+                                        coin
+                                    )
+                                )
+                            )
+                        } else {
+                            views.setTextViewText(
+                                R.id.widgetCurrentHashrate,
+                                nf.format
+                                    (result.data.hashrate).toString().plus(" ").plus(
+                                    TabIntent.instance.getWorkerHashType(
+                                        coin
+                                    )
+                                )
+                            )
+                        }
+                    }
+                }
+
+
+                    , {
+                        Log.e("AAA", it.message)
+                    })
+
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
 
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)

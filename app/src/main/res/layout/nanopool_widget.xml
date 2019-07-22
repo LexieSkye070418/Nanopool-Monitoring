@@ -21,9 +21,9 @@
             android:layout_height="25dp"/>
 
     <TextView
+            android:id="@+id/widgetCurrentCoin"
             android:paddingLeft="8dp"
             android:layout_toRightOf="@id/widgetCoinImage"
-            android:id="@+id/widgetCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loading coin..."
@@ -47,7 +47,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:id="@+id/widgetHashrate"
-            android:layout_below="@id/widgetCoin"
+            android:layout_below="@id/widgetCurrentCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hashrate:"
@@ -57,10 +57,10 @@
     />
 
     <TextView
+            android:id="@+id/widgetCurrentHashrate"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/widgetHashrate"
-            android:layout_below="@id/widgetCoin"
-            android:id="@+id/widgetCurrentHashrate"
+            android:layout_below="@id/widgetCurrentCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loading hashrate..."
@@ -77,20 +77,20 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_toRightOf="@+id/widgetCurrentHashrate"
-            android:layout_below="@id/widgetCoin"
+            android:layout_below="@id/widgetCurrentCoin"
     />
 
     <TextView
-            android:layout_marginTop="4dp"
             android:id="@+id/widgetCurrentBalance"
+            android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:paddingLeft="16dp"
             android:text="Loading balance..."
-            android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_toRightOf="@+id/widgetBalance"
-            android:layout_below="@id/widgetCoin"
+            android:layout_below="@id/widgetCurrentCoin"
     />
 
     <TextView
