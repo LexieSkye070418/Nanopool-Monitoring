@@ -11,16 +11,10 @@ import android.widget.ProgressBar
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.fragments.rates.recycler.CoinAdapter
 import by.lebedev.nanopoolmonitoring.fragments.rates.retrofit.ServiceGenerator.create1
-import by.lebedev.nanopoolmonitoring.fragments.rates.retrofit.entity.CoinCanInfo
 import by.lebedev.nanopoolmonitoring.fragments.rates.retrofit.entity.CoinCap
-import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartData
-import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_pool.*
 import kotlinx.android.synthetic.main.fragment_rates.*
-import kotlinx.android.synthetic.main.item_coin.*
-import kotlinx.android.synthetic.main.linechart_layout.*
 
 class RatesFragment : Fragment() {
     lateinit var progressBar: ProgressBar
@@ -34,14 +28,14 @@ class RatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getActivity()?.getWindow()?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
-        progressBar = view.findViewById<ProgressBar>(R.id.progressRates)
+        getActivity()?.getWindow()?.setBackgroundDrawableResource(R.drawable.nanopool_background)
+        progressBar = view.findViewById(R.id.progressRates)
 
         getD()
     }
 
     fun getD() {
-        val disposables = create1().loadData("587a787c-2a32-44f9-8a5a-40470f01ce6f")
+        val disposable = create1().loadData("587a787c-2a32-44f9-8a5a-40470f01ce6f")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
