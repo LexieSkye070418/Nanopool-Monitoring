@@ -43,24 +43,23 @@
             android:layout_width="25dp"
             android:layout_height="25dp"/>
     <TextView
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:id="@+id/widgetHashrate"
-            android:layout_below="@id/widgetCurrentCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hashrate:"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:contentDescription="@string/default_wallet_text"
+            android:layout_toRightOf="@id/widgetCurrentCoin"
     />
 
     <TextView
             android:id="@+id/widgetCurrentHashrate"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
             android:layout_toRightOf="@+id/widgetHashrate"
-            android:layout_below="@id/widgetCurrentCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loading hashrate..."
@@ -76,8 +75,8 @@
             android:text="Balance:"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:layout_toRightOf="@+id/widgetCurrentHashrate"
-            android:layout_below="@id/widgetCurrentCoin"
+android:layout_alignLeft="@id/widgetHashrate"
+            android:layout_below="@id/widgetHashrate"
     />
 
     <TextView
@@ -89,11 +88,13 @@
             android:paddingLeft="16dp"
             android:text="Loading balance..."
             android:textSize="12sp"
+            android:layout_alignLeft="@id/widgetCurrentHashrate"
             android:layout_toRightOf="@+id/widgetBalance"
             android:layout_below="@id/widgetCurrentCoin"
     />
 
     <TextView
+            android:layout_marginTop="4dp"
             android:id="@+id/widgetWorkers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,19 +102,22 @@
             android:text="Workers:"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:layout_below="@id/widgetHashrate"
+            android:layout_below="@id/widgetBalance"
+            android:layout_alignLeft="@id/widgetBalance"
     />
 
     <TextView
             android:id="@+id/widgetCurrentWorkers"
+            android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:text="Loading workers..."
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:layout_below="@id/widgetHashrate"
+            android:layout_below="@id/widgetBalance"
             android:layout_toRightOf="@+id/widgetWorkers"
+            android:layout_alignLeft="@id/widgetCurrentBalance"
     />
 
 

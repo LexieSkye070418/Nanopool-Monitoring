@@ -10,9 +10,10 @@ import android.view.View
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
 
 
@@ -25,11 +26,10 @@ class NanopoolWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         // There may be multiple widgets active, so update all of them
         Log.e("AAA", "onUpdate")
-        val views = RemoteViews(context.packageName, by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget)
+        val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
 
 
         for (appWidgetId in appWidgetIds) {
-
 
             val intentSync = Intent(context, NanopoolWidget::class.java)
             intentSync.action =
@@ -40,7 +40,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 intentSync,
                 PendingIntent.FLAG_UPDATE_CURRENT
             ) //You need to specify a proper flag for the intent. Or else the intent will become deleted.
-            views.setOnClickPendingIntent(by.lebedev.nanopoolmonitoring.R.id.updateButton, pendingSync)
+            views.setOnClickPendingIntent(R.id.updateButton, pendingSync)
 
 
 
@@ -104,7 +104,6 @@ class NanopoolWidget : AppWidgetProvider() {
         }
 
 
-
     }
 
     override fun onEnabled(context: Context) {
@@ -119,26 +118,6 @@ class NanopoolWidget : AppWidgetProvider() {
 
 
     companion object {
-
-        internal fun loadWallet(
-            context: Context, appWidgetManager: AppWidgetManager,
-            appWidgetId: Int
-        ) {
-            Log.e("AAA", "loadWallet")
-
-            val walletText =
-                NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
-                    context,
-                    appWidgetId
-                )
-            // Construct the RemoteViews object
-            val views = RemoteViews(context.packageName, by.lebedev.nanopoolmonitoring.R.layout.nanopool_widget)
-            views.setTextViewText(by.lebedev.nanopoolmonitoring.R.id.widgetCurrentCoin, walletText)
-
-            // Instruct the widget manager to update the widget
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-        }
-
 
         fun setCoinImageAndName(
             context: Context,
@@ -250,8 +229,6 @@ class NanopoolWidget : AppWidgetProvider() {
                 }
             }
             appWidgetManager.updateAppWidget(appWidgetId, views)
-
-
         }
 
 
@@ -260,8 +237,9 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            val nf = NumberFormat.getInstance()
             Log.e("AAA", "set hashrate")
+
+            val nf = NumberFormat.getInstance()
 
 
             val wallet =
@@ -277,19 +255,33 @@ class NanopoolWidget : AppWidgetProvider() {
                 )
 
             val coin = TabIntent.instance.shortNameFromSelector(coinId)
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
 
-            nf.maximumFractionDigits = 2
+//            val widgetDataLoader=WidgetDataLoader(appWidgetManager,appWidgetId,coin,wallet)
+//
+//            val balance = widgetDataLoader.execute().get()
+//
+//            views.setTextViewText(R.id.widgetCurrentBalance,balance)
+//            appWidgetManager.updateAppWidget(appWidgetId, views)
+
+
+            nf.maximumFractionDigits = 3
+
+
             val d = provideApi().getGeneralInfo(coin, wallet)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result.status != null) {
-                        val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+                    if (result.status.equals(true)) {
+                        Log.e("AAA", result.data.balance.toString())
+                        Log.e("AAA", result.data.hashrate.toString())
+
                         views.setTextViewText(
                             R.id.widgetCurrentBalance,
-                            nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase()
+                            (nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                         )
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
 
 
                         if (result.data.hashrate > 1000) {
@@ -303,6 +295,8 @@ class NanopoolWidget : AppWidgetProvider() {
                                     )
                                 )
                             )
+                            appWidgetManager.updateAppWidget(appWidgetId, views)
+
                         } else {
                             views.setTextViewText(
                                 R.id.widgetCurrentHashrate,
@@ -314,6 +308,12 @@ class NanopoolWidget : AppWidgetProvider() {
                                 )
                             )
                         }
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
+                    }
+                    else{
+                        views.setTextViewText(
+                            R.id.widgetCurrentHashrate,"Account not found")
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
                 }
 
@@ -321,15 +321,49 @@ class NanopoolWidget : AppWidgetProvider() {
                     , {
                         Log.e("AAA", it.message)
                     })
+//            d.dispose()
 
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val x = provideApi().getWorkers(coin, wallet)
+                .subscribeOn(newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
 
-            // Instruct the widget manager to update the widget
+                    if (!result.data.isEmpty()) {
+
+                        views.setTextViewText(
+                            R.id.widgetCurrentWorkers,
+                            countAlive(result.data).toString()
+                        )
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
+                    }else{
+                        views.setTextViewText(
+                            R.id.widgetCurrentWorkers,"Workers not found")
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
+                    }
+                }, {
+                    Log.e("err", it.message)
+                })
+//            x.dispose()
+
+//            views.setTextViewText(
+//                R.id.widgetCurrentBalance,
+//                NanopoolWidgetConfigureActivity.loadSharedPrefBalance(context,appWidgetId)
+//            )
+//            Log.e("AAA",NanopoolWidgetConfigureActivity.loadSharedPrefBalance(context,appWidgetId) )
+
+//             Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
-
-
+        fun countAlive(workerList: ArrayList<DataWorkers>): Int {
+            var count = 0
+            for (i in 0 until workerList.size) {
+                if (workerList.get(i).hashrate != 0L) {
+                    count++
+                }
+            }
+            return count
+        }
     }
 }
 
