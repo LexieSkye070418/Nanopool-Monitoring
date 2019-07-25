@@ -32,6 +32,7 @@ class NanopoolWidget : AppWidgetProvider() {
         for (appWidgetId in appWidgetIds) {
 
             val intentSync = Intent(context, NanopoolWidget::class.java)
+            intentSync.putExtra("widgetId", appWidgetId)
             intentSync.action =
                 AppWidgetManager.ACTION_APPWIDGET_UPDATE //You need to specify the action for the intent. Right now that intent is doing nothing for there is no action to be broadcasted.
             val pendingSync = PendingIntent.getBroadcast(
@@ -40,9 +41,11 @@ class NanopoolWidget : AppWidgetProvider() {
                 intentSync,
                 PendingIntent.FLAG_UPDATE_CURRENT
             ) //You need to specify a proper flag for the intent. Or else the intent will become deleted.
+
+
             views.setOnClickPendingIntent(R.id.updateButton, pendingSync)
 
-
+            appWidgetManager.updateAppWidget(appWidgetId, views)
 
             setHashrate(
                 context,
@@ -54,8 +57,6 @@ class NanopoolWidget : AppWidgetProvider() {
                 appWidgetManager,
                 appWidgetId
             )
-
-
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
@@ -82,11 +83,36 @@ class NanopoolWidget : AppWidgetProvider() {
         var mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
         val extras = intent?.getExtras()
         if (extras != null) {
-            mAppWidgetId = extras.getInt(
-                AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID
-            )
+            mAppWidgetId = extras.getInt("widgetId", AppWidgetManager.INVALID_APPWIDGET_ID)
         }
+        Log.e("AAA", "onReceive ID = " + mAppWidgetId)
+
+//        if (context != null) {
+//            setHashrate(
+//                context,
+//                appWidgetManager,
+//                mAppWidgetId
+//            )
+//        }
+//
+//
+//        val sConn = object : ServiceConnection {
+//            override fun onServiceConnected(name: ComponentName, service: IBinder) {
+//                Log.e("AAA", "connected")
+//            }
+//
+//            override fun onServiceDisconnected(name: ComponentName) {
+//                Log.e("AAA", "disconnected")
+//            }
+//        }
+//      val serviceIntent = Intent(context, DataLoaderService::class.java)
+//        serviceIntent.putExtra("appWidgetId",mAppWidgetId)
+//        serviceIntent.setPackage("by.lebedev.nanopoolmonitoring")
+//        if (context!=null){
+//            Log.e("AAA", "context !=null try Start Service")
+//            context.startService(intent)
+//        }
+
 
         if (context != null) {
             setHashrate(
@@ -95,6 +121,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 mAppWidgetId
             )
         }
+
         if (context != null) {
             setCoinImageAndName(
                 context,
@@ -113,7 +140,6 @@ class NanopoolWidget : AppWidgetProvider() {
 
     override fun onDisabled(context: Context) {
         Log.e("AAA", "onDisabled")
-
     }
 
 
@@ -257,14 +283,6 @@ class NanopoolWidget : AppWidgetProvider() {
             val coin = TabIntent.instance.shortNameFromSelector(coinId)
             val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
 
-//            val widgetDataLoader=WidgetDataLoader(appWidgetManager,appWidgetId,coin,wallet)
-//
-//            val balance = widgetDataLoader.execute().get()
-//
-//            views.setTextViewText(R.id.widgetCurrentBalance,balance)
-//            appWidgetManager.updateAppWidget(appWidgetId, views)
-
-
             nf.maximumFractionDigits = 3
 
 
@@ -274,8 +292,8 @@ class NanopoolWidget : AppWidgetProvider() {
                 .subscribe({ result ->
 
                     if (result.status.equals(true)) {
-                        Log.e("AAA", result.data.balance.toString())
-                        Log.e("AAA", result.data.hashrate.toString())
+                        Log.e("AAA", "balance: " + result.data.balance.toString())
+                        Log.e("AAA", "hashrate: " + result.data.hashrate.toString())
 
                         views.setTextViewText(
                             R.id.widgetCurrentBalance,
@@ -309,10 +327,10 @@ class NanopoolWidget : AppWidgetProvider() {
                             )
                         }
                         appWidgetManager.updateAppWidget(appWidgetId, views)
-                    }
-                    else{
+                    } else {
                         views.setTextViewText(
-                            R.id.widgetCurrentHashrate,"Account not found")
+                            R.id.widgetCurrentHashrate, "Account not found"
+                        )
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
                 }
@@ -321,7 +339,6 @@ class NanopoolWidget : AppWidgetProvider() {
                     , {
                         Log.e("AAA", it.message)
                     })
-//            d.dispose()
 
             val x = provideApi().getWorkers(coin, wallet)
                 .subscribeOn(newThread())
@@ -329,29 +346,23 @@ class NanopoolWidget : AppWidgetProvider() {
                 .subscribe({ result ->
 
                     if (!result.data.isEmpty()) {
+                        Log.e("AAA", "workers: " + result.data.size.toString())
 
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers,
                             countAlive(result.data).toString()
                         )
                         appWidgetManager.updateAppWidget(appWidgetId, views)
-                    }else{
+                    } else {
                         views.setTextViewText(
-                            R.id.widgetCurrentWorkers,"Workers not found")
+                            R.id.widgetCurrentWorkers, "Workers not found"
+                        )
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
                 }, {
                     Log.e("err", it.message)
                 })
-//            x.dispose()
 
-//            views.setTextViewText(
-//                R.id.widgetCurrentBalance,
-//                NanopoolWidgetConfigureActivity.loadSharedPrefBalance(context,appWidgetId)
-//            )
-//            Log.e("AAA",NanopoolWidgetConfigureActivity.loadSharedPrefBalance(context,appWidgetId) )
-
-//             Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
@@ -365,5 +376,6 @@ class NanopoolWidget : AppWidgetProvider() {
             return count
         }
     }
+
 }
 
