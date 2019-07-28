@@ -24,7 +24,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -386,11 +385,12 @@ class NanopoolWidget : AppWidgetProvider() {
             Log.e("AAA", "coin= "+coin)
 
 
-            val d = provideApi().getChart(coin, wallet)
-                .subscribeOn(Schedulers.io())
+            val c = provideApi().getChart(coin, wallet)
+                .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
+                    Log.e("AAA", "inside val C")
                     if (!result.data.isEmpty() && result.data.get(0).hashrate.toInt() != 0) {
                         Log.e("AAA", result.data.get(0).hashrate.toString())
                         Log.e("AAA", result.data.get(0).date.toString())
@@ -516,10 +516,14 @@ class NanopoolWidget : AppWidgetProvider() {
                 View.MeasureSpec.makeMeasureSpec(90,View.MeasureSpec.EXACTLY));
 
             val chartBitmap = lineChart.chartBitmap
-            Thread.sleep(5000)
             Log.e("AAA", "BITMAP")
-            views.setImageViewBitmap(R.id.chartOnWidget, chartBitmap)
-            views.setBitmap(R.id.chartOnWidget,"set bitmap",chartBitmap)
+
+            android.os.Handler().postDelayed({
+                views.setImageViewBitmap(R.id.chartOnWidget, chartBitmap)
+            }, 5000)
+
+
+//            views.setBitmap(R.id.chartOnWidget,"set bitmap",chartBitmap)
 
         }
     }
