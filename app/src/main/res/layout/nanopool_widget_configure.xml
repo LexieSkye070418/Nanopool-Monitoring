@@ -36,6 +36,7 @@
             android:id="@+id/walletWidgetEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="wallet"
             android:inputType="text"/>
 
     <Button

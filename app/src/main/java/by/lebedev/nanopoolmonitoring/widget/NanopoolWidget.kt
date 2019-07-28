@@ -87,33 +87,6 @@ class NanopoolWidget : AppWidgetProvider() {
         }
         Log.e("AAA", "onReceive ID = " + mAppWidgetId)
 
-//        if (context != null) {
-//            setHashrate(
-//                context,
-//                appWidgetManager,
-//                mAppWidgetId
-//            )
-//        }
-//
-//
-//        val sConn = object : ServiceConnection {
-//            override fun onServiceConnected(name: ComponentName, service: IBinder) {
-//                Log.e("AAA", "connected")
-//            }
-//
-//            override fun onServiceDisconnected(name: ComponentName) {
-//                Log.e("AAA", "disconnected")
-//            }
-//        }
-//      val serviceIntent = Intent(context, DataLoaderService::class.java)
-//        serviceIntent.putExtra("appWidgetId",mAppWidgetId)
-//        serviceIntent.setPackage("by.lebedev.nanopoolmonitoring")
-//        if (context!=null){
-//            Log.e("AAA", "context !=null try Start Service")
-//            context.startService(intent)
-//        }
-
-
         if (context != null) {
             setHashrate(
                 context,
@@ -285,6 +258,18 @@ class NanopoolWidget : AppWidgetProvider() {
 
             nf.maximumFractionDigits = 3
 
+            views.setTextViewText(
+                R.id.widgetCurrentBalance,"Loading balance..."
+            )
+
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+            views.setTextViewText(
+                R.id.widgetCurrentHashrate,"Loading hashrate")
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+
+            views.setTextViewText(
+                R.id.widgetCurrentWorkers,"Loading workers...")
+            appWidgetManager.updateAppWidget(appWidgetId, views)
 
             val d = provideApi().getGeneralInfo(coin, wallet)
                 .subscribeOn(newThread())
