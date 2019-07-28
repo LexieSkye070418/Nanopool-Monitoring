@@ -47,7 +47,7 @@
             android:textStyle="bold"
             android:textSize="12sp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"
     />
     <Button
@@ -58,9 +58,11 @@
             android:id="@+id/updateButton"
             android:layout_alignParentRight="true"
             android:layout_width="35dp"
-            android:layout_height="35dp"/>
+            android:layout_height="35dp"
+            android:layout_alignTop="@id/widgetCurrentBalance"
+    />
     <TextView
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:id="@+id/widgetHashrate"
@@ -75,11 +77,11 @@
 
     <TextView
             android:id="@+id/widgetCurrentHashrate"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/widgetHashrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading hashrate..."
+            android:text="Updating..."
             android:textColor="@color/black"
             android:textSize="12sp"
     />
@@ -102,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Loading balance..."
+            android:text="Updating..."
             android:textSize="12sp"
             android:layout_alignLeft="@id/widgetCurrentHashrate"
             android:layout_toRightOf="@+id/widgetBalance"
@@ -127,18 +129,24 @@
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading workers..."
+            android:text="Updating..."
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_below="@id/widgetBalance"
             android:layout_toRightOf="@+id/widgetWorkers"
             android:layout_alignLeft="@id/widgetCurrentBalance"
     />
-    <ImageView
-            android:layout_alignLeft="@id/widgetCurrentCoin"
-            android:layout_below="@id/widgetCurrentCoin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
 
+    <ImageView
+            android:id="@+id/chartOnWidget"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/widgetCurrentCoin"
+            android:layout_alignLeft="@id/widgetCoinImage"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:contentDescription="chart">
+
+    </ImageView>
 
 </RelativeLayout>
