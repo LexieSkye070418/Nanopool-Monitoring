@@ -70,7 +70,11 @@ class NanopoolWidget : AppWidgetProvider() {
                 appWidgetId
             )
 
-            getChartInfo(context, appWidgetId)
+//            getChartInfo(
+//                context,
+//                appWidgetManager,
+//                appWidgetId
+//            )
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
@@ -363,7 +367,7 @@ class NanopoolWidget : AppWidgetProvider() {
         }
 
 
-        fun getChartInfo(context: Context, appWidgetId: Int) {
+        fun getChartInfo(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             Log.e("AAA", "Get chart info")
 
             val wallet =
@@ -380,9 +384,9 @@ class NanopoolWidget : AppWidgetProvider() {
 
             val coin = TabIntent.instance.shortNameFromSelector(coinId)
 
-            Log.e("AAA", "appWidgetId= "+appWidgetId.toString())
-            Log.e("AAA", "wallet= "+wallet)
-            Log.e("AAA", "coin= "+coin)
+            Log.e("AAA", "appWidgetId= " + appWidgetId.toString())
+            Log.e("AAA", "wallet= " + wallet)
+            Log.e("AAA", "coin= " + coin)
 
 
             val c = provideApi().getChart(coin, wallet)
@@ -411,23 +415,37 @@ class NanopoolWidget : AppWidgetProvider() {
                             }
                         }
 
-                        setupLineChart(context, coin, limitedArray)
+                        setupLineChart(context, appWidgetId, appWidgetManager, coin, limitedArray)
 
                     }
 
                 }, {
-                    Log.e("err", "error getting chart data" +it.message)
+                    Log.e("err", "error getting chart data" + it.message)
                 })
 
         }
 
-        fun setupLineChart(context: Context, coin: String, result: ArrayList<ChartData>) {
+        fun setupLineChart(
+            context: Context,
+            appWidgetId: Int,
+            appWidgetManager: AppWidgetManager,
+            coin: String,
+            result: ArrayList<ChartData>
+        ) {
 
             Log.e("AAA", "Setup line chart")
 
             val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
             val lineChart = LineChart(context)
-            lineChart.setBackgroundColor(Color.WHITE);
+
+            lineChart.measure(
+                View.MeasureSpec.makeMeasureSpec(90, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(40, View.MeasureSpec.EXACTLY)
+            )
+            lineChart.layout(0, 0, lineChart.getMeasuredWidth(), lineChart.getMeasuredHeight())
+
+
+//            lineChart.setBackgroundColor(Color.WHITE);
 
             // disable description text
             lineChart.getDescription().setEnabled(false);
@@ -438,52 +456,55 @@ class NanopoolWidget : AppWidgetProvider() {
 
             // enable scaling and dragging
             lineChart.setDragEnabled(false);
-            lineChart.setScaleEnabled(true);
+//            lineChart.setScaleEnabled(true);
 
             // force pinch zoom along both axis
-            lineChart.setPinchZoom(true);
+//            lineChart.setPinchZoom(true);
 
-            val xAxis = lineChart.getXAxis();
+            val xAxis = lineChart.getXAxis()
+            xAxis.setDrawLabels(false)
 
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.textSize = 10f
-            xAxis.setDrawAxisLine(false)
-            xAxis.setDrawGridLines(true)
-            xAxis.textColor = Color.rgb(230, 133, 22)
-            xAxis.setCenterAxisLabels(true)
-            xAxis.granularity = 5f
+//            xAxis.position = XAxis.XAxisPosition.BOTTOM
+//            xAxis.textSize = 10f
+//            xAxis.setDrawAxisLine(false)
+//            xAxis.setDrawGridLines(true)
+//            xAxis.textColor = Color.rgb(230, 133, 22)
+//            xAxis.setCenterAxisLabels(true)
+            xAxis.granularity = 1.5f
 
-            xAxis.setValueFormatter(object : IAxisValueFormatter {
-                private val mFormat = SimpleDateFormat("HH:mm", Locale.US)
-
-                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                    val date = Date((value * 1000).minus(10800000).toLong())
-
-                    return mFormat.format(date)
-
-                }
-            })
+//            xAxis.setValueFormatter(object : IAxisValueFormatter {
+//                private val mFormat = SimpleDateFormat("HH:mm", Locale.US)
+//
+//                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+//                    val date = Date((value * 1000).minus(10800000).toLong())
+//
+//                    return mFormat.format(date)
+//
+//                }
+//            })
 
 
             val leftAxis = lineChart.getAxisLeft()
-            leftAxis.setValueFormatter(object : IAxisValueFormatter {
+            leftAxis.setEnabled(false);
 
-                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+//            leftAxis.setValueFormatter(object : IAxisValueFormatter {
+//
+//                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+//
+//                    return value.div(1000).toInt().toString().plus(" ").plus(
+//                        TabIntent.instance.getWorkerHashType(
+//                            coin
+//                        )
+//                    )
+//
+//                }
+//            })
 
-                    return value.div(1000).toInt().toString().plus(" ").plus(
-                        TabIntent.instance.getWorkerHashType(
-                            coin
-                        )
-                    )
-
-                }
-            })
-
-            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-            leftAxis.setDrawGridLines(true);
-            leftAxis.setGranularityEnabled(true);
-            leftAxis.setYOffset(9f);
-            leftAxis.setTextColor(Color.rgb(230, 133, 22));
+//            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+//            leftAxis.setDrawGridLines(true);
+//            leftAxis.setGranularityEnabled(true);
+//            leftAxis.setYOffset(9f);
+//            leftAxis.setTextColor(Color.rgb(230, 133, 22));
 
             val rightAxis = lineChart.getAxisRight();
             rightAxis.setEnabled(false);
@@ -495,12 +516,12 @@ class NanopoolWidget : AppWidgetProvider() {
             }
 
             // create a dataset and give it a type
-            val set = LineDataSet(values, "Hashrate")
+            val set = LineDataSet(values, "")
             set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             set.setCubicIntensity(0.2f)
             set.setDrawFilled(true);
             set.setDrawCircles(false);
-            set.setLineWidth(1.8f);
+            set.setLineWidth(1.5f);
             set.setFillColor(R.color.yellow)
             set.setDrawCircleHole(false)
             set.setColor(R.color.yellow, 100)
@@ -512,18 +533,19 @@ class NanopoolWidget : AppWidgetProvider() {
             // set data
             lineChart.setData(data)
 
-            lineChart.measure(View.MeasureSpec.makeMeasureSpec(40,View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(90,View.MeasureSpec.EXACTLY));
+
 
             val chartBitmap = lineChart.chartBitmap
-            Log.e("AAA", "BITMAP")
+
 
             android.os.Handler().postDelayed({
-                views.setImageViewBitmap(R.id.chartOnWidget, chartBitmap)
+//              views.setImageViewResource(R.id.chartOnWidget, R.drawable.xmr)
+//              views.setBitmap(R.id.chartOnWidget, "set bitmap", chartBitmap)
+                views.setImageViewBitmap(R.id.chartOnWidget,chartBitmap)
+                appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                Log.e("AAA", "SETTING BITMAP")
             }, 5000)
-
-
-//            views.setBitmap(R.id.chartOnWidget,"set bitmap",chartBitmap)
 
         }
     }
