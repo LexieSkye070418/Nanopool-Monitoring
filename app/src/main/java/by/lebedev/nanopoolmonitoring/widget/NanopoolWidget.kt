@@ -319,7 +319,10 @@ class NanopoolWidget : AppWidgetProvider() {
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     } else {
                         views.setTextViewText(
-                            R.id.widgetCurrentHashrate, "Account not found"
+                            R.id.widgetCurrentHashrate, "N/A"
+                        )
+                        views.setTextViewText(
+                            R.id.widgetCurrentBalance, "N/A"
                         )
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
@@ -345,7 +348,7 @@ class NanopoolWidget : AppWidgetProvider() {
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     } else {
                         views.setTextViewText(
-                            R.id.widgetCurrentWorkers, "Workers not found"
+                            R.id.widgetCurrentWorkers, "N/A"
                         )
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
@@ -541,7 +544,7 @@ class NanopoolWidget : AppWidgetProvider() {
             android.os.Handler().postDelayed({
 //              views.setImageViewResource(R.id.chartOnWidget, R.drawable.xmr)
 //              views.setBitmap(R.id.chartOnWidget, "set bitmap", chartBitmap)
-                views.setImageViewBitmap(R.id.chartOnWidget,chartBitmap)
+//                views.setImageViewBitmap(R.id.chartOnWidget,chartBitmap)
                 appWidgetManager.updateAppWidget(appWidgetId, views)
 
                 Log.e("AAA", "SETTING BITMAP")

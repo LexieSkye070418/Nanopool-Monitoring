@@ -9,11 +9,12 @@
             android:layout_width="match_parent"
             android:layout_height="180dp">
         <ImageView
+                android:background="@drawable/widget_logo_background"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:layout_width="180dp"
-                android:layout_height="180dp"/>
+                android:layout_width="20dp"
+                android:layout_height="110dp"/>
         <ImageView
+
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 android:layout_width="180dp"
@@ -45,15 +46,40 @@
             android:text="Loading coin..."
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"
     />
+
+    <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:id="@+id/widgetStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetCoinImage"
+android:layout_marginLeft="16dp"
+    />
+    <TextView
+            android:id="@+id/widgetCurrentStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textColor="@color/green_confirm"
+            android:textSize="12sp"
+            android:layout_alignTop="@id/widgetStatus"
+            android:layout_toRightOf="@id/widgetStatus"
+            android:layout_marginLeft="4dp"
+    />
+
     <Button
 
             android:background="@drawable/update_selector"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="8dp"
             android:id="@+id/updateButton"
             android:layout_alignParentRight="true"
