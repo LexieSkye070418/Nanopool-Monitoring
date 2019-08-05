@@ -2,7 +2,7 @@
     <string name="app_name">Nanopool monitoring</string>
     <string name="accounts">ACCOUNTS</string>
     <string name="skip">SKIP</string>
-    <string name="add_account">Select your coin</string>
+    <string name="add_account">Configure account</string>
     <string name="select_your_coin">Select your coin</string>
     <string name="your_wallet_address">your wallet address</string>
     <string name="add">ADD</string>

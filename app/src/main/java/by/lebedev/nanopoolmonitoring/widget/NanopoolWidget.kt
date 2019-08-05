@@ -70,12 +70,6 @@ class NanopoolWidget : AppWidgetProvider() {
                 appWidgetId
             )
 
-//            getChartInfo(
-//                context,
-//                appWidgetManager,
-//                appWidgetId
-//            )
-
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
         }
@@ -261,6 +255,12 @@ class NanopoolWidget : AppWidgetProvider() {
 
             nf.maximumFractionDigits = 3
 
+            views.setTextColor(R.id.widgetCurrentStatus,Color.rgb(54,137,70))
+
+            views.setTextViewText(
+                R.id.widgetCurrentStatus, "Receiving data"
+            )
+
             views.setTextViewText(
                 R.id.widgetCurrentBalance, "Updating..."
             )
@@ -295,6 +295,10 @@ class NanopoolWidget : AppWidgetProvider() {
                         if (result.data.hashrate > 1000) {
 
                             views.setTextViewText(
+                                R.id.widgetCurrentStatus, "Ok"
+                            )
+
+                            views.setTextViewText(
                                 R.id.widgetCurrentHashrate,
                                 nf.format
                                     (result.data.hashrate.div(1000)).toString().plus(" ").plus(
@@ -306,6 +310,11 @@ class NanopoolWidget : AppWidgetProvider() {
                             appWidgetManager.updateAppWidget(appWidgetId, views)
 
                         } else {
+
+                            views.setTextViewText(
+                                R.id.widgetCurrentStatus, "Ok"
+                            )
+
                             views.setTextViewText(
                                 R.id.widgetCurrentHashrate,
                                 nf.format
@@ -318,6 +327,13 @@ class NanopoolWidget : AppWidgetProvider() {
                         }
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     } else {
+
+                        views.setTextColor(R.id.widgetCurrentStatus,Color.rgb(165,63,63))
+
+                        views.setTextViewText(
+                            R.id.widgetCurrentStatus, "Account not found"
+                        )
+
                         views.setTextViewText(
                             R.id.widgetCurrentHashrate, "N/A"
                         )
@@ -370,186 +386,5 @@ class NanopoolWidget : AppWidgetProvider() {
         }
 
 
-        fun getChartInfo(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-            Log.e("AAA", "Get chart info")
-
-            val wallet =
-                NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
-                    context,
-                    appWidgetId
-                )
-
-            val coinId =
-                NanopoolWidgetConfigureActivity.loadSharedPrefCoin(
-                    context,
-                    appWidgetId
-                )
-
-            val coin = TabIntent.instance.shortNameFromSelector(coinId)
-
-            Log.e("AAA", "appWidgetId= " + appWidgetId.toString())
-            Log.e("AAA", "wallet= " + wallet)
-            Log.e("AAA", "coin= " + coin)
-
-
-            val c = provideApi().getChart(coin, wallet)
-                .subscribeOn(newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ result ->
-
-                    Log.e("AAA", "inside val C")
-                    if (!result.data.isEmpty() && result.data.get(0).hashrate.toInt() != 0) {
-                        Log.e("AAA", result.data.get(0).hashrate.toString())
-                        Log.e("AAA", result.data.get(0).date.toString())
-                        Log.e("AAA", result.data.get(0).shares.toString())
-
-                        result.data.sortBy { it.date }
-
-                        val limitedArray = ArrayList<ChartData>()
-
-                        if (result.data.size > 20) {
-                            for (i in 0..20) {
-                                limitedArray.add(result.data.get(i))
-
-                            }
-                        } else {
-                            for (i in 0 until result.data.size) {
-                                limitedArray.add(result.data.get(i))
-                            }
-                        }
-
-                        setupLineChart(context, appWidgetId, appWidgetManager, coin, limitedArray)
-
-                    }
-
-                }, {
-                    Log.e("err", "error getting chart data" + it.message)
-                })
-
-        }
-
-        fun setupLineChart(
-            context: Context,
-            appWidgetId: Int,
-            appWidgetManager: AppWidgetManager,
-            coin: String,
-            result: ArrayList<ChartData>
-        ) {
-
-            Log.e("AAA", "Setup line chart")
-
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
-            val lineChart = LineChart(context)
-
-            lineChart.measure(
-                View.MeasureSpec.makeMeasureSpec(90, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(40, View.MeasureSpec.EXACTLY)
-            )
-            lineChart.layout(0, 0, lineChart.getMeasuredWidth(), lineChart.getMeasuredHeight())
-
-
-//            lineChart.setBackgroundColor(Color.WHITE);
-
-            // disable description text
-            lineChart.getDescription().setEnabled(false);
-
-            // enable touch gestures
-            lineChart.setTouchEnabled(false);
-            lineChart.setDrawGridBackground(false);
-
-            // enable scaling and dragging
-            lineChart.setDragEnabled(false);
-//            lineChart.setScaleEnabled(true);
-
-            // force pinch zoom along both axis
-//            lineChart.setPinchZoom(true);
-
-            val xAxis = lineChart.getXAxis()
-            xAxis.setDrawLabels(false)
-
-//            xAxis.position = XAxis.XAxisPosition.BOTTOM
-//            xAxis.textSize = 10f
-//            xAxis.setDrawAxisLine(false)
-//            xAxis.setDrawGridLines(true)
-//            xAxis.textColor = Color.rgb(230, 133, 22)
-//            xAxis.setCenterAxisLabels(true)
-            xAxis.granularity = 1.5f
-
-//            xAxis.setValueFormatter(object : IAxisValueFormatter {
-//                private val mFormat = SimpleDateFormat("HH:mm", Locale.US)
-//
-//                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-//                    val date = Date((value * 1000).minus(10800000).toLong())
-//
-//                    return mFormat.format(date)
-//
-//                }
-//            })
-
-
-            val leftAxis = lineChart.getAxisLeft()
-            leftAxis.setEnabled(false);
-
-//            leftAxis.setValueFormatter(object : IAxisValueFormatter {
-//
-//                override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-//
-//                    return value.div(1000).toInt().toString().plus(" ").plus(
-//                        TabIntent.instance.getWorkerHashType(
-//                            coin
-//                        )
-//                    )
-//
-//                }
-//            })
-
-//            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-//            leftAxis.setDrawGridLines(true);
-//            leftAxis.setGranularityEnabled(true);
-//            leftAxis.setYOffset(9f);
-//            leftAxis.setTextColor(Color.rgb(230, 133, 22));
-
-            val rightAxis = lineChart.getAxisRight();
-            rightAxis.setEnabled(false);
-
-            val values = ArrayList<Entry>()
-
-            for (i in 0 until result.size) {
-                values.add(Entry(result.get(i).date.toFloat(), result.get(i).hashrate.toFloat()))
-            }
-
-            // create a dataset and give it a type
-            val set = LineDataSet(values, "")
-            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            set.setCubicIntensity(0.2f)
-            set.setDrawFilled(true);
-            set.setDrawCircles(false);
-            set.setLineWidth(1.5f);
-            set.setFillColor(R.color.yellow)
-            set.setDrawCircleHole(false)
-            set.setColor(R.color.yellow, 100)
-
-            // create a data object with the data sets
-            val data = LineData(set);
-            data.setDrawValues(false)
-
-            // set data
-            lineChart.setData(data)
-
-
-
-            val chartBitmap = lineChart.chartBitmap
-
-
-            android.os.Handler().postDelayed({
-//              views.setImageViewResource(R.id.chartOnWidget, R.drawable.xmr)
-//              views.setBitmap(R.id.chartOnWidget, "set bitmap", chartBitmap)
-//                views.setImageViewBitmap(R.id.chartOnWidget,chartBitmap)
-                appWidgetManager.updateAppWidget(appWidgetId, views)
-
-                Log.e("AAA", "SETTING BITMAP")
-            }, 5000)
-
-        }
     }
 }

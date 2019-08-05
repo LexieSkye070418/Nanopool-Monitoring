@@ -37,20 +37,6 @@ class NanopoolWidgetConfigureActivity : Activity() {
             coinId
         )
 
-        // It is the responsibility of the configuration activity to update the app widget
-//        val appWidgetManager = AppWidgetManager.getInstance(context)
-//        setHashrate(
-//            context,
-//            appWidgetManager,
-//            mAppWidgetId
-//        )
-//
-//        setCoinImageAndName(
-//            context,
-//            appWidgetManager,
-//            mAppWidgetId
-//        )
-
 
         // Make sure we pass back the original appWidgetId
         val resultValue = Intent()
@@ -127,7 +113,6 @@ class NanopoolWidgetConfigureActivity : Activity() {
         private val PREFS_NAME = "by.lebedev.nanopoolmonitoring.widget.NanopoolWidget"
         private val PREF_PREFIX_KEY_WALLET = "appwidgetwallet_"
         private val PREF_PREFIX_KEY_COINID = "appwidgetcoinid_"
-        private val PREF_PREFIX_KEY_BALANCE = "appwidgetbalance_"
 
         // Write the prefix to the SharedPreferences object for this widget
         internal fun saveSharedPref(context: Context, appWidgetId: Int, walletText: String, coin: Int) {
@@ -137,30 +122,18 @@ class NanopoolWidgetConfigureActivity : Activity() {
             prefs.apply()
         }
 
-        internal fun saveBalance(context: Context, appWidgetId: Int, balance: String) {
-            val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-            prefs.putString(PREF_PREFIX_KEY_BALANCE + appWidgetId, balance)
-            prefs.apply()
-        }
-
         // Read the prefix from the SharedPreferences object for this widget.
         // If there is no preference saved, get the default from a resource
         internal fun loadSharedPrefWallet(context: Context, appWidgetId: Int): String {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0)
             val walletValue = prefs.getString(PREF_PREFIX_KEY_WALLET + appWidgetId, null)
-            return walletValue ?: context.getString(R.string.default_wallet_text)
+            return walletValue ?: "your wallet"
         }
 
         internal fun loadSharedPrefCoin(context: Context, appWidgetId: Int): Int {
             val prefs = context.getSharedPreferences(PREFS_NAME, 0)
             val coinValue = prefs.getInt(PREF_PREFIX_KEY_COINID + appWidgetId, 0)
             return coinValue
-        }
-
-        internal fun loadSharedPrefBalance(context: Context, appWidgetId: Int): String {
-            val prefs = context.getSharedPreferences(PREFS_NAME, 0)
-            val balance = prefs.getString(PREF_PREFIX_KEY_BALANCE + appWidgetId, null)
-            return balance?: "N/A"
         }
 
         internal fun deleteSharedPref(context: Context, appWidgetId: Int) {
