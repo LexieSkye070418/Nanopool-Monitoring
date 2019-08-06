@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.widget
+package by.lebedev.nanopoolmonitoringnoads.widget
 
 import android.app.Service
 import android.appwidget.AppWidgetManager
@@ -7,10 +7,10 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import android.widget.RemoteViews
-import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
-import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
-import by.lebedev.nanopoolmonitoring.retrofit.provideApi
+import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
+import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.NumberFormat

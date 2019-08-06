@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.widget
+package by.lebedev.nanopoolmonitoringnoads.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -10,24 +10,13 @@ import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
-import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
-import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartData
-import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
-import by.lebedev.nanopoolmonitoring.retrofit.provideApi
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
+import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 

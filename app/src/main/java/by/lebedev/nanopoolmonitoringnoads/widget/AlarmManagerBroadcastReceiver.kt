@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.widget
+package by.lebedev.nanopoolmonitoringnoads.widget
 
 import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.PowerManager
 import android.util.Log
 import android.widget.RemoteViews
-import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoringnoads.R
 
 
 class AlarmManagerBroadcastReceiver: BroadcastReceiver() {

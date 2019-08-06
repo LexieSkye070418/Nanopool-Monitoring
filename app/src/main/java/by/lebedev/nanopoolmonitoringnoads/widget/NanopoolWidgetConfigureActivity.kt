@@ -1,4 +1,4 @@
-package by.lebedev.nanopoolmonitoring.widget
+package by.lebedev.nanopoolmonitoringnoads.widget
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -9,9 +9,9 @@ import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
-import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.dagger.PoolCoins
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import kotlinx.android.synthetic.main.nanopool_widget_configure.*
 import javax.inject.Inject
 
