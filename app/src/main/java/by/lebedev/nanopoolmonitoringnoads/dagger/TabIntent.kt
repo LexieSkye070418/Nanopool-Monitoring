@@ -50,6 +50,36 @@ class TabIntent private constructor() {
         }
     }
 
+    fun shortNameFromSelector(coinId: Int): String {
+        return when (coinId) {
+            0 -> {
+                return "eth"
+            }
+            1 -> {
+                return "etc"
+            }
+            2 -> {
+                return "zec"
+            }
+            3 -> {
+                return "xmr"
+            }
+            4 -> {
+                return "pasc"
+            }
+            5 -> {
+                return "etn"
+            }
+            6 -> {
+                return "rvn"
+            }
+            7 -> {
+                return "grin29"
+            }
+            else -> "N/A"
+        }
+    }
+
 
     fun getHashType(coin: String): String {
         return when (coin) {

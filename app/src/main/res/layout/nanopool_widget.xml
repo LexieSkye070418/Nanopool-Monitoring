@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/widget_margin"
+                android:background="@drawable/widget"
+
+>
+
+        <ImageView
+                android:alpha="0.5"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/widget_logo_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+    <ImageView
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/widgetCoinImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+    <TextView
+            android:id="@+id/widgetCurrentCoin"
+            android:paddingLeft="8dp"
+            android:layout_toRightOf="@id/widgetCoinImage"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:text="Loading coin..."
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentTop="true"
+    />
+
+    <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:id="@+id/widgetStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetCoinImage"
+android:layout_marginLeft="16dp"
+    />
+
+    <TextView
+            android:id="@+id/widgetCurrentStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receiving data"
+            android:textColor="@color/widget_green"
+            android:textSize="12sp"
+            android:layout_alignTop="@id/widgetStatus"
+            android:layout_toRightOf="@id/widgetStatus"
+            android:layout_marginLeft="4dp"
+    />
+
+    <Button
+
+            android:background="@drawable/update_selector"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/updateButton"
+            android:layout_alignParentRight="true"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/widgetCurrentBalance"
+    />
+    <TextView
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:id="@+id/widgetHashrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hashrate:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:contentDescription="@string/default_wallet_text"
+            android:layout_toRightOf="@id/widgetCurrentCoin"
+    />
+
+    <TextView
+            android:id="@+id/widgetCurrentHashrate"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/widgetHashrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updating..."
+            android:textColor="@color/black"
+            android:textSize="12sp"
+    />
+    <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/widgetBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Balance:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_alignLeft="@id/widgetHashrate"
+            android:layout_below="@id/widgetHashrate"
+    />
+
+    <TextView
+            android:id="@+id/widgetCurrentBalance"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Updating..."
+            android:textSize="12sp"
+            android:layout_alignLeft="@id/widgetCurrentHashrate"
+            android:layout_toRightOf="@+id/widgetBalance"
+            android:layout_below="@id/widgetCurrentHashrate"
+    />
+
+    <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/widgetWorkers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Workers:"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetBalance"
+            android:layout_alignLeft="@id/widgetBalance"
+    />
+
+    <TextView
+            android:id="@+id/widgetCurrentWorkers"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updating..."
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_below="@id/widgetBalance"
+            android:layout_toRightOf="@+id/widgetWorkers"
+            android:layout_alignLeft="@id/widgetCurrentBalance"
+    />
+
+
+</RelativeLayout>

@@ -1,7 +1,9 @@
 package by.lebedev.nanopoolmonitoringnoads.fragments.rates.retrofit
 
 import android.util.Log
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,18 +11,24 @@ import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
 
-    private val BASE_URL = "https://api.coinmarketcap.com/v1/"
+    //    private val BASE_URL = "https://api.coinmarketcap.com/v1/"
+    private val BASE_URL = "https://pro-api.coinmarketcap.com/"
 
 
     // выставлены таймауты на соединение с сервером
-     val httpClient = OkHttpClient.Builder()
+    var httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
         .writeTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
-
+        .addInterceptor(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val request = chain.request().newBuilder().addHeader("x-cmc_pro_api_key", "587a787c-2a32-44f9-8a5a-40470f01ce6f").build()
+                return chain.proceed(request)
+            }
+        })
 
     fun create1(): ApiService {
-        Log.e("AAA","api service")
+        Log.e("AAA", "api service")
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(httpClient.build())

@@ -81,6 +81,7 @@ class BarChartFragment : Fragment() {
                         }
                     }
 
+
                     setupBarChart(limitedArray)
 
                 }
@@ -110,10 +111,9 @@ class BarChartFragment : Fragment() {
                 dataSetIndex: Int,
                 viewPortHandler: ViewPortHandler?
             ): String {
-                if (value>1000){
+                if (value > 1000) {
                     return nf.format(value.div(1000)).toString().plus(" k")
-                }
-                else return value.toInt().toString()
+                } else return value.toInt().toString()
             }
 
         })
@@ -170,10 +170,9 @@ class BarChartFragment : Fragment() {
         leftAxis.setValueFormatter(object : IAxisValueFormatter {
 
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                if (value>1000){
+                if (value > 1000) {
                     return nf.format(value.div(1000)).toString().plus(" k")
-                }
-                else return value.toInt().toString()
+                } else return value.toInt().toString()
             }
         })
 //

@@ -79,10 +79,13 @@ class WorkersFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (!result.data.isEmpty() && progressWorkers != null && workers_recycle != null) {
+                if (!result.data.isEmpty() && progressWorkers != null && workers_recycle != null && workersTotal != null) {
                     tabIntent.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
+                    workersTotal.setText("Workers total: "+result.data.size)
+                    workersAlive.setText("Alive: "+countAlive(result.data))
+                    workersDead.setText("Dead: "+countDead(result.data))
                 } else {
                     if (progressWorkers != null && textForError != null) {
                         progressWorkers.visibility = View.INVISIBLE
@@ -110,4 +113,25 @@ class WorkersFragment : Fragment() {
         tabIntent.filteredLocalWorkersList.clear()
         tabIntent.localWorkersList.clear()
     }
+
+    fun countAlive(workerList:ArrayList<DataWorkers>):Int{
+        var count =0
+        for (i in 0 until workerList.size){
+            if (workerList.get(i).hashrate != 0L){
+                count++
+            }
+        }
+        return count
+    }
+
+    fun countDead(workerList:ArrayList<DataWorkers>):Int{
+        var count =0
+        for (i in 0 until workerList.size){
+            if (workerList.get(i).hashrate == 0L){
+                count++
+            }
+        }
+        return count
+    }
+
 }
