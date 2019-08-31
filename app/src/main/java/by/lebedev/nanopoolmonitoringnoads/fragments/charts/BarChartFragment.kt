@@ -7,10 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
-
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.chart.ChartData
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import com.github.mikephil.charting.components.AxisBase
@@ -28,7 +27,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.barchart_layout.*
 import java.text.NumberFormat
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class BarChartFragment : Fragment() {
 
@@ -62,7 +60,7 @@ class BarChartFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (!result.data.isEmpty() && barChart != null && result.data.get(0).shares.toInt() != 0) {
+                if (result!=null&&!result.data.isEmpty() && barChart != null && result.data.get(0).shares.toInt() != 0) {
 
 
                     result.data.sortBy { it.date }

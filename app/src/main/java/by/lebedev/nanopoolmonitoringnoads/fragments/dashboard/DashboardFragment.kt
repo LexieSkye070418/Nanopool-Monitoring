@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
@@ -72,7 +71,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result.status && balance != null) {
+                if (result!=null&&result.status && balance != null) {
 
                     balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }

@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 
 android {
 
@@ -24,8 +23,8 @@ android {
         applicationId "by.lebedev.nanopoolmonitoringnoads"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 7
-        versionName "2.2.0"
+        versionCode 8
+        versionName "2.2.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
