@@ -184,7 +184,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
+                if (result!=null&&view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }

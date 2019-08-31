@@ -12,23 +12,11 @@ import android.view.View
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.TabIntent
-import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartData
 import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -354,7 +342,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (!result.data.isEmpty()) {
+                    if (result!=null&&!result.data.isEmpty()) {
                         Log.e("AAA", "workers: " + result.data.size.toString())
 
                         views.setTextViewText(

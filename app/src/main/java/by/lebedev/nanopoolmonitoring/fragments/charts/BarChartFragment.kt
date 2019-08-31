@@ -26,9 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.barchart_layout.*
 import java.text.NumberFormat
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class BarChartFragment : Fragment() {
 
@@ -62,7 +60,7 @@ class BarChartFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (!result.data.isEmpty() && barChart != null && result.data.get(0).shares.toInt() != 0) {
+                if (result!=null&&!result.data.isEmpty() && barChart != null && result.data.get(0).shares.toInt() != 0) {
 
 
                     result.data.sortBy { it.date }
