@@ -477,8 +477,8 @@
                         android:layout_weight="1"
                 />
 
-            </LinearLayout>
 
+            </LinearLayout>
 
             <TextView
                     android:layout_marginTop="100dp"
@@ -487,4 +487,6 @@
 
         </TableLayout>
     </ScrollView>
+    <android.support.constraint.Barrier android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:id="@+id/barrier" ads:barrierDirection="top"/>
 </android.support.constraint.ConstraintLayout>

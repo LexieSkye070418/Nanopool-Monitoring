@@ -6,12 +6,12 @@
 
 >
 
-        <ImageView
-                android:alpha="0.5"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/widget_logo_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+    <ImageView
+            android:alpha="0.5"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/widget_logo_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
     <ProgressBar
@@ -25,16 +25,16 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:id="@+id/widgetCoinImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
 
     <TextView
             android:id="@+id/widgetCurrentCoin"
             android:paddingLeft="8dp"
             android:layout_toRightOf="@id/widgetCoinImage"
             android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:text="Loading coin..."
+            android:layout_height="35dp"
+            android:text="@string/loading_coin"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="14sp"
@@ -44,16 +44,26 @@
     />
 
     <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
             android:id="@+id/widgetStatus"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status:"
+            android:text="@string/status"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:layout_below="@id/widgetCoinImage"
-android:layout_marginLeft="16dp"
+            android:layout_marginLeft="5dp"
+    />
+    <TextView
+            android:id="@+id/widgetUpdateStatus"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last updated:"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_below="@id/widgetStatus"
+            android:layout_marginLeft="5dp"
     />
 
     <TextView
@@ -62,16 +72,28 @@ android:layout_marginLeft="16dp"
             android:layout_height="wrap_content"
             android:text="Receiving data"
             android:textColor="@color/widget_green"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:layout_alignTop="@id/widgetStatus"
             android:layout_toRightOf="@id/widgetStatus"
+            android:layout_marginLeft="4dp"
+    />
+
+    <TextView
+            android:id="@+id/widgetLastUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18 sep 15:15"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_alignTop="@id/widgetUpdateStatus"
+            android:layout_toRightOf="@id/widgetUpdateStatus"
             android:layout_marginLeft="4dp"
     />
 
     <Button
 
             android:background="@drawable/update_selector"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="13dp"
             android:layout_marginRight="8dp"
             android:id="@+id/updateButton"
             android:layout_alignParentRight="true"
@@ -86,7 +108,7 @@ android:layout_marginLeft="16dp"
             android:id="@+id/widgetHashrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hashrate:"
+            android:text="@string/hashrate"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:contentDescription="@string/default_wallet_text"
@@ -99,7 +121,7 @@ android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/widgetHashrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Updating..."
+            android:text="@string/updating"
             android:textColor="@color/black"
             android:textSize="12sp"
     />
@@ -109,7 +131,7 @@ android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:text="Balance:"
+            android:text="@string/balance1"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_alignLeft="@id/widgetHashrate"
@@ -122,7 +144,7 @@ android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Updating..."
+            android:text="@string/updating"
             android:textSize="12sp"
             android:layout_alignLeft="@id/widgetCurrentHashrate"
             android:layout_toRightOf="@+id/widgetBalance"
@@ -135,7 +157,7 @@ android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:text="Workers:"
+            android:text="@string/workers"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_below="@id/widgetBalance"
@@ -147,7 +169,7 @@ android:layout_marginLeft="16dp"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Updating..."
+            android:text="@string/updating"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_below="@id/widgetBalance"
