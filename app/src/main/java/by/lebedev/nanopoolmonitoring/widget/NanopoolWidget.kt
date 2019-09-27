@@ -279,7 +279,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result.status.equals(true)) {
+                    if (result != null&&result.status.equals(true)) {
                         Log.e("AAA", "balance: " + result.data.balance.toString())
                         Log.e("AAA", "hashrate: " + result.data.hashrate.toString())
 

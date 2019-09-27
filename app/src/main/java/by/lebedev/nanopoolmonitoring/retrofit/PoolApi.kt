@@ -14,7 +14,7 @@ import retrofit2.http.Path
 
 interface PoolApi {
 
-    @GET("{coin}/prices")
+    @GET("{coin}/prices!")
     fun getPrice(@Path("coin") coin: String): Single<Price>
 
     @GET("{coin}/pool/hashrate")

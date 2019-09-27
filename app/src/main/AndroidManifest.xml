@@ -27,7 +27,7 @@
                     android:resource="@xml/nanopool_widget_info"/>
         </receiver>
 
-        <receiver android:name=".widget.AlarmManagerBroadcastReceiver">
+        <receiver android:name="by.lebedev.nanopoolmonitoring.widget.AlarmManagerBroadcastReceiver">
 
             <intent-filter>
                 <action android:name="android.appwidget.ACTION_APPWIDGET_UPDATE"/>
@@ -35,7 +35,7 @@
         </receiver>
 
 
-        <activity android:name=".widget.NanopoolWidgetConfigureActivity">
+        <activity android:name="by.lebedev.nanopoolmonitoring.widget.NanopoolWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
@@ -46,10 +46,10 @@
                 android:value="ca-app-pub-1501215034144631~3780667725"/>
 
         <activity
-                android:name=".activities.TabActivity"
+                android:name="by.lebedev.nanopoolmonitoring.activities.TabActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.LogoActivity"
+                android:name="by.lebedev.nanopoolmonitoring.activities.LogoActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -58,10 +58,10 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activities.AccountsActivity"
+                android:name="by.lebedev.nanopoolmonitoring.activities.AccountsActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.AddAccountActivity"
+                android:name="by.lebedev.nanopoolmonitoring.activities.AddAccountActivity"
                 android:screenOrientation="portrait"/>
         <activity android:name=".activities.webview.WebActivity"/>
         <service android:name=".widget.DataLoaderService" />

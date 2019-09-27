@@ -34,7 +34,7 @@ class NewsFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ resultNews ->
-                if (!resultNews.isEmpty()) {
+                if (resultNews!=null&&!resultNews.isEmpty()) {
                     setupRecyclerNews(resultNews)
                     progressNewsLoad.visibility = View.INVISIBLE
                 }

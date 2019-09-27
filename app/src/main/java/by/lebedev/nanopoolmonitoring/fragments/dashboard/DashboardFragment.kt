@@ -112,7 +112,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result.status && balance != null) {
+                if (result!=null&&result.status && balance != null) {
 
                     balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
