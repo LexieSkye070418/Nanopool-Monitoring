@@ -37,6 +37,7 @@ class PoolFragment : Fragment() {
         getActivity()?.getWindow()?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
 
+
         nf.maximumFractionDigits = 8
 
         val component = DaggerMagicBox.builder().build()
@@ -64,10 +65,11 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (price != null) {
+                if (result != null && result.status && price != null) {
                     nf.maximumFractionDigits = 2
                     price.setText(nf.format(result.data.price_usd).toString().plus('$'))
-                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { price.setTextColor(it) }
+                    view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
+                        ?.let { price.setTextColor(it) }
                 }
 
             }, {
@@ -80,9 +82,10 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (hashrate != null) {
+                if (result != null&&result.status && hashrate != null) {
                     hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))
-                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { hashrate.setTextColor(it) }
+                    view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
+                        ?.let { hashrate.setTextColor(it) }
                 }
             }, {
                 Log.e("err", it.message)
@@ -94,9 +97,10 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (miners != null) {
+                if (result != null &&result.status&& miners != null) {
                     miners.setText(result.data.toString())
-                    view?.context?.let { ContextCompat.getColor(it,R.color.colorPrimary) }?.let { miners.setTextColor(it) }
+                    view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
+                        ?.let { miners.setTextColor(it) }
                 }
             }, {
                 Log.e("err", it.message)

@@ -38,16 +38,19 @@ class RatesFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                result.data.map {
 
-                    it.url = "https://s2.coinmarketcap.com/static/img/coins/32x32/${it.id}.png"
-                    it.quote.USD.price = Math.round(it.quote.USD.price * 100.0) / 100.0
-                    it.quote.USD.percent_change_24h = Math.round(it.quote.USD.percent_change_24h * 100.0) / 100.0
+                if (result != null) {
+                    result.data.map {
 
-                }
-                if (recycleView !=null){
-                    progressBar.visibility = View.INVISIBLE
-                    setupRecycler(result.data)
+                        it.url = "https://s2.coinmarketcap.com/static/img/coins/32x32/${it.id}.png"
+                        it.quote.USD.price = Math.round(it.quote.USD.price * 100.0) / 100.0
+                        it.quote.USD.percent_change_24h = Math.round(it.quote.USD.percent_change_24h * 100.0) / 100.0
+
+                    }
+                    if (recycleView != null) {
+                        progressBar.visibility = View.INVISIBLE
+                        setupRecycler(result.data)
+                    }
                 }
             },
                 { error -> Log.e("AAA", error.message) })

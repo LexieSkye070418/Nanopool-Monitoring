@@ -110,14 +110,10 @@ class AddAccountActivity : AppCompatActivity() {
 
             }
             5 -> {
-                addAccCoinLogo.setImageResource(R.drawable.etn)
-
-            }
-            6 -> {
                 addAccCoinLogo.setImageResource(R.drawable.raven)
 
             }
-            7 -> {
+            6 -> {
                 addAccCoinLogo.setImageResource(R.drawable.grin)
 
             }

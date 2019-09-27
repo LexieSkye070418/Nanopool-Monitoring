@@ -27,7 +27,7 @@
                     android:resource="@xml/nanopool_widget_info"/>
         </receiver>
 
-        <receiver android:name=".widget.AlarmManagerBroadcastReceiver">
+        <receiver android:name="by.lebedev.nanopoolmonitoringnoads.widget.AlarmManagerBroadcastReceiver">
 
             <intent-filter>
                 <action android:name="android.appwidget.ACTION_APPWIDGET_UPDATE"/>
@@ -35,17 +35,19 @@
         </receiver>
 
 
-        <activity android:name=".widget.NanopoolWidgetConfigureActivity">
+        <activity android:name="by.lebedev.nanopoolmonitoringnoads.widget.NanopoolWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
 
 
+
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.TabActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.LogoActivity"
                   android:screenOrientation="portrait">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -55,6 +57,7 @@
         </activity>
 
 
+
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.AccountsActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.AddAccountActivity"
@@ -62,6 +65,7 @@
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.webview.WebActivity"/>
 
         <service android:name=".widget.DataLoaderService"/>
+
 
     </application>
 

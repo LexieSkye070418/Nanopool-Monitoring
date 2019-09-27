@@ -6,9 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
-import android.provider.Settings.System.getConfiguration
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
@@ -21,7 +19,6 @@ import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -279,7 +276,8 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result!=null&&result.status.equals(true)) {
+
+                    if (result != null&&result.status.equals(true)) {
                         Log.e("AAA", "balance: " + result.data.balance.toString())
                         Log.e("AAA", "hashrate: " + result.data.hashrate.toString())
 
@@ -339,7 +337,7 @@ class NanopoolWidget : AppWidgetProvider() {
                         views.setTextColor(R.id.widgetCurrentStatus,Color.rgb(165,63,63))
 
                         views.setTextViewText(
-                            R.id.widgetCurrentStatus, "Account not found"
+                            R.id.widgetCurrentStatus, "Error"
                         )
 
                         views.setTextViewText(
@@ -362,8 +360,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result!=null&&!result.data.isEmpty()) {
-                        Log.e("AAA", "workers: " + result.data.size.toString())
+                    if (result!=null) {
 
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers,
@@ -374,6 +371,7 @@ class NanopoolWidget : AppWidgetProvider() {
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers, "N/A"
                         )
+
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
                 }, {
