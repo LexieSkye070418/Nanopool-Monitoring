@@ -1,7 +1,5 @@
 package by.lebedev.nanopoolmonitoring.dagger
 
-import android.graphics.drawable.Drawable
-import by.lebedev.nanopoolmonitoring.R
 import javax.inject.Singleton
 
 @Singleton
@@ -14,7 +12,6 @@ class PoolCoins private constructor() {
         list.add("zec")
         list.add("xmr")
         list.add("pasc")
-        list.add("etn")
         list.add("rvn")
         list.add("grin29")
     }
@@ -37,12 +34,9 @@ class PoolCoins private constructor() {
                 return "Pascal"
             }
             5 -> {
-                return "Electroneum"
-            }
-            6 -> {
                 return "Raven coin"
             }
-            7 -> {
+            6 -> {
                 return "Grin-29"
             }
             else -> return "Ethereum"

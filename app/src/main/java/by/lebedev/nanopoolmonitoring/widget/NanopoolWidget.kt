@@ -336,7 +336,7 @@ class NanopoolWidget : AppWidgetProvider() {
                         views.setTextColor(R.id.widgetCurrentStatus,Color.rgb(165,63,63))
 
                         views.setTextViewText(
-                            R.id.widgetCurrentStatus, "Account not found"
+                            R.id.widgetCurrentStatus, "Error"
                         )
 
                         views.setTextViewText(
@@ -360,7 +360,6 @@ class NanopoolWidget : AppWidgetProvider() {
                 .subscribe({ result ->
 
                     if (result!=null) {
-                        Log.e("AAA", "workers: " + result.data.size.toString())
 
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers,
@@ -371,6 +370,7 @@ class NanopoolWidget : AppWidgetProvider() {
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers, "N/A"
                         )
+
                         appWidgetManager.updateAppWidget(appWidgetId, views)
                     }
                 }, {

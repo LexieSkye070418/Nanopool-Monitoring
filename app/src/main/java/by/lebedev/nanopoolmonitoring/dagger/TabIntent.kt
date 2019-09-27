@@ -37,9 +37,7 @@ class TabIntent private constructor() {
             "pasc" -> {
                 return "Pascal"
             }
-            "etn" -> {
-                return "Electroneum"
-            }
+
             "rvn" -> {
                 return "Raven"
             }
@@ -68,12 +66,9 @@ class TabIntent private constructor() {
                 return "pasc"
             }
             5 -> {
-                return "etn"
-            }
-            6 -> {
                 return "rvn"
             }
-            7 -> {
+            6 -> {
                 return "grin29"
             }
             else -> "N/A"
@@ -97,9 +92,6 @@ class TabIntent private constructor() {
             }
             "pasc" -> {
                 return "KH/s"
-            }
-            "etn" -> {
-                return "kH/s"
             }
             "rvn" -> {
                 return "Gh/s"
@@ -126,9 +118,6 @@ class TabIntent private constructor() {
                 return "H/s"
             }
             "pasc" -> {
-                return "H/s"
-            }
-            "etn" -> {
                 return "H/s"
             }
             "rvn" -> {
@@ -158,9 +147,6 @@ class TabIntent private constructor() {
             "pasc" -> {
                 return "KH/s"
             }
-            "etn" -> {
-                return "KH/s"
-            }
             "rvn" -> {
                 return "Gh/s"
             }
@@ -187,9 +173,6 @@ class TabIntent private constructor() {
             }
             "pasc" -> {
                 return "Molina"
-            }
-            "etn" -> {
-                return "Richard Ells"
             }
             "rvn" -> {
                 return "Project fork of Bitcoin"
@@ -218,9 +201,6 @@ class TabIntent private constructor() {
             "pasc" -> {
                 return "July 2016"
             }
-            "etn" -> {
-                return "October 2017"
-            }
             "rvn" -> {
                 return "3 January 2018"
             }
@@ -248,9 +228,6 @@ class TabIntent private constructor() {
             "pasc" -> {
                 return "Pascal"
             }
-            "etn" -> {
-                return "С++"
-            }
             "rvn" -> {
                 return "С++"
             }
@@ -277,9 +254,6 @@ class TabIntent private constructor() {
             }
             "pasc" -> {
                 return "pascalcoin.org"
-            }
-            "etn" -> {
-                return "electroneum.com"
             }
             "rvn" -> {
                 return "ravencoin.org"
