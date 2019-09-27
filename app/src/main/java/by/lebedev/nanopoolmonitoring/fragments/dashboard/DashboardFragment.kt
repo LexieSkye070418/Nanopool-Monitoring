@@ -1,5 +1,9 @@
 package by.lebedev.nanopoolmonitoring.fragments.dashboard
 
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -26,6 +30,9 @@ import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
     lateinit var mAdView: AdView
+    val APP_PREFERENCES = "settings"
+    val APP_PREFERENCES_CHECK = "check"
+    lateinit var pref: SharedPreferences
 
     @Inject
     lateinit var tabIntent: TabIntent
@@ -35,6 +42,7 @@ class DashboardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +50,11 @@ class DashboardFragment : Fragment() {
         getActivity()?.getWindow()
             ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
+        pref = view.context.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+
+        if (pref.getBoolean(APP_PREFERENCES_CHECK, false)) {
+            layoutForCalculator.visibility = View.GONE
+        }
 
         MobileAds.initialize(this.context, "ca-app-pub-1501215034144631~3780667725")
 
@@ -77,6 +90,19 @@ class DashboardFragment : Fragment() {
             ft1.replace(R.id.layoutBarChart, barChartFragment)
             ft1.commit()
         }
+
+        layoutForCalculator.setOnClickListener {
+            val editor = pref.edit()
+            editor.putBoolean(APP_PREFERENCES_CHECK, true)
+            editor.apply()
+
+            layoutForCalculator.visibility = View.GONE
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=by.lebedev.miningcalculator")
+            startActivity(intent)
+        }
+
     }
 
     fun getGeneralInfo() {
@@ -184,7 +210,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
+                if (result != null && view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }

@@ -24,13 +24,10 @@ class NewsAdapter(
         view.setOnClickListener {
 
             val url = listNews.get(holder.adapterPosition).url
-            val intent = Intent(it.context,WebActivity::class.java)
-            intent.putExtra("url",url)
+            val intent = Intent(it.context, WebActivity::class.java)
+            intent.putExtra("url", url)
             it.context.startActivity(intent)
 
-//            val address = Uri.parse(listNews.get(holder.adapterPosition).url);
-//            val openlink = Intent(Intent.ACTION_VIEW, address);
-//            it.context.startActivity(openlink)
         }
         return holder
 
@@ -43,12 +40,12 @@ class NewsAdapter(
     override fun onBindViewHolder(holderNews: ViewHolderNews, position: Int) {
         listNews.let {
             val news = it[position]
+            holderNews.viewNews.newsSource.text = news.sourceDomain
+            holderNews.viewNews.newsPublishDate.text = news.publishedAt.substring(0,10)
             holderNews.viewNews.titleNews.text = news.title
             Picasso.get().load(news.originalImageUrl)
                 .into(holderNews.viewNews.urlNews)
 
-
         }
     }
-
 }

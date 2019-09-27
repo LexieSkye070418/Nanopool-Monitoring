@@ -30,7 +30,7 @@ class NewsFragment : Fragment() {
 
     fun getNews() {
 
-        val disposablesNews = createNews().loadNews("6bb2d102680be65b5d540eb15eb2c58a")
+        val disposablesNews = createNews().loadNews(getString(R.string.news_key))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ resultNews ->
