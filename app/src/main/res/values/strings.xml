@@ -29,12 +29,5 @@
     <string name="default_wallet_text">Your wallet</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
-    <string name="updating">Updating...</string>
-    <string name="hashrate">Hashrate:</string>
-    <string name="status">Status:</string>
-    <string name="loading_coin">Loading coin...</string>
-    <string name="workers">Workers:</string>
-    <string name="balance1">Balance:</string>
-    <string name="news_key">6bb2d102680be65b5d540eb15eb2c58a</string>
 
 </resources>

@@ -15,58 +15,13 @@
             android:layout_height="100dp"
     />
 
-    <LinearLayout
+    <TextView
+            android:id="@+id/titleNews"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-    >
-        <TextView
-                android:id="@+id/titleNews"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                tools:text="Название новости"
-                android:gravity="center"
-                android:textColor="@color/black"/>
-
-
-        <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-        >
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:text="Source: "/>
-
-
-            <TextView
-                    android:id="@+id/newsSource"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:text="bitnet.com"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:textSize="10dp"
-                    android:text="Published: "/>
-
-            <TextView
-                    android:id="@+id/newsPublishDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:text="19.09.2019"/>
-
-
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            tools:text="Название новости"
+            android:gravity="center"
+            android:textColor="@color/black"
+    />
 </LinearLayout>

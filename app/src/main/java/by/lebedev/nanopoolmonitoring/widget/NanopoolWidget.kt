@@ -6,9 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
-import android.provider.Settings.System.getConfiguration
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
@@ -19,9 +17,6 @@ import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -45,8 +40,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 0,
                 intentSync,
                 PendingIntent.FLAG_UPDATE_CURRENT
-            )
-            //specify a proper flag for the intent. Or else the intent will become deleted.
+            ) //You need to specify a proper flag for the intent. Or else the intent will become deleted.
 
 
             views.setOnClickPendingIntent(R.id.updateButton, pendingSync)
@@ -256,10 +250,6 @@ class NanopoolWidget : AppWidgetProvider() {
             )
 
             views.setTextViewText(
-                R.id.widgetLastUpdated,"Updating..."
-            )
-
-            views.setTextViewText(
                 R.id.widgetCurrentBalance, "Updating..."
             )
 
@@ -287,16 +277,6 @@ class NanopoolWidget : AppWidgetProvider() {
                             R.id.widgetCurrentBalance,
                             (nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                         )
-
-                        val sdf = SimpleDateFormat("dd/MM HH:mm")
-                        val currentTime = sdf.format(Date())
-                        views.setTextViewText(
-                            R.id.widgetLastUpdated,
-                            currentTime
-                        )
-
-
-
                         appWidgetManager.updateAppWidget(appWidgetId, views)
 
 
