@@ -6,9 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
-import android.provider.Settings.System.getConfiguration
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
@@ -21,7 +19,6 @@ import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -362,7 +359,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result!=null&&!result.data.isEmpty()) {
+                    if (result!=null) {
                         Log.e("AAA", "workers: " + result.data.size.toString())
 
                         views.setTextViewText(

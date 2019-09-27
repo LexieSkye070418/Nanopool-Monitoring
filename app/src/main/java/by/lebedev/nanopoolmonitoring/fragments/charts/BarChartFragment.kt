@@ -60,7 +60,7 @@ class BarChartFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&!result.data.isEmpty() && barChart != null && result.data.get(0).shares.toInt() != 0) {
+                if (result!=null && barChart != null && result.data.get(0).shares.toInt() != 0) {
 
 
                     result.data.sortBy { it.date }

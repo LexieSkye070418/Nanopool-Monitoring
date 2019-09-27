@@ -1,7 +1,6 @@
 package by.lebedev.nanopoolmonitoring.fragments.pool
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -66,7 +65,7 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && price != null) {
+                if (result != null && result.status && price != null) {
                     nf.maximumFractionDigits = 2
                     price.setText(nf.format(result.data.price_usd).toString().plus('$'))
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
@@ -83,7 +82,7 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && hashrate != null) {
+                if (result != null&&result.status && hashrate != null) {
                     hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { hashrate.setTextColor(it) }
@@ -98,7 +97,7 @@ class PoolFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && miners != null) {
+                if (result != null &&result.status&& miners != null) {
                     miners.setText(result.data.toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { miners.setTextColor(it) }

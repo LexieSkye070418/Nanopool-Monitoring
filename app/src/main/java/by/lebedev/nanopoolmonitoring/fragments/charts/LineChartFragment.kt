@@ -61,7 +61,7 @@ class LineChartFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&!result.data.isEmpty() && lineChart != null && result.data.get(0).hashrate.toInt() != 0) {
+                if (result!=null && lineChart != null && result.data.get(0).hashrate.toInt() != 0) {
 
                     result.data.sortBy { it.date }
 

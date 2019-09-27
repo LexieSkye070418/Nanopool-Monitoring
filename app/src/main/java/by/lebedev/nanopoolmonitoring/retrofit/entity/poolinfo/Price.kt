@@ -1,5 +1,6 @@
 package by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo
 
 data class Price(
-    val data: DataPool
+    val status: Boolean,
+    val data: PriceInfo
 )
