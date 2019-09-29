@@ -2,6 +2,8 @@ package by.lebedev.nanopoolmonitoring.retrofit
 
 import by.lebedev.nanopoolmonitoring.retrofit.entity.chart.ChartInfo
 import by.lebedev.nanopoolmonitoring.retrofit.entity.dashboard.GeneralInfo
+import by.lebedev.nanopoolmonitoring.retrofit.entity.dashboard.averagehashrate.AverageHashrate
+import by.lebedev.nanopoolmonitoring.retrofit.entity.dashboard.hashratebalance.HashrateBalance
 import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.Payments
 import by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo.Hashrate
 import by.lebedev.nanopoolmonitoring.retrofit.entity.poolinfo.Miners
@@ -25,6 +27,12 @@ interface PoolApi {
 
     @GET("{coin}/user/{wallet}")
     fun getGeneralInfo(@Path("coin") coin: String, @Path("wallet") wallet: String): Single<GeneralInfo>
+
+    @GET("{coin}/avghashrate/{wallet}")
+    fun getAverageHashrate(@Path("coin") coin: String, @Path("wallet") wallet: String): Single<AverageHashrate>
+
+    @GET("{coin}/balance_hashrate/{wallet}")
+    fun getHashrateBalance(@Path("coin") coin: String, @Path("wallet") wallet: String): Single<HashrateBalance>
 
     @GET("{coin}/approximated_earnings/{hashrate}")
     fun getProfit(@Path("coin") coin: String, @Path("hashrate") hashrate: Double): Single<Profit>

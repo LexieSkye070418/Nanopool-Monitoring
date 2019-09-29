@@ -1,7 +1,6 @@
 package by.lebedev.nanopoolmonitoring.retrofit.entity.profit
 
-import by.lebedev.nanopoolmonitoring.retrofit.entity.profit.DataProfit
-
 data class Profit(
+    val status:Boolean,
     val data: DataProfit
 )

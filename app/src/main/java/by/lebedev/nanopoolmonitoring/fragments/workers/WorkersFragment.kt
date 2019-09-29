@@ -78,7 +78,7 @@ class WorkersFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&& progressWorkers != null && workers_recycle != null && workersTotal != null) {
+                if (result!=null&&result.status&&!result.data.isEmpty()&& progressWorkers != null && workers_recycle != null && workersTotal != null) {
                     tabIntent.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)

@@ -271,7 +271,7 @@ class NanopoolWidget : AppWidgetProvider() {
             )
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
-            val d = provideApi().getGeneralInfo(coin, wallet)
+            val d = provideApi().getHashrateBalance(coin, wallet)
                 .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
@@ -359,7 +359,7 @@ class NanopoolWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
-                    if (result!=null) {
+                    if (result!=null&&result.status&&!result.data.isEmpty()) {
 
                         views.setTextViewText(
                             R.id.widgetCurrentWorkers,
