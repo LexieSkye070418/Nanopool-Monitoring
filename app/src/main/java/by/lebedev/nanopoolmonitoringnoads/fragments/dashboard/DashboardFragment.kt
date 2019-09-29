@@ -48,7 +48,12 @@ class DashboardFragment : Fragment() {
         coin = tabIntent.coin
         wallet = tabIntent.wallet
 
-        getGeneralInfo()
+        //setting data
+//        setGeneralInfo()
+        setCurrHashrateBalance()
+        setAverageHashrateAndCalcProfit()
+
+
 
         if (layoutLineChart != null) {
 
@@ -67,7 +72,119 @@ class DashboardFragment : Fragment() {
 
     }
 
-    fun getGeneralInfo() {
+    fun setCurrHashrateBalance() {
+        nf.maximumFractionDigits = 2
+        val d = provideApi().getHashrateBalance(coin, wallet)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result->
+                if (result!=null&&result.status&&balance!=null&&current_hashrate!=null){
+
+                    balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
+                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
+                        ?.let { balance.setTextColor(it) }
+
+                    if (result.data.hashrate > 1000) {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        current_hashrate.setText(
+                            nf.format
+                                (result.data.hashrate).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
+                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
+                        ?.let { current_hashrate.setTextColor(it) }
+                }
+
+            },{
+                Log.e("err", it.message)
+            })
+    }
+
+    fun setAverageHashrateAndCalcProfit() {
+        nf.maximumFractionDigits = 2
+        val d = provideApi().getAverageHashrate(coin, wallet)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result->
+                if (result!=null&&result.status&&hours_6!=null&&hours_24!=null){
+
+                    if (result.data.h6 > 1000) {
+
+                        hours_6.setText(
+                            nf.format
+                                (result.data.h6.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        hours_6.setText(
+                            nf.format
+                                (result.data.h6).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
+                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
+                        ?.let { hours_6.setTextColor(it) }
+
+
+                    if (result.data.h24 > 1000) {
+
+                        hours_24.setText(
+                            nf.format
+                                (result.data.h24.div(1000)).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashTypeHigh(
+                                    coin
+                                )
+                            )
+                        )
+                    } else {
+                        hours_24.setText(
+                            nf.format
+                                (result.data.h24).toString().plus(" ").plus(
+                                tabIntent.getWorkerHashType(
+                                    coin
+                                )
+                            )
+                        )
+                    }
+
+                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
+                        ?.let { hours_24.setTextColor(it) }
+
+                    if (result.data.h6 > 1) {
+                        getProfitInfo(coin, result.data.h6)
+                    }
+
+                }
+
+            },{
+                Log.e("err", it.message)
+            })
+    }
+
+
+
+
+    fun setGeneralInfo() {
         nf.maximumFractionDigits = 2
         val d = provideApi().getGeneralInfo(coin, wallet)
             .subscribeOn(Schedulers.io())
@@ -172,7 +289,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result != null && view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
+                if (result != null&& result.status&& view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }

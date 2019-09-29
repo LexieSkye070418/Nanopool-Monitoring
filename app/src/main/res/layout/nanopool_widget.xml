@@ -82,7 +82,7 @@
             android:id="@+id/widgetLastUpdated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="18 sep 15:15"
+            android:text="1 jan 00:00"
             android:textColor="@color/black"
             android:textSize="10sp"
             android:layout_alignTop="@id/widgetUpdateStatus"
