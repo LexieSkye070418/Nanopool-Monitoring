@@ -3,6 +3,7 @@ package by.lebedev.nanopoolmonitoring.retrofit.entity.payment
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class DataPayments(
     val date: Long,
     val txHash: String,
@@ -18,8 +19,8 @@ class DataPayments(
 
     fun convertLongToTime(time: Long): String {
         val date = Date(time*1000)
-        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
-        return format.format(date)
+        val sdf = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
+        return sdf.format(date)
 
 
     }

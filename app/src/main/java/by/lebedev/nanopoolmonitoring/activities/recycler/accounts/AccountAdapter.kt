@@ -3,13 +3,16 @@ package by.lebedev.nanopoolmonitoring.activities.recycler.accounts
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
+import by.lebedev.nanopoolmonitoring.activities.ModifyAccountActivity
 import by.lebedev.nanopoolmonitoring.activities.TabActivity
 import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
@@ -19,11 +22,6 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import android.content.DialogInterface
-import android.support.v7.app.AlertDialog
-import android.util.Log
-import android.widget.ImageButton
-import by.lebedev.nanopoolmonitoring.activities.ModifyAccountActivity
 
 
 class AccountAdapter(

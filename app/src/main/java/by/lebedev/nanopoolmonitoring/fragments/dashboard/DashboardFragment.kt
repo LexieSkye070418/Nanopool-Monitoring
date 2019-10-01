@@ -75,8 +75,6 @@ class DashboardFragment : Fragment() {
         coin = coinWalletTempData.coin
         wallet = coinWalletTempData.wallet
 
-        //setting data
-//        setGeneralInfo()
         setCurrHashrateBalance()
         setAverageHashrateAndCalcProfit()
 
@@ -215,107 +213,6 @@ class DashboardFragment : Fragment() {
                 }
 
             },{
-                Log.e("err", it.message)
-            })
-    }
-
-
-
-
-    fun setGeneralInfo() {
-        nf.maximumFractionDigits = 2
-        val d = provideApi().getGeneralInfo(coin, wallet)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-
-                if (result!=null&&result.status && balance != null) {
-
-                    balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { balance.setTextColor(it) }
-
-
-                    if (result.data.hashrate > 1000) {
-                        current_hashrate.setText(
-                            nf.format
-                                (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        current_hashrate.setText(
-                            nf.format
-                                (result.data.hashrate).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { current_hashrate.setTextColor(it) }
-
-
-                    if (result.data.avgHashrate.h6 > 1000) {
-
-                        hours_6.setText(
-                            nf.format
-                                (result.data.avgHashrate.h6.div(1000)).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        hours_6.setText(
-                            nf.format
-                                (result.data.avgHashrate.h6).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { hours_6.setTextColor(it) }
-
-
-                    if (result.data.avgHashrate.h24 > 1000) {
-
-                        hours_24.setText(
-                            nf.format
-                                (result.data.avgHashrate.h24.div(1000)).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        hours_24.setText(
-                            nf.format
-                                (result.data.avgHashrate.h24).toString().plus(" ").plus(
-                                coinWalletTempData.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { hours_24.setTextColor(it) }
-
-                    if (result.data.avgHashrate.h6 > 1) {
-                        getProfitInfo(coin, result.data.avgHashrate.h6)
-                    }
-                }
-
-            }, {
                 Log.e("err", it.message)
             })
     }

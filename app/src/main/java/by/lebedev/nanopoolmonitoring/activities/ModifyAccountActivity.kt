@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.adding_account_layout.addAccCoinLogo
 import kotlinx.android.synthetic.main.adding_account_layout.coinName
 import kotlinx.android.synthetic.main.adding_account_layout.selectCoinButton
 import kotlinx.android.synthetic.main.modify_account_layout.*
-import java.util.*
 import javax.inject.Inject
 
 
@@ -72,11 +71,6 @@ class ModifyAccountActivity : AppCompatActivity() {
             if (walletText.text.toString() != "") {
                 updateDatabase(accountId, poolCoins.list.get(coinId), walletText.text.toString())
 
-                Log.e(
-                    "FF",
-                    accountId.toString() + "    " + poolCoins.list.get(coinId) + "   " + walletText.text.toString()
-                )
-
             } else {
                 walletText.setError("please, fill this field")
                 Toast.makeText(baseContext, "Please, enter your wallet", Toast.LENGTH_SHORT).show()
@@ -85,7 +79,7 @@ class ModifyAccountActivity : AppCompatActivity() {
 
         selectCoinButton.setOnClickListener {
             val builder = AlertDialog.Builder(it.context)
-                .setTitle("Select your coin")
+            .setTitle("Select your coin")
                 .setIcon(R.drawable.bitcoinicon)
                 .setCancelable(true)
 
@@ -124,39 +118,39 @@ class ModifyAccountActivity : AppCompatActivity() {
 
             }
 
-}
-
-fun setSelectedCoinImage(position: Int) {
-    when (position) {
-        0 -> {
-            addAccCoinLogo.setImageResource(R.drawable.eth)
-
-        }
-        1 -> {
-            addAccCoinLogo.setImageResource(R.drawable.etc)
-
-        }
-        2 -> {
-            addAccCoinLogo.setImageResource(R.drawable.zec)
-
-        }
-        3 -> {
-            addAccCoinLogo.setImageResource(R.drawable.xmr)
-
-        }
-        4 -> {
-            addAccCoinLogo.setImageResource(R.drawable.pasc)
-
-        }
-        5 -> {
-            addAccCoinLogo.setImageResource(R.drawable.raven)
-
-        }
-        6 -> {
-            addAccCoinLogo.setImageResource(R.drawable.grin)
-
-        }
-        else -> addAccCoinLogo.setImageResource(R.drawable.eth)
     }
-}
+
+    fun setSelectedCoinImage(position: Int) {
+        when (position) {
+            0 -> {
+                addAccCoinLogo.setImageResource(R.drawable.eth)
+
+            }
+            1 -> {
+                addAccCoinLogo.setImageResource(R.drawable.etc)
+
+            }
+            2 -> {
+                addAccCoinLogo.setImageResource(R.drawable.zec)
+
+            }
+            3 -> {
+                addAccCoinLogo.setImageResource(R.drawable.xmr)
+
+            }
+            4 -> {
+                addAccCoinLogo.setImageResource(R.drawable.pasc)
+
+            }
+            5 -> {
+                addAccCoinLogo.setImageResource(R.drawable.raven)
+
+            }
+            6 -> {
+                addAccCoinLogo.setImageResource(R.drawable.grin)
+
+            }
+            else -> addAccCoinLogo.setImageResource(R.drawable.eth)
+        }
+    }
 }

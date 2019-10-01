@@ -29,7 +29,6 @@ class NanopoolWidget : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         // There may be multiple widgets active, so update all of them
-        Log.e("AAA", "onUpdate")
         val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
 
         for (appWidgetId in appWidgetIds) {
@@ -67,7 +66,6 @@ class NanopoolWidget : AppWidgetProvider() {
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
-        Log.e("AAA", "onDelete")
         // When the user deletes the widget, delete the preference associated with it.
         for (appWidgetId in appWidgetIds) {
             NanopoolWidgetConfigureActivity.deleteSharedPref(
@@ -78,9 +76,7 @@ class NanopoolWidget : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.e("AAA", "onReceive")
         super.onReceive(context, intent)
-
 
         val appWidgetManager = AppWidgetManager.getInstance(context)
 
@@ -88,7 +84,6 @@ class NanopoolWidget : AppWidgetProvider() {
         val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
 
         if (context != null) {
-            Log.e("AAA", "Call Update from onReceive")
             onUpdate(context, appWidgetManager, appWidgetIds)
         }
 
@@ -111,9 +106,6 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-
-            Log.e("AAA", "set coin image")
-
 
             val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
             val coinId =
@@ -224,10 +216,8 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            Log.e("AAA", "set hashrate")
 
             val nf = NumberFormat.getInstance()
-
 
             val wallet =
                 NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
@@ -389,7 +379,5 @@ class NanopoolWidget : AppWidgetProvider() {
             }
             return count
         }
-
-
     }
 }

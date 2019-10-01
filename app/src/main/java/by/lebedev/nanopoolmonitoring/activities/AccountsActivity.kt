@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoring.R
@@ -23,9 +25,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.account_layout.*
 import javax.inject.Inject
-import android.net.Uri
-import android.support.v4.content.ContextCompat
-import android.util.Log
 
 
 class AccountsActivity : AppCompatActivity() {
@@ -39,7 +38,7 @@ class AccountsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_layout)
-        if (!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             Toast.makeText(this, "Network unavailable...", Toast.LENGTH_LONG).show()
             Toast.makeText(this, "Check Internet connection...", Toast.LENGTH_LONG).show()
         }
@@ -95,8 +94,6 @@ class AccountsActivity : AppCompatActivity() {
                     noAccountText.visibility = View.VISIBLE
                 } else {
 
-                    Log.e("FF",result.size.toString()+" "+result.get(2).coin+ " "+result.get(2).wallet)
-
                     noAccountText.visibility = View.INVISIBLE
                     setupRecycler(result)
                     accountLocalList.list = result as ArrayList<Account>
@@ -109,7 +106,7 @@ class AccountsActivity : AppCompatActivity() {
         super.onResume()
         progressAccountLoad.visibility = View.VISIBLE
 
-        Log.e("FF","onResume")
+        Log.e("FF", "onResume")
         getAllDatabase()
     }
 
@@ -134,7 +131,3 @@ class AccountsActivity : AppCompatActivity() {
         } else false
     }
 }
-
-
-
-

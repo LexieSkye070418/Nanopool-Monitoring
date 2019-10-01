@@ -27,11 +27,9 @@ class DataLoaderService() : Service() {
 
         super.onCreate()
 
-
         val nf = NumberFormat.getInstance()
 
         val appWidgetId = 1
-//        intent?.extras?.get("appWidgetId") as Int
 
         val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
 
