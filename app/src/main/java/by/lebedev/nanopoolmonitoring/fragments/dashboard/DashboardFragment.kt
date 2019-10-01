@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.fragments.charts.BarChartFragment
 import by.lebedev.nanopoolmonitoring.fragments.charts.LineChartFragment
@@ -35,7 +35,7 @@ class DashboardFragment : Fragment() {
     lateinit var pref: SharedPreferences
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
     val nf = NumberFormat.getInstance()
     var coin: String = ""
     var wallet: String = ""
@@ -70,10 +70,10 @@ class DashboardFragment : Fragment() {
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
-        coin = tabIntent.coin
-        wallet = tabIntent.wallet
+        coin = coinWalletTempData.coin
+        wallet = coinWalletTempData.wallet
 
         //setting data
 //        setGeneralInfo()
@@ -126,7 +126,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -135,7 +135,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -164,7 +164,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.h6.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -173,7 +173,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.h6).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -189,7 +189,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.h24.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -198,7 +198,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.h24).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -240,7 +240,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -249,7 +249,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -266,7 +266,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.avgHashrate.h6.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -275,7 +275,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.avgHashrate.h6).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -291,7 +291,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.avgHashrate.h24.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -300,7 +300,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.avgHashrate.h24).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )

@@ -82,9 +82,6 @@ class AddAccountActivity : AppCompatActivity() {
                 )
             )
         }
-        val disposable = complete.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {}
     }
 
     fun setSelectedCoinImage(position: Int) {

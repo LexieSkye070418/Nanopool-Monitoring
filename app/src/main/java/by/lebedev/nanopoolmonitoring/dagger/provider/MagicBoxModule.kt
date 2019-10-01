@@ -2,7 +2,7 @@ package by.lebedev.nanopoolmonitoring.dagger.provider
 
 import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import dagger.Module
 import dagger.Provides
 
@@ -10,8 +10,8 @@ import dagger.Provides
 class MagicBoxModule {
 
     @Provides
-    fun getTabIntentInstance():TabIntent{
-        return TabIntent.instance
+    fun getTabIntentInstance():CoinWalletTempData{
+        return CoinWalletTempData.INSTANCE
     }
 
     @Provides

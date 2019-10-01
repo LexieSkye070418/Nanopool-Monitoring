@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.activities.webview.WebActivity
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class PoolFragment : Fragment() {
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
 
     val nf = NumberFormat.getInstance()
 
@@ -41,16 +41,18 @@ class PoolFragment : Fragment() {
         nf.maximumFractionDigits = 8
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
 
-        coin = tabIntent.coin
-        hashType = tabIntent.getHashType(coin)
-        coin_name.setText(tabIntent.fullName(coin))
-        getPrice()
-        getHashrate()
-        getMiners()
-        getGeneralInfo()
+        coin = coinWalletTempData.coin
+        hashType = coinWalletTempData.getHashType(coin)
+        coin_name.setText(coinWalletTempData.fullName(coin))
+
+        setPrice()
+        setHashrate()
+        setMiners()
+        setGeneralInfo()
+        setMinorPoolData()
 
 
         website.setOnClickListener {
@@ -60,7 +62,7 @@ class PoolFragment : Fragment() {
         }
     }
 
-    fun getPrice() {
+    fun setPrice() {
         val d = provideApi().getPrice(coin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -77,12 +79,12 @@ class PoolFragment : Fragment() {
             })
     }
 
-    fun getHashrate() {
+    fun setHashrate() {
         val d = provideApi().getHashrate(coin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null&&result.status && hashrate != null) {
+                if (result != null && result.status && hashrate != null) {
                     hashrate.setText(nf.format(result.data).toString().plus(' ').plus(hashType))
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { hashrate.setTextColor(it) }
@@ -92,12 +94,12 @@ class PoolFragment : Fragment() {
             })
     }
 
-    fun getMiners() {
+    fun setMiners() {
         val d = provideApi().getMiners(coin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null &&result.status&& miners != null) {
+                if (result != null && result.status && miners != null) {
                     miners.setText(result.data.toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }
                         ?.let { miners.setTextColor(it) }
@@ -107,10 +109,18 @@ class PoolFragment : Fragment() {
             })
     }
 
-    fun getGeneralInfo() {
-        if (authors != null) authors.text = tabIntent.getAuthors(coin)
-        if (authors != null) release.text = tabIntent.getRelease(coin)
-        if (authors != null) writtenIn.text = tabIntent.getWrittenIn(coin)
-        if (authors != null) website.text = tabIntent.getWebsite(coin)
+    fun setGeneralInfo() {
+        if (authors != null) authors.text = coinWalletTempData.getAuthors(coin)
+        if (release != null) release.text = coinWalletTempData.getRelease(coin)
+        if (writtenIn != null) writtenIn.text = coinWalletTempData.getWrittenIn(coin)
+        if (website != null) website.text = coinWalletTempData.getWebsite(coin)
     }
+
+    fun setMinorPoolData() {
+        if (poolFee != null) poolFee.text = coinWalletTempData.getPoolFee(coin)
+        if (payoutScheme != null) payoutScheme.text = coinWalletTempData.getPayoutScheme(coin)
+        if (blockValidation != null) blockValidation.text = coinWalletTempData.getBlockValidation(coin)
+        if (payoutLimit != null) payoutLimit.text = coinWalletTempData.getPayoutLimit(coin)
+    }
+
 }

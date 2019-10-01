@@ -64,6 +64,8 @@
                 android:name="by.lebedev.nanopoolmonitoring.activities.AddAccountActivity"
                 android:screenOrientation="portrait"/>
         <activity android:name=".activities.webview.WebActivity"/>
+        <activity android:name=".activities.ModifyAccountActivity"
+                  android:screenOrientation="portrait"/>
         <service android:name=".widget.DataLoaderService" />
     </application>
 

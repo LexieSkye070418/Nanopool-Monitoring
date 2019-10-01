@@ -8,7 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,8 +47,8 @@ class DataLoaderService() : Service() {
                 appWidgetId
             )
 
-        val coin = TabIntent.instance.shortNameFromSelector(coinId)
-        val views = RemoteViews(applicationContext.packageName, R.layout.nanopool_widget)
+        val coin = CoinWalletTempData.INSTANCE.shortNameFromSelector(coinId)
+        val views = RemoteViews(applicationContext.packageName, R.layout.nanopool_widget_layout)
 
         nf.maximumFractionDigits = 3
 
@@ -75,7 +75,7 @@ class DataLoaderService() : Service() {
                             R.id.widgetCurrentHashrate,
                             nf.format
                                 (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                TabIntent.instance.getWorkerHashTypeHigh(
+                                CoinWalletTempData.INSTANCE.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -87,7 +87,7 @@ class DataLoaderService() : Service() {
                             R.id.widgetCurrentHashrate,
                             nf.format
                                 (result.data.hashrate).toString().plus(" ").plus(
-                                TabIntent.instance.getWorkerHashType(
+                                CoinWalletTempData.INSTANCE.getWorkerHashType(
                                     coin
                                 )
                             )

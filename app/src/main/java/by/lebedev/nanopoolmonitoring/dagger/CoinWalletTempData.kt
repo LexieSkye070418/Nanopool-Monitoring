@@ -4,7 +4,7 @@ import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import javax.inject.Singleton
 
 @Singleton
-class TabIntent private constructor() {
+class CoinWalletTempData private constructor() {
 
     var coin: String = ""
     var wallet: String = ""
@@ -13,11 +13,11 @@ class TabIntent private constructor() {
 
 
     private object Holder {
-        val INSTANCE = TabIntent()
+        val INSTANCE = CoinWalletTempData()
     }
 
     companion object {
-        val instance: TabIntent by lazy { Holder.INSTANCE }
+        val INSTANCE: CoinWalletTempData by lazy { Holder.INSTANCE }
     }
 
     fun fullName(coin: String): String {
@@ -260,6 +260,114 @@ class TabIntent private constructor() {
             }
             "grin29" -> {
                 return "grin-tech.org"
+            }
+            else -> "N/A"
+        }
+    }
+
+    fun getPoolFee(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "1%"
+            }
+            "etc" -> {
+                return "1%"
+            }
+            "zec" -> {
+                return "1%"
+            }
+            "xmr" -> {
+                return "1%"
+            }
+            "pasc" -> {
+                return "2%"
+            }
+            "rvn" -> {
+                return "1%"
+            }
+            "grin29" -> {
+                return "1%"
+            }
+            else -> "N/A"
+        }
+    }
+
+    fun getPayoutScheme(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "PPLNS (20 minutes)"
+            }
+            "etc" -> {
+                return "PPLNS (20 minutes)"
+            }
+            "zec" -> {
+                return "PPLNS (3 hours)"
+            }
+            "xmr" -> {
+                return "PPLNS (6 hours)"
+            }
+            "pasc" -> {
+                return "PPLNS (1 hour)"
+            }
+            "rvn" -> {
+                return "PPLNS (6 hours)"
+            }
+            "grin29" -> {
+                return "PPLNS (6 hours)"
+            }
+            else -> "N/A"
+        }
+    }
+
+    fun getBlockValidation(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "50 blocks"
+            }
+            "etc" -> {
+                return "100 blocks"
+            }
+            "zec" -> {
+                return "10 blocks"
+            }
+            "xmr" -> {
+                return "10 blocks"
+            }
+            "pasc" -> {
+                return "10 blocks"
+            }
+            "rvn" -> {
+                return "20 blocks"
+            }
+            "grin29" -> {
+                return "1500 blocks"
+            }
+            else -> "N/A"
+        }
+    }
+
+    fun getPayoutLimit(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "0.05 ETH and up to 20 ETH"
+            }
+            "etc" -> {
+                return "0.1 ETC and up to 100 ETC"
+            }
+            "zec" -> {
+                return "0.01 ZEC that can be raised up to 10 ZEC"
+            }
+            "xmr" -> {
+                return "0.1 XMR and up to 10 XMR"
+            }
+            "pasc" -> {
+                return "0.5 PASC and up to 100 PASC"
+            }
+            "rvn" -> {
+                return "50 RVN up to 50000 RVN"
+            }
+            "grin29" -> {
+                return "1 GRIN up to 50 GRIN"
             }
             else -> "N/A"
         }

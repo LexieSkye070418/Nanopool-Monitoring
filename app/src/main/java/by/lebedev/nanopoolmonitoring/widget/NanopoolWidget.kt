@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoring.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,7 +30,7 @@ class NanopoolWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         // There may be multiple widgets active, so update all of them
         Log.e("AAA", "onUpdate")
-        val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+        val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
 
         for (appWidgetId in appWidgetIds) {
 
@@ -115,7 +115,7 @@ class NanopoolWidget : AppWidgetProvider() {
             Log.e("AAA", "set coin image")
 
 
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
             val coinId =
                 NanopoolWidgetConfigureActivity.loadSharedPrefCoin(
                     context,
@@ -241,8 +241,8 @@ class NanopoolWidget : AppWidgetProvider() {
                     appWidgetId
                 )
 
-            val coin = TabIntent.instance.shortNameFromSelector(coinId)
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val coin = CoinWalletTempData.INSTANCE.shortNameFromSelector(coinId)
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
 
             nf.maximumFractionDigits = 3
 
@@ -307,7 +307,7 @@ class NanopoolWidget : AppWidgetProvider() {
                                 R.id.widgetCurrentHashrate,
                                 nf.format
                                     (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                    TabIntent.instance.getWorkerHashTypeHigh(
+                                    CoinWalletTempData.INSTANCE.getWorkerHashTypeHigh(
                                         coin
                                     )
                                 )
@@ -324,7 +324,7 @@ class NanopoolWidget : AppWidgetProvider() {
                                 R.id.widgetCurrentHashrate,
                                 nf.format
                                     (result.data.hashrate).toString().plus(" ").plus(
-                                    TabIntent.instance.getWorkerHashType(
+                                    CoinWalletTempData.INSTANCE.getWorkerHashType(
                                         coin
                                     )
                                 )

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.fragments.payments.recycler.PaymentAdapter
 import by.lebedev.nanopoolmonitoring.retrofit.entity.payment.DataPayments
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class PaymentsFragment : Fragment() {
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
 
     var coin: String = ""
     var wallet: String = ""
@@ -36,10 +36,10 @@ class PaymentsFragment : Fragment() {
 
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
-        coin = tabIntent.coin
-        wallet = tabIntent.wallet
+        coin = coinWalletTempData.coin
+        wallet = coinWalletTempData.wallet
 
         getPayments()
     }

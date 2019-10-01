@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import by.lebedev.nanopoolmonitoring.dagger.TabIntent
+import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.fragments.workers.recycler.WorkersAdapter
 import by.lebedev.nanopoolmonitoring.retrofit.entity.workers.DataWorkers
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class WorkersFragment : Fragment() {
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
 
     var coin: String = ""
     var wallet: String = ""
@@ -40,10 +40,10 @@ class WorkersFragment : Fragment() {
 
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
-        coin = tabIntent.coin
-        wallet = tabIntent.wallet
+        coin = coinWalletTempData.coin
+        wallet = coinWalletTempData.wallet
 
         //Поиск по workers
         searchText.addTextChangedListener(object : TextWatcher {
@@ -51,14 +51,14 @@ class WorkersFragment : Fragment() {
 
 
                 if (!TextUtils.isEmpty(s)) {
-                    tabIntent.filteredLocalWorkersList.clear()
+                    coinWalletTempData.filteredLocalWorkersList.clear()
 
-                    for (i in 0 until tabIntent.localWorkersList.size) {
-                        if (tabIntent.localWorkersList.get(i).id.contains(s.toString(), true)) {
-                            tabIntent.filteredLocalWorkersList.add(tabIntent.localWorkersList.get(i))
+                    for (i in 0 until coinWalletTempData.localWorkersList.size) {
+                        if (coinWalletTempData.localWorkersList.get(i).id.contains(s.toString(), true)) {
+                            coinWalletTempData.filteredLocalWorkersList.add(coinWalletTempData.localWorkersList.get(i))
                         }
                     }
-                    setupRecycler(tabIntent.filteredLocalWorkersList)
+                    setupRecycler(coinWalletTempData.filteredLocalWorkersList)
                 }
             }
 
@@ -79,7 +79,7 @@ class WorkersFragment : Fragment() {
             .subscribe({ result ->
 
                 if (result!=null&&result.status&&!result.data.isEmpty()&& progressWorkers != null && workers_recycle != null && workersTotal != null) {
-                    tabIntent.localWorkersList = result.data
+                    coinWalletTempData.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
                     workersTotal.setText("Workers total: "+result.data.size)
@@ -109,8 +109,8 @@ class WorkersFragment : Fragment() {
         searchText.setText("")
         getWorkers()
         super.onPause()
-        tabIntent.filteredLocalWorkersList.clear()
-        tabIntent.localWorkersList.clear()
+        coinWalletTempData.filteredLocalWorkersList.clear()
+        coinWalletTempData.localWorkersList.clear()
     }
 
     fun countAlive(workerList:ArrayList<DataWorkers>):Int{

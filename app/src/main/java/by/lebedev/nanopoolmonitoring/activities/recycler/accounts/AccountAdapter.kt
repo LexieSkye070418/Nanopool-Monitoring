@@ -21,6 +21,9 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
+import android.util.Log
+import android.widget.ImageButton
+import by.lebedev.nanopoolmonitoring.activities.ModifyAccountActivity
 
 
 class AccountAdapter(
@@ -46,6 +49,7 @@ class AccountAdapter(
             val intent = Intent(view.context, TabActivity::class.java)
             intent.putExtra("COIN", accountLocalList.list.get(holder.adapterPosition).coin)
             intent.putExtra("WALLET", accountLocalList.list.get(holder.adapterPosition).wallet)
+
             if (context != null) {
                 context.startActivity(intent)
             }
@@ -60,11 +64,24 @@ class AccountAdapter(
                 .setMessage("You are going to delete this account from list.")
                 .setIcon(R.drawable.confirmdelete)
                 .setCancelable(true)
-                .setPositiveButton("Delete", { dialog, which -> deleteAccount(it, view, holder) })
+                .setPositiveButton("Delete", { dialog, which -> deleteAccount(view, holder) })
                 .setNegativeButton("Cancel", { dialog, which -> dialog.cancel() })
             val alert = builder.create()
             alert.show()
         }
+
+        val modifyImage = holder.itemView.findViewById<ImageButton>(R.id.modify_image)
+
+        modifyImage.setOnClickListener {
+
+            val intent = Intent(view.context, ModifyAccountActivity::class.java)
+            intent.putExtra("COIN", accountLocalList.list.get(holder.adapterPosition).coin)
+            intent.putExtra("WALLET", accountLocalList.list.get(holder.adapterPosition).wallet)
+            intent.putExtra("ID", accountLocalList.list.get(holder.adapterPosition).id)
+            intent.putExtra("POSITION", holder.adapterPosition)
+            view.context.startActivity(intent)
+        }
+
 
         return holder
     }
@@ -79,10 +96,10 @@ class AccountAdapter(
     }
 
     @SuppressLint("CheckResult")
-    fun deleteAccount(it: View, view: View, holder: AccountViewHolder) {
+    fun deleteAccount(view: View, holder: AccountViewHolder) {
 
         Completable.fromAction {
-            DataBase.getInstance(it.context).db.accountDao()
+            DataBase.getInstance(view.context).db.accountDao()
                 .delete(accountLocalList.list.get(holder.adapterPosition))
         }
             .subscribeOn(Schedulers.io())
@@ -97,4 +114,5 @@ class AccountAdapter(
                 }
             )
     }
+
 }

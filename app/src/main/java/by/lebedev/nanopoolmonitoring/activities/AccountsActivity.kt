@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.account_layout.*
 import javax.inject.Inject
 import android.net.Uri
 import android.support.v4.content.ContextCompat
+import android.util.Log
 
 
 class AccountsActivity : AppCompatActivity() {
@@ -69,11 +70,9 @@ class AccountsActivity : AppCompatActivity() {
         getAllDatabase()
 
         removeAdsButton.setOnClickListener {
-
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("market://details?id=by.lebedev.nanopoolmonitoringnoads")
             startActivity(intent)
-
         }
     }
 
@@ -86,6 +85,7 @@ class AccountsActivity : AppCompatActivity() {
     }
 
     fun getAllDatabase() {
+
         val d = DataBase.getInstance(this).db.accountDao()
             .getAll()
             .subscribeOn(Schedulers.io())
@@ -94,6 +94,9 @@ class AccountsActivity : AppCompatActivity() {
                 if (result.isEmpty()) {
                     noAccountText.visibility = View.VISIBLE
                 } else {
+
+                    Log.e("FF",result.size.toString()+" "+result.get(2).coin+ " "+result.get(2).wallet)
+
                     noAccountText.visibility = View.INVISIBLE
                     setupRecycler(result)
                     accountLocalList.list = result as ArrayList<Account>
@@ -105,6 +108,8 @@ class AccountsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         progressAccountLoad.visibility = View.VISIBLE
+
+        Log.e("FF","onResume")
         getAllDatabase()
     }
 
