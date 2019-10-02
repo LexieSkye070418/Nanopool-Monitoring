@@ -1,10 +1,8 @@
 package by.lebedev.nanopoolmonitoringnoads.room
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import by.lebedev.nanopoolmonitoringnoads.room.entity.Account
+
 import io.reactivex.Single
 
 @Dao
@@ -17,4 +15,8 @@ interface AccountDAO {
 
     @Delete
     fun delete(account: Account)
+
+    @Update
+    fun modify(account: Account)
+
 }

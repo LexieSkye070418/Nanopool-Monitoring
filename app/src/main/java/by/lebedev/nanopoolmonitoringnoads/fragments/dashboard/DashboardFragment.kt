@@ -8,11 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.fragments.charts.BarChartFragment
 import by.lebedev.nanopoolmonitoringnoads.fragments.charts.LineChartFragment
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
+
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -24,7 +25,7 @@ import javax.inject.Inject
 class DashboardFragment : Fragment() {
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
     val nf = NumberFormat.getInstance()
     var coin: String = ""
     var wallet: String = ""
@@ -43,13 +44,11 @@ class DashboardFragment : Fragment() {
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
-        coin = tabIntent.coin
-        wallet = tabIntent.wallet
+        coin = coinWalletTempData.coin
+        wallet = coinWalletTempData.wallet
 
-        //setting data
-//        setGeneralInfo()
         setCurrHashrateBalance()
         setAverageHashrateAndCalcProfit()
 
@@ -88,7 +87,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -97,7 +96,7 @@ class DashboardFragment : Fragment() {
                         current_hashrate.setText(
                             nf.format
                                 (result.data.hashrate).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -126,7 +125,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.h6.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -135,7 +134,7 @@ class DashboardFragment : Fragment() {
                         hours_6.setText(
                             nf.format
                                 (result.data.h6).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -151,7 +150,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.h24.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
+                                coinWalletTempData.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -160,7 +159,7 @@ class DashboardFragment : Fragment() {
                         hours_24.setText(
                             nf.format
                                 (result.data.h24).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
+                                coinWalletTempData.getWorkerHashType(
                                     coin
                                 )
                             )
@@ -177,107 +176,6 @@ class DashboardFragment : Fragment() {
                 }
 
             },{
-                Log.e("err", it.message)
-            })
-    }
-
-
-
-
-    fun setGeneralInfo() {
-        nf.maximumFractionDigits = 2
-        val d = provideApi().getGeneralInfo(coin, wallet)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-
-                if (result!=null&&result.status && balance != null) {
-
-                    balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { balance.setTextColor(it) }
-
-
-                    if (result.data.hashrate > 1000) {
-                        current_hashrate.setText(
-                            nf.format
-                                (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        current_hashrate.setText(
-                            nf.format
-                                (result.data.hashrate).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { current_hashrate.setTextColor(it) }
-
-
-                    if (result.data.avgHashrate.h6 > 1000) {
-
-                        hours_6.setText(
-                            nf.format
-                                (result.data.avgHashrate.h6.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        hours_6.setText(
-                            nf.format
-                                (result.data.avgHashrate.h6).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { hours_6.setTextColor(it) }
-
-
-                    if (result.data.avgHashrate.h24 > 1000) {
-
-                        hours_24.setText(
-                            nf.format
-                                (result.data.avgHashrate.h24.div(1000)).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashTypeHigh(
-                                    coin
-                                )
-                            )
-                        )
-                    } else {
-                        hours_24.setText(
-                            nf.format
-                                (result.data.avgHashrate.h24).toString().plus(" ").plus(
-                                tabIntent.getWorkerHashType(
-                                    coin
-                                )
-                            )
-                        )
-                    }
-
-                    view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
-                        ?.let { hours_24.setTextColor(it) }
-
-                    if (result.data.avgHashrate.h6 > 1) {
-                        getProfitInfo(coin, result.data.avgHashrate.h6)
-                    }
-                }
-
-            }, {
                 Log.e("err", it.message)
             })
     }

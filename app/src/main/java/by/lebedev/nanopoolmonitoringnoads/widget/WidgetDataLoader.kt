@@ -8,9 +8,10 @@ import android.os.IBinder
 import android.util.Log
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.NumberFormat
@@ -27,11 +28,9 @@ class DataLoaderService() : Service() {
 
         super.onCreate()
 
-
         val nf = NumberFormat.getInstance()
 
         val appWidgetId = 1
-//        intent?.extras?.get("appWidgetId") as Int
 
         val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
 
@@ -47,8 +46,8 @@ class DataLoaderService() : Service() {
                 appWidgetId
             )
 
-        val coin = TabIntent.instance.shortNameFromSelector(coinId)
-        val views = RemoteViews(applicationContext.packageName, R.layout.nanopool_widget)
+        val coin = CoinWalletTempData.INSTANCE.shortNameFromSelector(coinId)
+        val views = RemoteViews(applicationContext.packageName, R.layout.nanopool_widget_layout)
 
         nf.maximumFractionDigits = 3
 
@@ -75,7 +74,7 @@ class DataLoaderService() : Service() {
                             R.id.widgetCurrentHashrate,
                             nf.format
                                 (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                TabIntent.instance.getWorkerHashTypeHigh(
+                                CoinWalletTempData.INSTANCE.getWorkerHashTypeHigh(
                                     coin
                                 )
                             )
@@ -87,7 +86,7 @@ class DataLoaderService() : Service() {
                             R.id.widgetCurrentHashrate,
                             nf.format
                                 (result.data.hashrate).toString().plus(" ").plus(
-                                TabIntent.instance.getWorkerHashType(
+                                CoinWalletTempData.INSTANCE.getWorkerHashType(
                                     coin
                                 )
                             )

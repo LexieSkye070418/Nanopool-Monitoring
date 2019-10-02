@@ -7,6 +7,6 @@ import android.arch.persistence.room.PrimaryKey
 data class Account(
     @PrimaryKey
     val id: Long,
-    val coin: String,
-    val wallet: String
+    var coin: String,
+    var wallet: String
 )

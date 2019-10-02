@@ -8,10 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.chart.ChartData
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
+
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -31,7 +32,7 @@ import javax.inject.Inject
 class BarChartFragment : Fragment() {
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
     val nf = NumberFormat.getInstance()
     var coin: String = ""
     var wallet: String = ""
@@ -45,10 +46,10 @@ class BarChartFragment : Fragment() {
         nf.maximumFractionDigits = 1
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
 
-        coin = tabIntent.coin
-        wallet = tabIntent.wallet
+        coin = coinWalletTempData.coin
+        wallet = coinWalletTempData.wallet
 
         getChartInfo()
 

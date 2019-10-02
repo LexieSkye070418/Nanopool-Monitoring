@@ -4,9 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.payment.DataPayments
+
 import javax.inject.Inject
 
 
@@ -17,7 +18,7 @@ class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val paymentTx: TextView
 
     @Inject
-    lateinit var tabIntent: TabIntent
+    lateinit var coinWalletTempData: CoinWalletTempData
 
 
 
@@ -28,14 +29,14 @@ class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         paymentTx = itemView.findViewById(R.id.tx_transaction)
 
         val component = DaggerMagicBox.builder().build()
-        tabIntent = component.provideTabIntent()
+        coinWalletTempData = component.provideTabIntent()
     }
 
     fun bind(payment: DataPayments) {
         paymentConfirmation.setText(payment.transform(payment.confirmed))
 
         paymentDate.setText(payment.convertLongToTime(payment.date))
-        paymentAmount.setText(payment.amount.toString().plus(tabIntent.coin))
+        paymentAmount.setText(payment.amount.toString().plus(coinWalletTempData.coin))
         paymentTx.setText(payment.txHash)
     }
 }

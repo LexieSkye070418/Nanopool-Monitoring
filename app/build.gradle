@@ -23,9 +23,9 @@ android {
         applicationId "by.lebedev.nanopoolmonitoringnoads"
         minSdkVersion 22
         targetSdkVersion 28
+        versionCode 12
+        versionName "2.5.0"
 
-        versionCode 11
-        versionName "2.4.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

@@ -58,13 +58,17 @@
 
 
 
+
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.AccountsActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.AddAccountActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name="by.lebedev.nanopoolmonitoringnoads.activities.webview.WebActivity"/>
+        <activity android:name=".activities.ModifyAccountActivity"
+                  android:screenOrientation="portrait"/>
 
         <service android:name=".widget.DataLoaderService"/>
+
 
 
     </application>

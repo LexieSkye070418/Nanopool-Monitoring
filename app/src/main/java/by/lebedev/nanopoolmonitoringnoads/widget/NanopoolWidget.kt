@@ -11,9 +11,10 @@ import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import by.lebedev.nanopoolmonitoringnoads.R
-import by.lebedev.nanopoolmonitoringnoads.dagger.TabIntent
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.newThread
 import java.text.NumberFormat
@@ -29,8 +30,7 @@ class NanopoolWidget : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         // There may be multiple widgets active, so update all of them
-        Log.e("AAA", "onUpdate")
-        val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+        val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
 
         for (appWidgetId in appWidgetIds) {
 
@@ -67,7 +67,6 @@ class NanopoolWidget : AppWidgetProvider() {
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
-        Log.e("AAA", "onDelete")
         // When the user deletes the widget, delete the preference associated with it.
         for (appWidgetId in appWidgetIds) {
             NanopoolWidgetConfigureActivity.deleteSharedPref(
@@ -78,9 +77,7 @@ class NanopoolWidget : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.e("AAA", "onReceive")
         super.onReceive(context, intent)
-
 
         val appWidgetManager = AppWidgetManager.getInstance(context)
 
@@ -88,7 +85,6 @@ class NanopoolWidget : AppWidgetProvider() {
         val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
 
         if (context != null) {
-            Log.e("AAA", "Call Update from onReceive")
             onUpdate(context, appWidgetManager, appWidgetIds)
         }
 
@@ -112,10 +108,7 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
 
-            Log.e("AAA", "set coin image")
-
-
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
             val coinId =
                 NanopoolWidgetConfigureActivity.loadSharedPrefCoin(
                     context,
@@ -224,10 +217,8 @@ class NanopoolWidget : AppWidgetProvider() {
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            Log.e("AAA", "set hashrate")
 
             val nf = NumberFormat.getInstance()
-
 
             val wallet =
                 NanopoolWidgetConfigureActivity.loadSharedPrefWallet(
@@ -241,8 +232,8 @@ class NanopoolWidget : AppWidgetProvider() {
                     appWidgetId
                 )
 
-            val coin = TabIntent.instance.shortNameFromSelector(coinId)
-            val views = RemoteViews(context.packageName, R.layout.nanopool_widget)
+            val coin = CoinWalletTempData.INSTANCE.shortNameFromSelector(coinId)
+            val views = RemoteViews(context.packageName, R.layout.nanopool_widget_layout)
 
             nf.maximumFractionDigits = 3
 
@@ -308,7 +299,7 @@ class NanopoolWidget : AppWidgetProvider() {
                                 R.id.widgetCurrentHashrate,
                                 nf.format
                                     (result.data.hashrate.div(1000)).toString().plus(" ").plus(
-                                    TabIntent.instance.getWorkerHashTypeHigh(
+                                    CoinWalletTempData.INSTANCE.getWorkerHashTypeHigh(
                                         coin
                                     )
                                 )
@@ -325,7 +316,7 @@ class NanopoolWidget : AppWidgetProvider() {
                                 R.id.widgetCurrentHashrate,
                                 nf.format
                                     (result.data.hashrate).toString().plus(" ").plus(
-                                    TabIntent.instance.getWorkerHashType(
+                                    CoinWalletTempData.INSTANCE.getWorkerHashType(
                                         coin
                                     )
                                 )
@@ -390,7 +381,5 @@ class NanopoolWidget : AppWidgetProvider() {
             }
             return count
         }
-
-
     }
 }

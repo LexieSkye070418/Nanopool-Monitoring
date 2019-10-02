@@ -3,6 +3,7 @@ package by.lebedev.nanopoolmonitoringnoads.activities
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoringnoads.R
 import by.lebedev.nanopoolmonitoringnoads.dagger.PoolCoins
@@ -41,6 +42,7 @@ class AddAccountActivity : AppCompatActivity() {
 
             if (wallet.text.toString() != "") {
                 insertToDatabase(wallet.text.toString())
+                Thread.sleep(100)
                 onBackPressed()
             } else {
                 Toast.makeText(baseContext, "Please, enter your wallet", Toast.LENGTH_SHORT).show()
@@ -62,14 +64,12 @@ class AddAccountActivity : AppCompatActivity() {
 
                     })
 
-
                 .setPositiveButton("OK", { dialog, which -> dialog.cancel() })
                 .setNegativeButton("Cancel", { dialog, which -> dialog.cancel() })
             val alert = builder.create()
             alert.show()
         }
     }
-
 
     fun insertToDatabase(walletText: String) {
         val complete = Completable.fromAction {
@@ -81,10 +81,12 @@ class AddAccountActivity : AppCompatActivity() {
 
                 )
             )
-        }
-        val disposable = complete.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {}
+            .subscribe({
+            }, {
+                Log.e("err", it.message)
+            })
     }
 
     fun setSelectedCoinImage(position: Int) {

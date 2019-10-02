@@ -36,5 +36,17 @@
     <string name="workers">Workers:</string>
     <string name="balance1">Balance:</string>
     <string name="news_key">6bb2d102680be65b5d540eb15eb2c58a</string>
+    <string name="modify_account">modify account</string>
+    <string name="pool_fee">Pool Fee</string>
+    <string name="payout_scheme">Payout Scheme</string>
+    <string name="block_validation_time">Block Validation Time</string>
+    <string name="default_payout_limit">Default Payout Limit</string>
+    <string name="general_info">General info</string>
+    <string name="original_authors">Original authors</string>
+    <string name="initial_release">Initial release</string>
+    <string name="written_in">Written in</string>
+    <string name="website">Website</string>
+    <string name="modify">modify</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

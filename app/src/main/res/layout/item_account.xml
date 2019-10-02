@@ -9,12 +9,15 @@
     <android.support.v7.widget.CardView
             android:id="@+id/cardview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+    >
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="#1BB4A9BB"
+        >
 
             <ImageView
                     android:id="@+id/coin_image"
@@ -39,14 +42,25 @@
                     android:layout_below="@+id/coin_name"
                     android:layout_toRightOf="@+id/coin_image"/>
 
+            <ImageButton
+                    android:id="@+id/modify_image"
+                    android:background="@drawable/modify_selector"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+            />
             <ImageView
                     android:src="@drawable/trashcan"
                     android:id="@+id/trash_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_below="@+id/modify_image"
+            />
+
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

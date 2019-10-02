@@ -7,6 +7,7 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import by.lebedev.nanopoolmonitoringnoads.R
@@ -31,7 +32,7 @@ class AccountsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_layout)
-        if (!isNetworkAvailable()){
+        if (!isNetworkAvailable()) {
             Toast.makeText(this, "Network unavailable...", Toast.LENGTH_LONG).show()
             Toast.makeText(this, "Check Internet connection...", Toast.LENGTH_LONG).show()
         }
@@ -60,6 +61,7 @@ class AccountsActivity : AppCompatActivity() {
     }
 
     fun getAllDatabase() {
+
         val d = DataBase.getInstance(this).db.accountDao()
             .getAll()
             .subscribeOn(Schedulers.io())
@@ -68,6 +70,7 @@ class AccountsActivity : AppCompatActivity() {
                 if (result.isEmpty()) {
                     noAccountText.visibility = View.VISIBLE
                 } else {
+
                     noAccountText.visibility = View.INVISIBLE
                     setupRecycler(result)
                     accountLocalList.list = result as ArrayList<Account>
@@ -79,6 +82,8 @@ class AccountsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         progressAccountLoad.visibility = View.VISIBLE
+
+        Log.e("FF", "onResume")
         getAllDatabase()
     }
 
@@ -103,7 +108,3 @@ class AccountsActivity : AppCompatActivity() {
         } else false
     }
 }
-
-
-
-

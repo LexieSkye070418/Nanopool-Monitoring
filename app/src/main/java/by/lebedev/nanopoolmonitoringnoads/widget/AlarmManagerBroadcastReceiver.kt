@@ -18,7 +18,7 @@ class AlarmManagerBroadcastReceiver: BroadcastReceiver() {
         val wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "nanopool:myTag")
         wakeLock.acquire()
 
-        val remoteViews = RemoteViews(context.getPackageName(), R.layout.nanopool_widget)
+        val remoteViews = RemoteViews(context.getPackageName(), R.layout.nanopool_widget_layout)
         val thisWidget = ComponentName(context, NanopoolWidget::class.java)
         val appWidgetManager = AppWidgetManager.getInstance(context)
         appWidgetManager.updateAppWidget(thisWidget, remoteViews)
