@@ -111,7 +111,7 @@ class PaymentsFragment : Fragment() {
     }
 
     fun countEarning(payments: ArrayList<DataPayments>, millisShift: Long): String {
-        nf.maximumFractionDigits = 4
+        nf.maximumFractionDigits = 2
         var count = 0.0
         val calendar = Calendar.getInstance()
         val todayMillis = calendar.timeInMillis
