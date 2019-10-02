@@ -48,7 +48,7 @@ class PaymentsFragment : Fragment() {
 
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
 
         coin = coinWalletTempData.coin
         wallet = coinWalletTempData.wallet

@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import by.lebedev.nanopoolmonitoring.activities.ModifyAccountActivity
 import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.activities.ModifyAccountActivity
 import by.lebedev.nanopoolmonitoringnoads.activities.TabActivity
 import by.lebedev.nanopoolmonitoringnoads.dagger.AccountLocalList
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox

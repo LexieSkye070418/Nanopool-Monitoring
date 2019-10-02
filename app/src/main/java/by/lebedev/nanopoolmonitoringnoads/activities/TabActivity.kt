@@ -21,7 +21,7 @@ class TabActivity : AppCompatActivity() {
         setContentView(R.layout.main_layout)
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
 
 
         val fragmentAdapter = PagerAdapter(supportFragmentManager)

@@ -46,7 +46,7 @@ class BarChartFragment : Fragment() {
         nf.maximumFractionDigits = 1
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
 
         coin = coinWalletTempData.coin
         wallet = coinWalletTempData.wallet

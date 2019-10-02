@@ -1,17 +1,18 @@
-package by.lebedev.nanopoolmonitoring.activities
+package by.lebedev.nanopoolmonitoringnoads.activities
 
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import by.lebedev.nanopoolmonitoring.R
-import by.lebedev.nanopoolmonitoring.dagger.AccountLocalList
-import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
-import by.lebedev.nanopoolmonitoring.dagger.PoolCoins
-import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
-import by.lebedev.nanopoolmonitoring.room.DataBase
-import by.lebedev.nanopoolmonitoring.room.entity.Account
+import by.lebedev.nanopoolmonitoringnoads.R
+import by.lebedev.nanopoolmonitoringnoads.dagger.AccountLocalList
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
+import by.lebedev.nanopoolmonitoringnoads.dagger.PoolCoins
+import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
+import by.lebedev.nanopoolmonitoringnoads.room.DataBase
+import by.lebedev.nanopoolmonitoringnoads.room.entity.Account
+
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -41,7 +42,7 @@ class ModifyAccountActivity : AppCompatActivity() {
 
         val component = DaggerMagicBox.builder().build()
         poolCoins = component.providePoolCoins()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
         accountLocalList = component.provideAccountLocalList()
         val arrayOfCoins = arrayOfNulls<String>(poolCoins.list.size)
         poolCoins.list.toArray(arrayOfCoins)

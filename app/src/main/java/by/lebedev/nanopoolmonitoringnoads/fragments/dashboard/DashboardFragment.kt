@@ -44,7 +44,7 @@ class DashboardFragment : Fragment() {
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
 
         coin = coinWalletTempData.coin
         wallet = coinWalletTempData.wallet

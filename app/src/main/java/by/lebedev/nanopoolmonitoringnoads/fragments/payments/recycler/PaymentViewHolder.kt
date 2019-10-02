@@ -29,7 +29,7 @@ class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         paymentTx = itemView.findViewById(R.id.tx_transaction)
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
     }
 
     fun bind(payment: DataPayments) {

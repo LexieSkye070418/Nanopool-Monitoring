@@ -1,6 +1,6 @@
-package by.lebedev.nanopoolmonitoring
+package by.lebedev.nanopoolmonitoringnoads
 
-import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
+import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mock

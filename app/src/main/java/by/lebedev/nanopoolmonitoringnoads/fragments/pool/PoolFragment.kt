@@ -42,7 +42,7 @@ class PoolFragment : Fragment() {
         nf.maximumFractionDigits = 8
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
 
 
         coin = coinWalletTempData.coin

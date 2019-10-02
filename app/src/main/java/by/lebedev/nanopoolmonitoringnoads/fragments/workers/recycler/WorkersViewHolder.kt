@@ -29,7 +29,7 @@ class WorkersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         workerHashrate = itemView.findViewById(R.id.workerHashrate)
 
         val component = DaggerMagicBox.builder().build()
-        coinWalletTempData = component.provideTabIntent()
+        coinWalletTempData = component.provideCoinWalletTempData()
     }
 
     fun bind(workers: DataWorkers, num: Int) {
