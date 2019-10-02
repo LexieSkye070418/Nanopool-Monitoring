@@ -61,6 +61,8 @@ class WorkersFragment : Fragment() {
                         }
                     }
                     setupRecycler(coinWalletTempData.filteredLocalWorkersList)
+                } else {
+                    setupRecycler(coinWalletTempData.localWorkersList)
                 }
             }
 
@@ -80,13 +82,13 @@ class WorkersFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&result.status&&!result.data.isEmpty()&& progressWorkers != null && workers_recycle != null && workersTotal != null) {
+                if (result != null && result.status && !result.data.isEmpty() && progressWorkers != null && workers_recycle != null && workersTotal != null) {
                     coinWalletTempData.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
                     setupRecycler(result.data)
-                    workersTotal.setText("Workers total: "+result.data.size)
-                    workersAlive.setText("Alive: "+countAlive(result.data))
-                    workersDead.setText("Dead: "+countDead(result.data))
+                    workersTotal.setText("Workers total: " + result.data.size)
+                    workersAlive.setText("Alive: " + countAlive(result.data))
+                    workersDead.setText("Dead: " + countDead(result.data))
                 } else {
                     if (progressWorkers != null && textForError != null) {
                         progressWorkers.visibility = View.INVISIBLE
@@ -115,20 +117,20 @@ class WorkersFragment : Fragment() {
         coinWalletTempData.localWorkersList.clear()
     }
 
-    fun countAlive(workerList:ArrayList<DataWorkers>):Int{
-        var count =0
-        for (i in 0 until workerList.size){
-            if (workerList.get(i).hashrate != 0L){
+    fun countAlive(workerList: ArrayList<DataWorkers>): Int {
+        var count = 0
+        for (i in 0 until workerList.size) {
+            if (workerList.get(i).hashrate != 0L) {
                 count++
             }
         }
         return count
     }
 
-    fun countDead(workerList:ArrayList<DataWorkers>):Int{
-        var count =0
-        for (i in 0 until workerList.size){
-            if (workerList.get(i).hashrate == 0L){
+    fun countDead(workerList: ArrayList<DataWorkers>): Int {
+        var count = 0
+        for (i in 0 until workerList.size) {
+            if (workerList.get(i).hashrate == 0L) {
                 count++
             }
         }
