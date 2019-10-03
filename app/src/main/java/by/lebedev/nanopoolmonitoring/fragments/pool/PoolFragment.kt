@@ -1,6 +1,5 @@
 package by.lebedev.nanopoolmonitoring.fragments.pool
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -42,8 +41,17 @@ class PoolFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getActivity()?.getWindow()
             ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
+        MobileAds.initialize(view.context, "ca-app-pub-1501215034144631~3780667725")
 
-        loadAds()
+        val adView = AdView(view.context)
+        adView.adSize = AdSize.BANNER
+
+        adView.adUnitId = "ca-app-pub-1501215034144631/3339997521"
+
+
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+            mAdView.loadAd(adRequest)
 
         nf.maximumFractionDigits = 8
 
@@ -155,17 +163,4 @@ class PoolFragment : Fragment() {
         if (payoutLimit != null) payoutLimit.text = coinWalletTempData.getPayoutLimit(coin)
     }
 
-    fun loadAds() {
-
-        MobileAds.initialize(this.context, "ca-app-pub-1501215034144631~3780667725")
-
-        val adView = AdView(this.context)
-        adView.adSize = AdSize.BANNER
-
-        adView.adUnitId = "ca-app-pub-1501215034144631/3339997521"
-
-        mAdView = view?.findViewById(R.id.adView) as AdView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-    }
 }

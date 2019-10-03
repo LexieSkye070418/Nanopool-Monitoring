@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
@@ -296,7 +297,7 @@ class DashboardFragment : Fragment() {
             val ft = childFragmentManager.beginTransaction()
             ft.replace(R.id.layoutLineChart, lineChartFragment)
             ft.commit()
-            swipeRefreshDashboard.setRefreshing(false)
+
         }
 
     }
@@ -319,7 +320,8 @@ class DashboardFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                if (mInterstitialAd.isLoaded&&firstTimeAds) {
+                val isDashboard = view?.findViewById<ScrollView>(R.id.scrollViewForRefresh)
+                if (mInterstitialAd.isLoaded&&firstTimeAds&&isDashboard!=null) {
                     coinWalletTempData.firstTimeAds = false
                     mInterstitialAd.show()
                 }
