@@ -27,7 +27,7 @@ object ServiceGenerator {
             }
         })
 
-    fun create1(): ApiService {
+    fun provideApi(): ApiService {
         Log.e("AAA", "api service")
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import by.lebedev.nanopoolmonitoring.R
 import by.lebedev.nanopoolmonitoring.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoring.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoring.fragments.workers.recycler.WorkersAdapter
@@ -30,13 +31,13 @@ class WorkersFragment : Fragment() {
     var wallet: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(by.lebedev.nanopoolmonitoring.R.layout.fragment_workers, container, false)
+        return inflater.inflate(R.layout.fragment_workers, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getActivity()?.getWindow()
-            ?.setBackgroundDrawableResource(by.lebedev.nanopoolmonitoring.R.drawable.nanopool_background)
+            ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
 
         val component = DaggerMagicBox.builder().build()
@@ -69,6 +70,22 @@ class WorkersFragment : Fragment() {
             }
         })
 
+
+        swipeRefreshWorkers.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshWorkers.setOnRefreshListener {
+            workersRecycle.visibility = View.INVISIBLE
+            workersAlive.visibility = View.INVISIBLE
+            workersDead.visibility = View.INVISIBLE
+            workersTotal.visibility = View.INVISIBLE
+            getWorkers()
+        }
+
+
         getWorkers()
     }
 
@@ -78,13 +95,14 @@ class WorkersFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&result.status&&!result.data.isEmpty()&& progressWorkers != null && workers_recycle != null && workersTotal != null) {
+                if (result != null && result.status && !result.data.isEmpty() && progressWorkers != null && workersRecycle != null && workersTotal != null) {
                     coinWalletTempData.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
+                    swipeRefreshWorkers.setRefreshing(false)
                     setupRecycler(result.data)
-                    workersTotal.setText("Workers total: "+result.data.size)
-                    workersAlive.setText("Alive: "+countAlive(result.data))
-                    workersDead.setText("Dead: "+countDead(result.data))
+                    workersTotal.setText("Workers total: " + result.data.size)
+                    workersAlive.setText("Alive: " + countAlive(result.data))
+                    workersDead.setText("Dead: " + countDead(result.data))
                 } else {
                     if (progressWorkers != null && textForError != null) {
                         progressWorkers.visibility = View.INVISIBLE
@@ -97,12 +115,17 @@ class WorkersFragment : Fragment() {
     }
 
     fun setupRecycler(workers: ArrayList<DataWorkers>) {
-        workers_recycle.setHasFixedSize(true)
+        workersRecycle.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(view?.context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        workers_recycle.layoutManager = layoutManager
-        workers_recycle.adapter = WorkersAdapter(workers)
-        (workers_recycle.adapter as WorkersAdapter).notifyDataSetChanged()
+        workersRecycle.layoutManager = layoutManager
+        workersRecycle.adapter = WorkersAdapter(workers)
+        (workersRecycle.adapter as WorkersAdapter).notifyDataSetChanged()
+
+        workersRecycle.visibility = View.VISIBLE
+        workersTotal.visibility = View.VISIBLE
+        workersAlive.visibility = View.VISIBLE
+        workersDead.visibility = View.VISIBLE
     }
 
     override fun onPause() {
@@ -113,20 +136,20 @@ class WorkersFragment : Fragment() {
         coinWalletTempData.localWorkersList.clear()
     }
 
-    fun countAlive(workerList:ArrayList<DataWorkers>):Int{
-        var count =0
-        for (i in 0 until workerList.size){
-            if (workerList.get(i).hashrate != 0L){
+    fun countAlive(workerList: ArrayList<DataWorkers>): Int {
+        var count = 0
+        for (i in 0 until workerList.size) {
+            if (workerList.get(i).hashrate != 0L) {
                 count++
             }
         }
         return count
     }
 
-    fun countDead(workerList:ArrayList<DataWorkers>):Int{
-        var count =0
-        for (i in 0 until workerList.size){
-            if (workerList.get(i).hashrate == 0L){
+    fun countDead(workerList: ArrayList<DataWorkers>): Int {
+        var count = 0
+        for (i in 0 until workerList.size) {
+            if (workerList.get(i).hashrate == 0L) {
                 count++
             }
         }

@@ -66,6 +66,18 @@ class AccountsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        swipeRefreshAccounts.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshAccounts.setOnRefreshListener {
+            recycleAccounts.visibility = View.INVISIBLE
+            getAllDatabase()
+        }
+
+
         getAllDatabase()
 
         removeAdsButton.setOnClickListener {
@@ -91,9 +103,15 @@ class AccountsActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
                 if (result.isEmpty()) {
+                    Thread.sleep(200)
+                    swipeRefreshAccounts.setRefreshing(false)
+                    recycleAccounts.visibility = View.VISIBLE
                     noAccountText.visibility = View.VISIBLE
-                } else {
 
+                } else {
+                    Thread.sleep(200)
+                    swipeRefreshAccounts.setRefreshing(false)
+                    recycleAccounts.visibility = View.VISIBLE
                     noAccountText.visibility = View.INVISIBLE
                     setupRecycler(result)
                     accountLocalList.list = result as ArrayList<Account>

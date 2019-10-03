@@ -76,6 +76,20 @@ class PaymentsFragment : Fragment() {
             alert.show()
         }
 
+
+        swipeRefreshPayment.setColorSchemeResources(
+                R.color.blue,
+        R.color.colorAccent,
+        R.color.colorPrimary,
+        R.color.orange
+        )
+        swipeRefreshPayment.setOnRefreshListener {
+paymentsLayoutForUpdate.visibility=View.INVISIBLE
+            selectPayoutPeriod.text=getString(R.string.twentyFourHours)
+            getPayments()
+        }
+
+
         getPayments()
     }
 
@@ -84,8 +98,9 @@ class PaymentsFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                if (result != null && result.status && progressPayments != null && payment_recycle != null) {
+                if (result != null && result.status && progressPayments != null && paymentRecycle != null) {
                     progressPayments.visibility = View.INVISIBLE
+                    swipeRefreshPayment.setRefreshing(false)
                     setupRecycler(result.data)
                     localPaymentsArray = result.data
                     payoutCount.text = countEarning(result.data, 86400000).plus(" ").plus(coin.toUpperCase())
@@ -94,7 +109,7 @@ class PaymentsFragment : Fragment() {
                 } else {
                     if (progressPayments != null && textForErrorPayments != null) {
                         progressPayments.visibility = View.INVISIBLE
-                        textForErrorPayments.setText("Payments not found...")
+                        textForErrorPayments.setText(getString(R.string.paymentsnotfound))
                     }
                 }
             }, {
@@ -103,11 +118,12 @@ class PaymentsFragment : Fragment() {
     }
 
     fun setupRecycler(payments: ArrayList<DataPayments>) {
-        payment_recycle.setHasFixedSize(true)
+        paymentRecycle.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(view?.context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        payment_recycle.layoutManager = layoutManager
-        payment_recycle.adapter = PaymentAdapter(payments)
+        paymentRecycle.layoutManager = layoutManager
+        paymentRecycle.adapter = PaymentAdapter(payments)
+        paymentsLayoutForUpdate.visibility= View.VISIBLE
     }
 
     fun countEarning(payments: ArrayList<DataPayments>, millisShift: Long): String {

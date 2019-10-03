@@ -5,7 +5,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CoinWalletTempData private constructor() {
-
+    var firstTimeAds: Boolean= true
     var coin: String = ""
     var wallet: String = ""
     var localWorkersList = ArrayList<DataWorkers>()
