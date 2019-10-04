@@ -14,8 +14,6 @@ import by.lebedev.nanopoolmonitoringnoads.fragments.charts.BarChartFragment
 import by.lebedev.nanopoolmonitoringnoads.fragments.charts.LineChartFragment
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Action
-import io.reactivex.internal.operators.completable.CompletableFromAction
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
@@ -65,7 +63,6 @@ class DashboardFragment : Fragment() {
             inflateBarChart()
             setCurrHashrateBalance()
             setAverageHashrateAndCalcProfit()
-            mAdView.loadAd(adRequest)
         }
 
 

@@ -366,7 +366,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="3dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="100dp">
 
 
                 <TextView
@@ -390,17 +390,6 @@
                         android:layout_weight="1"
                 />
             </LinearLayout>
-
-            <com.google.android.gms.ads.AdView
-                    android:layout_marginBottom="100dp"
-                    android:id="@+id/adView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-1501215034144631/3339997521"
-            >
-            </com.google.android.gms.ads.AdView>
 
         </LinearLayout>
     </ScrollView>
