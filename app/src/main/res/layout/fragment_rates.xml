@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshRates"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ImageView
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/imageView"/>
-    <ProgressBar
-            android:id="@+id/progressRates"
-            style="?android:attr/progressBarStyleInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/recycleView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView" app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintVertical_bias="0.446"/>
 
-    <android.support.v7.widget.RecyclerView
-            android:foregroundGravity="center"
-            android:id="@+id/recycleView"
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            tools:listitem="@layout/item_coin"
-            app:layout_constraintTop_toTopOf="@+id/imageView"/>
+            android:layout_height="match_parent">
+        <ImageView
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/imageView"/>
+        <ProgressBar
+                android:id="@+id/progressRates"
+                style="?android:attr/progressBarStyleInverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/recycleView"
+                app:layout_constraintEnd_toEndOf="@+id/imageView" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="@+id/imageView" app:layout_constraintHorizontal_bias="0.487"
+                app:layout_constraintVertical_bias="0.446"/>
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+                android:foregroundGravity="center"
+                android:id="@+id/recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                tools:listitem="@layout/item_coin"
+                app:layout_constraintTop_toTopOf="@+id/imageView"/>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

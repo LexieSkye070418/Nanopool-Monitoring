@@ -13,9 +13,9 @@ import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.fragments.charts.BarChartFragment
 import by.lebedev.nanopoolmonitoringnoads.fragments.charts.LineChartFragment
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
-
-
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Action
+import io.reactivex.internal.operators.completable.CompletableFromAction
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.NumberFormat
@@ -40,7 +40,6 @@ class DashboardFragment : Fragment() {
         getActivity()?.getWindow()
             ?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
-
         nf.maximumFractionDigits = 4
 
         val component = DaggerMagicBox.builder().build()
@@ -51,21 +50,22 @@ class DashboardFragment : Fragment() {
 
         setCurrHashrateBalance()
         setAverageHashrateAndCalcProfit()
+        inflateLineChart()
+        inflateBarChart()
 
-
-
-        if (layoutLineChart != null) {
-
-            val lineChartFragment = LineChartFragment()
-            val ft = childFragmentManager.beginTransaction()
-            ft.replace(R.id.layoutLineChart, lineChartFragment)
-            ft.commit()
-        }
-        if (layoutBarChart != null) {
-            val barChartFragment = BarChartFragment()
-            val ft1 = childFragmentManager.beginTransaction()
-            ft1.replace(R.id.layoutBarChart, barChartFragment)
-            ft1.commit()
+        swipeRefreshDashboard.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshDashboard.setOnRefreshListener {
+            scrollViewForRefresh.visibility = View.INVISIBLE
+            inflateLineChart()
+            inflateBarChart()
+            setCurrHashrateBalance()
+            setAverageHashrateAndCalcProfit()
+            mAdView.loadAd(adRequest)
         }
 
 
@@ -76,9 +76,12 @@ class DashboardFragment : Fragment() {
         val d = provideApi().getHashrateBalance(coin, wallet)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result->
-                if (result!=null&&result.status&&balance!=null&&current_hashrate!=null){
+            .subscribe({ result ->
+                if (result != null && result.status && balance != null && current_hashrate != null) {
 
+                    swipeRefreshDashboard.setRefreshing(false)
+
+                    scrollViewForRefresh.visibility = View.VISIBLE
                     balance.setText(nf.format(Math.abs(result.data.balance)).toString().plus(" ").plus(coin).toUpperCase())
                     view?.context?.let { ContextCompat.getColor(it, R.color.darkBlue) }
                         ?.let { balance.setTextColor(it) }
@@ -107,7 +110,7 @@ class DashboardFragment : Fragment() {
                         ?.let { current_hashrate.setTextColor(it) }
                 }
 
-            },{
+            }, {
                 Log.e("err", it.message)
             })
     }
@@ -117,8 +120,8 @@ class DashboardFragment : Fragment() {
         val d = provideApi().getAverageHashrate(coin, wallet)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result->
-                if (result!=null&&result.status&&hours_6!=null&&hours_24!=null){
+            .subscribe({ result ->
+                if (result != null && result.status && hours_6 != null && hours_24 != null) {
 
                     if (result.data.h6 > 1000) {
 
@@ -175,7 +178,7 @@ class DashboardFragment : Fragment() {
 
                 }
 
-            },{
+            }, {
                 Log.e("err", it.message)
             })
     }
@@ -187,7 +190,7 @@ class DashboardFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result != null&& result.status&& view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
+                if (result != null && result.status && view != null && minute_coin != null && hour_coin != null && day_coin != null && week_coin != null && month_coin != null) {
                     minute_coin.setText(nf.format(result.data.minute.coins).toString())
                     view?.context?.let { ContextCompat.getColor(it, R.color.black) }
                         ?.let { minute_coin.setTextColor(it) }
@@ -241,6 +244,26 @@ class DashboardFragment : Fragment() {
             }, {
                 Log.e("err", it.message)
             })
+    }
+
+    fun inflateLineChart() {
+        if (layoutLineChart != null) {
+            val lineChartFragment = LineChartFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.layoutLineChart, lineChartFragment)
+            ft.commit()
+
+        }
+
+    }
+
+    fun inflateBarChart() {
+        if (layoutBarChart != null) {
+            val barChartFragment = BarChartFragment()
+            val ft1 = childFragmentManager.beginTransaction()
+            ft1.replace(R.id.layoutBarChart, barChartFragment)
+            ft1.commit()
+        }
     }
 
 }

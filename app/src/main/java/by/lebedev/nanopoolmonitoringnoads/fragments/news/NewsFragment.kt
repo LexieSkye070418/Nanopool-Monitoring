@@ -25,6 +25,18 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getActivity()?.getWindow()?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
+        swipeRefreshNews.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshNews.setOnRefreshListener {
+            recycleViewNews.visibility= View.GONE
+            getNews()
+        }
+
+
         getNews()
     }
 
@@ -37,6 +49,7 @@ class NewsFragment : Fragment() {
                 if (resultNews!=null&&!resultNews.isEmpty()) {
                     setupRecyclerNews(resultNews)
                     progressNewsLoad.visibility = View.INVISIBLE
+                    swipeRefreshNews.setRefreshing(false)
                 }
             },
                 { error -> Log.e("AAA", "не забрал новости!!!") })
@@ -46,5 +59,6 @@ class NewsFragment : Fragment() {
         recycleViewNews.layoutManager = LinearLayoutManager(context)
         adapterNews = NewsAdapter(listNews, context)
         recycleViewNews.adapter = adapterNews
+        recycleViewNews.visibility= View.VISIBLE
     }
 }

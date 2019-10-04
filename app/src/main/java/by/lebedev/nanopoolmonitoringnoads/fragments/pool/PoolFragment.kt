@@ -13,7 +13,6 @@ import by.lebedev.nanopoolmonitoringnoads.activities.webview.WebActivity
 import by.lebedev.nanopoolmonitoringnoads.dagger.CoinWalletTempData
 import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
-
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pool.*
@@ -37,8 +36,6 @@ class PoolFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getActivity()?.getWindow()?.setBackgroundDrawableResource(R.drawable.nanopool_background)
 
-
-
         nf.maximumFractionDigits = 8
 
         val component = DaggerMagicBox.builder().build()
@@ -55,6 +52,29 @@ class PoolFragment : Fragment() {
         setGeneralInfo()
         setMinorPoolData()
 
+        swipeRefreshPool.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshPool.setOnRefreshListener {
+            poolLayoutForUpdate.visibility = View.INVISIBLE
+            hashrate.text = getString(R.string.updatingPoolInfo)
+            miners.text = getString(R.string.updatingPoolInfo)
+            price.text = getString(R.string.updatingPoolInfo)
+            poolFee.text = getString(R.string.updatingPoolInfo)
+            payoutScheme.text = getString(R.string.updatingPoolInfo)
+            blockValidation.text = getString(R.string.updatingPoolInfo)
+            payoutLimit.text = getString(R.string.updatingPoolInfo)
+
+            setPrice()
+            setHashrate()
+            setMiners()
+            setGeneralInfo()
+            setMinorPoolData()
+        }
+
 
         website.setOnClickListener {
             val intent = Intent(this.context, WebActivity::class.java)
@@ -69,6 +89,8 @@ class PoolFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 if (result != null && result.status && price != null) {
+                    swipeRefreshPool.setRefreshing(false)
+                    poolLayoutForUpdate.visibility = View.VISIBLE
                     nf.maximumFractionDigits = 2
                     price.setText(nf.format(result.data.price_usd).toString().plus('$'))
                     view?.context?.let { ContextCompat.getColor(it, R.color.colorPrimary) }

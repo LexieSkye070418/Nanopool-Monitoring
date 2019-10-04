@@ -16,7 +16,6 @@ import by.lebedev.nanopoolmonitoringnoads.dagger.provider.DaggerMagicBox
 import by.lebedev.nanopoolmonitoringnoads.fragments.workers.recycler.WorkersAdapter
 import by.lebedev.nanopoolmonitoringnoads.retrofit.entity.workers.DataWorkers
 import by.lebedev.nanopoolmonitoringnoads.retrofit.provideApi
-
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_workers.*
@@ -73,6 +72,22 @@ class WorkersFragment : Fragment() {
             }
         })
 
+
+        swipeRefreshWorkers.setColorSchemeResources(
+            R.color.blue,
+            R.color.colorAccent,
+            R.color.colorPrimary,
+            R.color.orange
+        )
+        swipeRefreshWorkers.setOnRefreshListener {
+            workersRecycle.visibility = View.INVISIBLE
+            workersAlive.visibility = View.INVISIBLE
+            workersDead.visibility = View.INVISIBLE
+            workersTotal.visibility = View.INVISIBLE
+            getWorkers()
+        }
+
+
         getWorkers()
     }
 
@@ -81,10 +96,10 @@ class WorkersFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-
-                if (result != null && result.status && !result.data.isEmpty() && progressWorkers != null && workers_recycle != null && workersTotal != null) {
+                if (result != null && result.status && !result.data.isEmpty() && progressWorkers != null && workersRecycle != null && workersTotal != null) {
                     coinWalletTempData.localWorkersList = result.data
                     progressWorkers.visibility = View.INVISIBLE
+                    swipeRefreshWorkers.setRefreshing(false)
                     setupRecycler(result.data)
                     workersTotal.setText("Workers total: " + result.data.size)
                     workersAlive.setText("Alive: " + countAlive(result.data))
@@ -101,12 +116,17 @@ class WorkersFragment : Fragment() {
     }
 
     fun setupRecycler(workers: ArrayList<DataWorkers>) {
-        workers_recycle.setHasFixedSize(true)
+        workersRecycle.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(view?.context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        workers_recycle.layoutManager = layoutManager
-        workers_recycle.adapter = WorkersAdapter(workers)
-        (workers_recycle.adapter as WorkersAdapter).notifyDataSetChanged()
+        workersRecycle.layoutManager = layoutManager
+        workersRecycle.adapter = WorkersAdapter(workers)
+        (workersRecycle.adapter as WorkersAdapter).notifyDataSetChanged()
+
+        workersRecycle.visibility = View.VISIBLE
+        workersTotal.visibility = View.VISIBLE
+        workersAlive.visibility = View.VISIBLE
+        workersDead.visibility = View.VISIBLE
     }
 
     override fun onPause() {

@@ -44,6 +44,7 @@ class NewsAdapter(
             holderNews.viewNews.newsPublishDate.text = news.publishedAt.substring(0,10)
             holderNews.viewNews.titleNews.text = news.title
             Picasso.get().load(news.originalImageUrl)
+                .placeholder(R.drawable.progress)
                 .into(holderNews.viewNews.urlNews)
 
         }

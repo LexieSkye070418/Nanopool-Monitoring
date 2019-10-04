@@ -52,6 +52,7 @@
             </LinearLayout>
 
             <TextView
+                    android:focusable="true"
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"
                     android:layout_marginTop="5dp"

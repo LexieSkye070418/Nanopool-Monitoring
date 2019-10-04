@@ -48,5 +48,9 @@
     <string name="website">Website</string>
     <string name="modify">modify</string>
     <string name="cancel">Cancel</string>
+    <string name="look_for_worker">Look for worker...</string>
+    <string name="updatingPoolInfo">updating...</string>
+    <string name="twentyFourHours">24H</string>
+    <string name="paymentsnotfound">Payments not found...</string>
 
 </resources>
