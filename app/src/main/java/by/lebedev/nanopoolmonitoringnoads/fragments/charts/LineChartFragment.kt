@@ -24,6 +24,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import junit.framework.Assert.assertEquals
 import kotlinx.android.synthetic.main.linechart_layout.*
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -39,7 +40,11 @@ class LineChartFragment : Fragment() {
     var coin: String = ""
     var wallet: String = ""
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.linechart_layout, container, false)
     }
 
@@ -63,7 +68,7 @@ class LineChartFragment : Fragment() {
             .subscribe({ result ->
 
 
-                if (result!=null&&result.status && lineChart != null&&!result.data.isEmpty()) {
+                if (result != null && result.status && lineChart != null && !result.data.isEmpty()) {
 
                     result.data.sortBy { it.date }
 
@@ -71,14 +76,34 @@ class LineChartFragment : Fragment() {
 
                     if (result.data.size > 20) {
                         for (i in 0..20) {
+
+                            if (result.data.get(i).shares.toInt() != 0 && result.data.get(i).hashrate.toInt() == 0 && coin.equals(
+                                    "xmr"
+                                )
+                            ) {
+                                result.data.get(i).hashrate =
+                                    result.data.get(i).shares.times(52.5).toLong()
+                            }
+
                             limitedArray.add(result.data.get(i))
 
                         }
                     } else {
+
                         for (i in 0 until result.data.size) {
+
+                            if (result.data.get(i).shares.toInt() != 0 && result.data.get(i).hashrate.toInt() == 0 && coin.equals(
+                                    "xmr"
+                                )
+                            ) {
+                                result.data.get(i).hashrate =
+                                    result.data.get(i).shares.times(52.5).toLong()
+                            }
+
                             limitedArray.add(result.data.get(i))
                         }
                     }
+
 
                     setupLineChart(limitedArray)
 
