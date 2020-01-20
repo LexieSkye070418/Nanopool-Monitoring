@@ -60,7 +60,8 @@ class LineChartFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
 
-                if (result!=null&&result.status && lineChart != null&&!result.data.isEmpty()) {
+
+                if (result != null && result.status && lineChart != null && !result.data.isEmpty()) {
 
                     result.data.sortBy { it.date }
 
@@ -68,14 +69,34 @@ class LineChartFragment : Fragment() {
 
                     if (result.data.size > 20) {
                         for (i in 0..20) {
+
+                            if (result.data.get(i).shares.toInt() != 0 && result.data.get(i).hashrate.toInt() == 0 && coin.equals(
+                                    "xmr"
+                                )
+                            ) {
+                                result.data.get(i).hashrate =
+                                    result.data.get(i).shares.times(52.5).toLong()
+                            }
+
                             limitedArray.add(result.data.get(i))
 
                         }
                     } else {
+
                         for (i in 0 until result.data.size) {
+
+                            if (result.data.get(i).shares.toInt() != 0 && result.data.get(i).hashrate.toInt() == 0 && coin.equals(
+                                    "xmr"
+                                )
+                            ) {
+                                result.data.get(i).hashrate =
+                                    result.data.get(i).shares.times(52.5).toLong()
+                            }
+
                             limitedArray.add(result.data.get(i))
                         }
                     }
+
 
                     setupLineChart(limitedArray)
 
