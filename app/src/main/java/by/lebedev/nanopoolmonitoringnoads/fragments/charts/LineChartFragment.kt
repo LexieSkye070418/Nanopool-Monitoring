@@ -164,7 +164,7 @@ class LineChartFragment : Fragment() {
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
 
                 return value.div(1000).toInt().toString().plus(" ").plus(
-                    coinWalletTempData.getWorkerHashType(
+                    getWorkerHashType(
                         coin
                     )
                 )
@@ -208,4 +208,30 @@ class LineChartFragment : Fragment() {
         lineChart.invalidate()
     }
 
+    fun getWorkerHashType(coin: String): String {
+        return when (coin) {
+            "eth" -> {
+                return "Mh/s"
+            }
+            "etc" -> {
+                return "Mh/s"
+            }
+            "zec" -> {
+                return "Sol/s"
+            }
+            "xmr" -> {
+                return "KH/s"
+            }
+            "pasc" -> {
+                return "H/s"
+            }
+            "rvn" -> {
+                return "Mh/s"
+            }
+            "grin29" -> {
+                return "Gp/s"
+            }
+            else -> "N/A"
+        }
+    }
 }

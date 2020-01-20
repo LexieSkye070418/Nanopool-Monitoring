@@ -115,7 +115,7 @@ class CoinWalletTempData private constructor() {
                 return "Sol/s"
             }
             "xmr" -> {
-                return "KH/s"
+                return "H/s"
             }
             "pasc" -> {
                 return "H/s"
